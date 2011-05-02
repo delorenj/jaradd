@@ -1,0 +1,43 @@
+body {
+  font-family: arial;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#banner {
+  height: 150px;
+  background-color: #bcabca;
+  padding: 0 15px;
+}
+
+#banner span.title {
+  position: relative;
+  top: 3em;
+  font-size: 2.2em;
+}
+
+#content {
+  min-height: 600px;
+  background-color: #aaaaaa;
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+#gallery {
+  
+}
+
+#gallery img {
+  width: 960px;
+}
+
+#footer {
+  height: 40px;
+  background-color: #bbaabb;
+}
