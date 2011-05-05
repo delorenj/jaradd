@@ -3,8 +3,10 @@
   <head>
     <title>Jarad DeLorenzo</title>
     <link type="text/css" rel="stylesheet" href="css/reset.css" />
-    <link type="text/css" rel="stylesheet" href="css/default.css" />
-    <link type="text/css" rel="stylesheet" href="css/orbit/orbit-1.2.3.css" />
+    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:bold' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="css/orbit/orbit-1.2.3.css" />        
+    <link type="text/css" rel="stylesheet" href="css/default.css" />    
     <script src="https://www.google.com/jsapi?key=ABQIAAAAg5hreqiv4zDpiIkbdnYh2hQzjbXTZc_qR8GRjgQn4thEx_x7-RRurJaW6-Mnhat6W7QH5fI6paACGA" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
