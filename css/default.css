@@ -24,20 +24,23 @@ body {
   background-color: #aaaaaa;
 }
 
-.container {
-  width: 960px;
+#gallery, div.orbit-wrapper {
+  width: 640px;
+  height: 390px;
   margin: 0 auto;
-}
-
-#gallery {
-  
-}
-
-#gallery img {
-  width: 960px;
 }
 
 #footer {
   height: 40px;
   background-color: #bbaabb;
+}
+
+.orbit-bullets li.has-thumb {
+    width: 48px !important;
+    height: 35px !important; 
+}
+
+/* captions */
+.orbit-caption {
+
 }
