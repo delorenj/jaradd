@@ -17,16 +17,16 @@ body {
 
 #banner {
   background-color: #2c333d;
-  height: 150px;
+  height: 100px;
   padding: 0 15px;
 }
 
 #banner span.title {
   color: #a39d8c;
   position: relative;
-  font-family: 'Luckiest Guy', 'Cabin Sketch', arial, sans;
+  font-family: 'Cabin Sketch', 'Luckiest Guy', 'Cabin Sketch', arial, sans;
   font-weight: bold;
-  top: 2em;
+  top: 1em;
   font-size: 3.2em;
 }
 
@@ -36,19 +36,49 @@ body {
 }
 
 #gallery, div.orbit-wrapper {
-  width: 640px;
-  height: 390px;
+  width: 540px;
+  height: 329px;
   margin: 0 auto;
 }
 
+.cap-title {
+  font-size: 1.2em;
+  font-family: 'Orbitron';
+}
+
+.cap-details {
+  font-size: 1em;
+  font-family: arial;
+}
+
 #footer {
-  background-color: #8a5a3d;
+  background-color: #e1c799;
   height: 40px;
+  text-align: center;
+}
+
+#footer ul li {
+  display:inline;
+  list-style: none;
+  font-weight: bold;
+  
+  margin: 0 30px;
+}
+
+#footer ul li a {
+  text-decoration: none;
+  color:black;
 }
 
 .orbit-bullets li.has-thumb {
-    width: 48px !important;
-    height: 35px !important; 
+    width: 100px !important;
+    height: 61px !important; 
+}
+
+.orbit-bullets {
+    width: 430px;
+    position: static;
+    margin: 15px auto;
 }
 
 /* captions */

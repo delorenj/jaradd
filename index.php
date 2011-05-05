@@ -5,6 +5,7 @@
     <link type="text/css" rel="stylesheet" href="css/reset.css" />
     <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:bold' rel='stylesheet' type='text/css' />
     <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css' />
     <link type="text/css" rel="stylesheet" href="css/orbit/orbit-1.2.3.css" />        
     <link type="text/css" rel="stylesheet" href="css/default.css" />    
     <script src="https://www.google.com/jsapi?key=ABQIAAAAg5hreqiv4zDpiIkbdnYh2hQzjbXTZc_qR8GRjgQn4thEx_x7-RRurJaW6-Mnhat6W7QH5fI6paACGA" type="text/javascript"></script>
@@ -63,13 +64,31 @@
         </div>
       </div>
       <div id="footer">
-        <!-- stuff -->
+        <ul>
+          <li>jaradd@gmail.com</li>
+          <li>973.440.8809</li>
+          <li><a href="#">Resume</a></li>
+          <li><a href="http://www.linkedin.com/profile/view?id=12114139">LinkedIn</a></li>
+          <li><a href="http://www.facebook.com/jaradd">Facebook</a></li>
+        </ul>
       </div>
     </div>
   </body>
-  <div class="orbit-caption" id="eclipse"><strong>A Micro-Site for Wrigley Eclipse Gum</strong></div>
-  <div class="orbit-caption" id="coachella"><strong>Wrigley 5gum Live Coachella Broadcast Site</strong></div>
-  <div class="orbit-caption" id="orbitgum"><strong>Orbit Gum: Clean Campaign Micro-Site</strong></div>
-  <div class="orbit-caption" id="tryeverything"><strong>SoBe: Try Everything iPhone App and Share Page</strong></div>  
+
+  <div class="orbit-caption" id="eclipse">
+    <span class="cap-title">Twilight Eclipse Bad Breath Contest for Wrigley Eclipse Gum</span>    
+  </div>
+  
+  <div class="orbit-caption" id="coachella">
+    <span class="cap-title">Wrigley 5gum Live Coachella Broadcast Site</span>
+  </div>
+  
+  <div class="orbit-caption" id="orbitgum">
+    <span class="cap-title">Orbit Gum: Clean Campaign Micro-Site</span>
+  </div>
+  
+  <div class="orbit-caption" id="tryeverything">
+    <span class="cap-title">SoBe: Try Everything iPhone App and Share Page</span>
+  </div>  
 
 </html>
