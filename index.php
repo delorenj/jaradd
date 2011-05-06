@@ -64,13 +64,14 @@
         </div>
       </div>
       <div id="footer">
-        <ul>
+<!--        <ul>
           <li>jaradd@gmail.com</li>
           <li>973.440.8809</li>
           <li><a href="#">Resume</a></li>
           <li><a href="http://www.linkedin.com/profile/view?id=12114139">LinkedIn</a></li>
           <li><a href="http://www.facebook.com/jaradd">Facebook</a></li>
-        </ul>
+        </ul>-->
+<span>Copyright &copy; 2011 somethin somethin somethin</span>
       </div>
     </div>
   </body>

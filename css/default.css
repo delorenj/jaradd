@@ -32,6 +32,9 @@ body {
 
 #content {
   background-color: #e1c799;
+  background-image: url('../images/splat.png');
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 100px 0;
 }
 
@@ -55,13 +58,12 @@ body {
   background-color: #e1c799;
   height: 40px;
   text-align: center;
+  font-size: 0.8em;
 }
 
 #footer ul li {
   display:inline;
   list-style: none;
-  font-weight: bold;
-  
   margin: 0 30px;
 }
 
