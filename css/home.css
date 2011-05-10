@@ -1,0 +1,12 @@
+body {
+  background-color: #9fa0a3;
+}
+
+#content {
+  width: 1024px;
+  height: 900px;
+  margin: 0 auto;
+  background-image: url("../images/grad4.png");
+  background-color: #9fa0a3;
+  
+}
