@@ -1,4 +1,5 @@
 body {
+  text-align: center;
   background-color: #9fa0a3;
 }
 
@@ -18,11 +19,50 @@ canvas {
 
 #cloud1 {
   position: absolute;
-  top: 0;
+  left: 100px;
+  top: 200px;
   width: 370px;
   height: 197px;
 }
 
+#cloud2 {
+  position: absolute;
+  top: 50px;
+  left: 700px;
+  width: 500px;
+  height: 200px;
+}
+
+.wrapper {
+  position:relative;
+  margin:0 auto;
+  text-align:left;
+  width:1024px;
+}
+
+#beeflinks {
+  position: absolute;
+  top:-250px;
+  z-index: 1;
+  width: 1024px;
+  margin: 0 auto;
+  display: inline;
+}
+
+#beeflinks li {
+  float: left;
+  margin: 0 30px;
+}
+
+.cloudlink {
+  position: absolute;
+  z-index: 2;
+}
+
+.cloudicon {
+  position: absolute;
+  z-index: 1;
+}
 
 #footer {
   width: 1024px;

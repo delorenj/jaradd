@@ -10,9 +10,28 @@
   </head>
   <body>
     <div id="canvas"></div>
-    <div id="content">
-<!--      <canvas id="clouds" width="1024" height="900"></canvas> -->
-    </div>
+    <div id="content"></div>
+      <div class="wrapper">
+        <ul id="beeflinks">
+          <li id="facebook">
+            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
+            <img class="cloudicon" src="images/canvas/linkedin.png"></img>
+          </li>
+          <li id="facebook">
+            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
+            <img class="cloudicon" src="images/canvas/facebook.png"></img>
+          </li>
+          <li id="facebook">
+            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
+            <img class="cloudicon" src="images/canvas/twitter.png"></img>
+          </li>
+          <li id="facebook">
+            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
+            <img class="cloudicon" src="images/canvas/linkedin.png"></img>
+          </li>
+        </ul>
+      </div>
+    </div>    
     <div id="footer">
       <span>Copyright &copy; 2011 somethin somethin somethin</span>
     </div>          
