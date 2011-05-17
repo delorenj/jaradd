@@ -42,26 +42,36 @@ canvas {
 
 #beeflinks {
   position: absolute;
-  top:-250px;
+  top:-350px;
   z-index: 1;
-  width: 1024px;
+  width: 100%;
   margin: 0 auto;
   display: inline;
 }
 
 #beeflinks li {
   float: left;
-  margin: 0 30px;
+  margin: 0 3.5%;
+  width:180px;
+  margin-right: 40px;
+}
+
+#beeflinks li:last:child {
+  margin-right: 0;
 }
 
 .cloudlink {
-  position: absolute;
+  position: relative;
+  top:70px;
   z-index: 2;
 }
 
 .cloudicon {
-  position: absolute;
+  position: relative;
+  left: 30px;
+  top:-60px;
   z-index: 1;
+  box-shadow: 10px 10px 5px #888;
 }
 
 #footer {
