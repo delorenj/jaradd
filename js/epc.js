@@ -19,11 +19,15 @@ var EPC = (function () {
   }
   
   return  {
-    initCanvas : function() {
+    initLinkClouds : function() {
       footer_height = $("#footer").css("height");
       footer_height = footer_height.split("px")
       //$("#content").css("height", (canvasHeight - footer_height[0]) + "px");
+
+      //****** set canvas dimensions
       $("#content").css("height", "900px");
+      
+      //****** bind cloud hover animations
       $("img.cloudlink").hover(function() {        
         $(this).siblings("img.cloudicon").animate({top: "-100px"}, {queue: false, duration: 400, easing: "easeOutExpo"});
         }, function() {
@@ -41,24 +45,62 @@ var EPC = (function () {
             },{
               duration: 50,
               queue: false              
-            }).animate({top: -1000}, 300, function() { $(this).hide()});
+            }).animate({top: -1000}, 300, function() {$(this).hide()});
           })
       });
-
     },
     
-    initClouds : function() {
+    initBgClouds : function() {
       $("body").append("<img id='cloud1' src='images/canvas/cloud_370x147.png' alt='' />");
-      animateCloud("#cloud1", z1_speed);
-      
       $("body").append("<img id='cloud2' src='images/canvas/cloud_500x200.png' alt='' />");      
-      animateCloud("#cloud2", z2_speed);
+      $("body").append("<img id='cloud3' src='images/canvas/cloud_410x272.png' alt='' />");      
+      $("img[id*='cloud']").each(function() {
+        $(this).css({
+        left: Math.random() * $(window).width(),
+        top: Math.random() * $(window).height()
+        });
+        
+        $(this).hover(function() {
+          $(this).css("border", "1px dashed red");
+        }, function() {
+          $(this).css("border", "none");
+        });
+      });
+      animateCloud("#cloud1", Math.random() * (z2_speed-z0_speed) + z0_speed);
+      animateCloud("#cloud2", Math.random() * (z2_speed-z0_speed) + z0_speed);
+      animateCloud("#cloud3", Math.random() * (z2_speed-z0_speed) + z0_speed);
+    },
+    
+    initPhysics : function() {
+      var worldAABB = new b2AABB();
+      worldAABB.minVertex.Set(-1000, -1000);
+      worldAABB.maxVertex.Set(1000, 1000);
+      var gravity = new b2Vec2(0, 300);
+      var doSleep = true;
+      var world = new b2World(worldAABB, gravity, doSleep); 
+      
+      var i;
+      var ground = world.GetGroundBody();
+      var jointDef = new b2RevoluteJointDef();
+      var L = 150;
+      for (i = 0; i < 4; i++) {
+        jointDef.anchorPoint.Set(250 + 40 * i, 200 - L);
+        jointDef.body1 = ground;
+        jointDef.body2 = createBall(world, 250 + 40 * i, 200);
+        world.CreateJoint(jointDef);
+      }
+      jointDef.anchorPoint.Set(250 - 40, 200 - L);
+      jointDef.body1 = ground;
+      jointDef.body2 = createBall(world, 250 - 40 - L, 200 - L);
+      world.CreateJoint(jointDef);
+
     }
   };
 })();
 
 $(document).ready(function() {
-  EPC.initCanvas();
-  EPC.initClouds();
+  EPC.initLinkClouds();
+  EPC.initBgClouds();
+  EPC.initPhysics();
    
 });
