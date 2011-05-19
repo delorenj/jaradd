@@ -90,3 +90,10 @@ canvas {
   margin:0 auto;
   text-align: center;
 }
+
+#bird {
+  position: absolute;
+  background: transparent url("../images/canvas/bird_180x180.png") 0 0 no-repeat;  
+  height: 180px;
+  width: 180px;
+}

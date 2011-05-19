@@ -87,11 +87,14 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/jquery.spritely-0.4.js"></script>
     <script type="text/javascript" src="js/epc.js"></script>
   </head>
   <body>
 <!--    <canvas width="800" height="600"></canvas>-->
-    <div id="canvas"></div>
+    <div id="canvas">
+      <div id="bird"></div>
+    </div>
     <div id="content"></div>
       <div class="wrapper">
         <ul id="beeflinks">

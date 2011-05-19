@@ -94,6 +94,18 @@ var EPC = (function () {
       jointDef.body2 = createBall(world, 250 - 40 - L, 200 - L);
       world.CreateJoint(jointDef);
 
+    },
+    
+    initBird : function() {
+      $('#bird').sprite({fps: 8, no_of_frames: 3})
+      .spRandom({
+          top: 70,
+          left: 100,
+          right: 800,
+          bottom: 640,
+          speed: 4000,
+          pause: 3000
+      });
     }
   };
 })();
@@ -101,6 +113,6 @@ var EPC = (function () {
 $(document).ready(function() {
   EPC.initLinkClouds();
   EPC.initBgClouds();
-  EPC.initPhysics();
+  EPC.initBird();
    
 });
