@@ -60,11 +60,11 @@ var EPC = (function () {
         top: Math.random() * $(window).height()
         });
         
-        $(this).hover(function() {
-          $(this).css("border", "1px dashed red");
-        }, function() {
-          $(this).css("border", "none");
-        });
+//        $(this).hover(function() {
+//          $(this).css("border", "1px dashed red");
+//        }, function() {
+//          $(this).css("border", "none");
+//        });
       });
       animateCloud("#cloud1", Math.random() * (z2_speed-z0_speed) + z0_speed);
       animateCloud("#cloud2", Math.random() * (z2_speed-z0_speed) + z0_speed);
@@ -97,7 +97,7 @@ var EPC = (function () {
     },
     
     initBird : function() {
-      $('#bird').sprite({fps: 8, no_of_frames: 3})
+      $('#bird').sprite({fps: 8, no_of_frames: 3, rewind:true})
       .spRandom({
           top: 70,
           left: 100,
@@ -105,7 +105,7 @@ var EPC = (function () {
           bottom: 640,
           speed: 4000,
           pause: 3000
-      });
+      }).isDraggable();
     }
   };
 })();

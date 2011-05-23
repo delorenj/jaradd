@@ -93,7 +93,8 @@ canvas {
 
 #bird {
   position: absolute;
-  background: transparent url("../images/canvas/bird_180x180.png") 0 0 no-repeat;  
-  height: 180px;
-  width: 180px;
+  background: transparent url("../images/canvas/bird_90x90.png") 0 0 no-repeat;  
+  height: 62px;
+  width: 90px;
+  z-index: 1000;
 }
