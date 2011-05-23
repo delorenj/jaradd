@@ -5,6 +5,14 @@
     <link type="text/css" rel="stylesheet" href="css/reset.css" />
     <link type="text/css" rel="stylesheet" href="css/home.css" />    
 
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/jquery.spritely-0.4.js"></script>
+    <script type="text/javascript">
+      $j = jQuery.noConflict();    
+    </script>
+        
 		<!--=============================-->
 		<!-- Copy this part to your app. -->
 		<!-- START                       -->
@@ -83,15 +91,10 @@
 		<!-- END                         -->
 		<!--=============================-->
 
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript" src="js/jquery.spritely-0.4.js"></script>
     <script type="text/javascript" src="js/epc.js"></script>
   </head>
   <body>
-<!--    <canvas width="800" height="600"></canvas>-->
+    <canvas width="1024" height="900"></canvas>
     <div id="canvas">
       <div id="bird"></div>
     </div>
