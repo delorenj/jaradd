@@ -34,12 +34,13 @@ var EPC = (function () {
     },
 
     createGround : function(world) {
-      var groundSd = new b2BoxDef();
-      groundSd.extents.Set(1000, 1);
+      var groundSd = new b2BoxDef();      
+      groundSd.extents.Set(512, 1);
       groundSd.restitution = 0.2;
-      var groundBd = new b2BodyDef();
-      groundBd.AddShape(groundSd);
-      groundBd.position.Set(0, 300);
+      var groundBd = new b2BodyDef();b2BodyDef
+      groundBd.AddShape(groundSd);     
+      groundBd.position.Set(512, 900);
+      groundBd.userData = "#00FF00";
       return world.CreateBody(groundBd)
     },
     
@@ -139,9 +140,9 @@ var EPC = (function () {
           context.lineTo(pos.x + r, pos.y);
           // draw radius
           context.moveTo(pos.x, pos.y);
-          var ax = circle.m_R.col1;
-          var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
-          context.lineTo(pos2.x, pos2.y);
+          //var ax = circle.m_R.col1;
+          //var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
+          //context.lineTo(pos2.x, pos2.y);
         }
         break;
       case b2Shape.e_polyShape:
@@ -175,9 +176,9 @@ var EPC = (function () {
       
       //****** bind cloud hover animations
       jQuery("img.cloudlink").hover(function() {        
-        jQuery(this).siblings("img.cloudicon").animate({top: "-100px"}, {queue: false, duration: 400, easing: "easeOutExpo"});
+        jQuery(this).siblings("img.cloudicon").animate({top: "-100px"}, {queue: false, duration: 100, easing: "linear"});
         }, function() {
-          jQuery(this).siblings("img.cloudicon").animate({top: "-60px"}, {queue: false, duration: 400, easing: "easeOutBounce"});
+          jQuery(this).siblings("img.cloudicon").animate({top: "-60px"}, {queue: false, duration: 450, easing: "easeOutBounce"});
         }
       ).click(function() {
           jQuery(this).siblings("img.cloudicon").animate({
@@ -238,10 +239,15 @@ var EPC = (function () {
       canvasHeight = parseInt(canvasElm.height);
       Event.observe('canvas', 'click', function(e) {
         if (Math.random() < 0.5) {
-          b2d.createBall(world, Event.pointerX(e), Event.pointerY(e));
+//          console.log(jQuery('canvas').css("left"));
+//          console.log(Event.pointerX(e) + ", " + Event.pointerY(e));
+//          console.log(Event.pointerX(e) - document.getElementById("canvas").offsetLeft);
+          
+          b2d.createBall(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));
+          
         }
         else {
-          b2d.createBox(world, Event.pointerX(e), Event.pointerY(e), 10, 10, false);          
+          b2d.createBox(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
         }
       });
       this.step();
@@ -264,7 +270,7 @@ var EPC = (function () {
 jQuery(document).ready(function() {
   EPC.initLinkClouds();
   EPC.initBgClouds();
-  EPC.initBird();
+//  EPC.initBird();
   EPC.initCanvas();
    
 });

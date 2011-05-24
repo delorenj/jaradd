@@ -3,10 +3,17 @@ body {
   background-color: #9fa0a3;  
 }
 
-canvas {
+#wrapper {
   position: absolute;
-  z-index: 5;
-  border: 1px solid red;
+  width: 100%;
+}
+
+canvas {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  z-index: 4;
 }
 
 #content {
@@ -23,8 +30,7 @@ canvas {
   left: 100px;
   top: 200px;
   width: 370px;
-  height: 197px;
-  background-color: rgb(240,239,136,0.5);
+  height: 197px;  
 }
 
 #cloud2 {
@@ -53,7 +59,7 @@ canvas {
 #beeflinks {
   position: absolute;
   top:-350px;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   margin: 0 auto;
   display: inline;
@@ -66,7 +72,7 @@ canvas {
   margin-right: 40px;
 }
 
-#beeflinks li:last:child {
+#beeflinks li:last-child {
   margin-right: 0;
 }
 
