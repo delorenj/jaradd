@@ -170,6 +170,9 @@ var EPC = (function () {
         break;
       }
       context.stroke();
+    },
+    createLinkedInIcon : function() {
+      
     }
   }
   
