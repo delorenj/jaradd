@@ -248,15 +248,16 @@ var EPC = (function () {
     initCanvas : function() {
       var canvasElm = jQuery('canvas').get(0);
       ctx = canvasElm.getContext('2d');      
-      Event.observe('canvas', 'click', function(e) {
-        if (Math.random() < 0.5) {
-          currShape = b2d.createBall(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
-        }
-        else {
-          currShape = b2d.createBox(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
-        }
-//        EPC.step(10);
-      });      
+      b2d.createLinkedInIcon();
+//      Event.observe('canvas', 'click', function(e) {
+//        if (Math.random() < 0.5) {
+//          currShape = b2d.createBall(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
+//        }
+//        else {
+//          currShape = b2d.createBox(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
+//        }
+////        EPC.step(10);
+//      });      
       this.step();
     },
 
