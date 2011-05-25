@@ -1,6 +1,9 @@
 var EPC = (function () {
   var canvasWidth = jQuery(window).width();
   var canvasHeight = jQuery(window).width();
+  var m_shapeHalfBB = 35;
+  var m_groundBody;
+  var currShape = null;
   var z0_speed = 350000;
   var z1_speed = 450000;
   var z2_speed = 800000;
@@ -22,12 +25,12 @@ var EPC = (function () {
   var b2d = {
     createWorld : function() {
       var worldAABB = new b2AABB();
-      worldAABB.minVertex.Set(-2000, -2000);
-      worldAABB.maxVertex.Set(2000, 2000);
+      worldAABB.minVertex.Set(-1000, -1000);
+      worldAABB.maxVertex.Set(1000, 1000);
       var gravity = new b2Vec2(0, 300);
       var doSleep = true;
       var world = new b2World(worldAABB, gravity, doSleep);
-      this.createGround(world);
+      m_groundBody = this.createGround(world);
     //	createBox(world, 0, 125, 10, 250);
     //	createBox(world, 500, 125, 10, 250);
       return world;
@@ -35,12 +38,11 @@ var EPC = (function () {
 
     createGround : function(world) {
       var groundSd = new b2BoxDef();      
-      groundSd.extents.Set(512, 1);
+      groundSd.extents.Set(512, 10);
       groundSd.restitution = 0.2;
-      var groundBd = new b2BodyDef();b2BodyDef
+      var groundBd = new b2BodyDef();
       groundBd.AddShape(groundSd);     
-      groundBd.position.Set(512, 900);
-      groundBd.userData = "#00FF00";
+      groundBd.position.Set(512, 900);      
       return world.CreateBody(groundBd)
     },
     
@@ -76,6 +78,15 @@ var EPC = (function () {
           this.drawShape(s, context);
         }
       }
+    },
+    
+    clearShapes : function(world, context) {
+      for (var b = world.m_bodyList; b; b = b.m_next) {
+        for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+          context.clearRect(s.m_position.x-m_shapeHalfBB,s.m_position.y-m_shapeHalfBB,s.m_position.x+m_shapeHalfBB, s.m_position.y+m_shapeHalfBB);
+        }
+      }      
+      context.clearRect(0,890, 1024,910);
     },
     
     drawJoint : function(joint, context) {
@@ -219,9 +230,11 @@ var EPC = (function () {
     },
     
     step : function(cnt) {
-      var stepping = false;
+      var stepping = false;      
       var timeStep = 1.0/60;
       var iteration = 1;
+//      console.log(currShape);
+//      b2d.clearShapes(world, ctx);
       world.Step(timeStep, iteration);
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
       b2d.drawWorld(world, ctx);
@@ -235,21 +248,15 @@ var EPC = (function () {
     initCanvas : function() {
       var canvasElm = jQuery('canvas').get(0);
       ctx = canvasElm.getContext('2d');      
-      canvasWidth = parseInt(canvasElm.width);
-      canvasHeight = parseInt(canvasElm.height);
       Event.observe('canvas', 'click', function(e) {
         if (Math.random() < 0.5) {
-//          console.log(jQuery('canvas').css("left"));
-//          console.log(Event.pointerX(e) + ", " + Event.pointerY(e));
-//          console.log(Event.pointerX(e) - document.getElementById("canvas").offsetLeft);
-          
-          b2d.createBall(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));
-          
+          currShape = b2d.createBall(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
         }
         else {
-          b2d.createBox(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
+          currShape = b2d.createBox(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
         }
-      });
+//        EPC.step(10);
+      });      
       this.step();
     },
 
