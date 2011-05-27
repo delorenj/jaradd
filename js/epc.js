@@ -34,7 +34,7 @@ var EPC = (function () {
         var worldAABB = new b2AABB();
         worldAABB.minVertex.Set(-1000, -1000);
         worldAABB.maxVertex.Set(1000, 1000);
-        var gravity = new b2Vec2(0, 700);
+        var gravity = new b2Vec2(0, 300);
         var doSleep = true;
         var canvasElm = jQuery('canvas').get(0);
         m_context = canvasElm.getContext('2d');      
@@ -221,22 +221,38 @@ var EPC = (function () {
       },
       
       createLinkedInIcon : function() {      
-        var boxSd = new b2BoxDef();
+//        var boxSd = new b2BoxDef();
         length = 40;
         left = 100;
-        boxSd.density = 1.0;
-        boxSd.extents.Set(30, 30);
-        var boxBd = new b2BodyDef();
-        boxBd.AddShape(boxSd);
-        boxBd.position.Set(left,length+1);
-        var rope1 = this.createRope(length, left);
-        m_linkedInIcon = m_world.CreateBody(boxBd);
-        var revolute_joint = new b2RevoluteJointDef();
-        revolute_joint.body1 = rope1;
-        revolute_joint.body2 = m_linkedInIcon;
-        revolute_joint.anchorPoint.Set(left, length+2);
-        m_world.CreateJoint(revolute_joint);
-        
+//        boxSd.density = 1.0;
+//        boxSd.extents.Set(30, 30);
+//        var boxBd = new b2BodyDef();
+//        boxBd.AddShape(boxSd);
+//        boxBd.position.Set(left,length);
+//       var box = b2d.createBox(100,100,10,10,false);
+        //var rope1 = this.createRope(length, left);
+//        m_linkedInIcon = m_world.CreateBody(boxBd);
+//        var revolute_joint = new b2RevoluteJointDef();
+//        revolute_joint.body1 = m_ceilingBody;
+//        revolute_joint.body2 = box;
+//        revolute_joint.anchorPoint.Set(left, length+100);
+//        m_world.CreateJoint(revolute_joint);
+//        
+       var i;
+        var ground = m_ceilingBody
+        var jointDef = new b2RevoluteJointDef();
+        var L = 150;
+        for (i = 0; i < 4; i++) {
+                jointDef.anchorPoint.Set(250 + 40 * i, 200 - L);
+                jointDef.body1 = ground;
+                jointDef.body2 = b2d.createBall(250 + 40 * i, 200);
+                m_world.CreateJoint(jointDef);
+        }
+        jointDef.anchorPoint.Set(250 - 40, 200 - L);
+        jointDef.body1 = ground;
+        jointDef.body2 = b2d.createBall(250 - 40 - L, 200 - L);
+        m_world.CreateJoint(jointDef);
+
       }
     }
   })();
