@@ -34,7 +34,7 @@ var EPC = (function () {
         var worldAABB = new b2AABB();
         worldAABB.minVertex.Set(-1000, -1000);
         worldAABB.maxVertex.Set(1000, 1000);
-        var gravity = new b2Vec2(0, 2200);
+        var gravity = new b2Vec2(0, 300);
         var doSleep = true;
         var canvasElm = jQuery('canvas').get(0);
         m_context = canvasElm.getContext('2d');      
