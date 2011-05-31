@@ -34,7 +34,7 @@ var EPC = (function () {
         var worldAABB = new b2AABB();
         worldAABB.minVertex.Set(-1000, -1000);
         worldAABB.maxVertex.Set(1000, 1000);
-        var gravity = new b2Vec2(0, 300);
+        var gravity = new b2Vec2(0, 2200);
         var doSleep = true;
         var canvasElm = jQuery('canvas').get(0);
         m_context = canvasElm.getContext('2d');      
@@ -69,10 +69,11 @@ var EPC = (function () {
         return m_world.CreateBody(groundBd)
       },
 
-      createBall : function(x, y) {
+      createBall : function(x, y, radius) {
+        if (typeof(radius) == 'undefined') radius = 20;
         var ballSd = new b2CircleDef();
         ballSd.density = 1.0;
-        ballSd.radius = 20;
+        ballSd.radius = radius;
         ballSd.restitution = 0.7;
         ballSd.friction = 0;
         var ballBd = new b2BodyDef();
@@ -90,6 +91,13 @@ var EPC = (function () {
         boxBd.AddShape(boxSd);
         boxBd.position.Set(x,y);
         return m_world.CreateBody(boxBd)
+      },
+
+      createAnchor : function(x, y) {
+        var fixed = true;
+        var anchorBd = new b2BodyDef();
+        anchorBd.position.Set(x,y);
+        return m_world.CreateBody(anchorBd)
       },
 
       drawWorld : function() {
@@ -238,20 +246,26 @@ var EPC = (function () {
 //        revolute_joint.anchorPoint.Set(left, length+100);
 //        m_world.CreateJoint(revolute_joint);
 //        
-       var i;
-        var ground = m_ceilingBody
-        var jointDef = new b2RevoluteJointDef();
-        var L = 150;
-        for (i = 0; i < 4; i++) {
-                jointDef.anchorPoint.Set(250 + 40 * i, 200 - L);
-                jointDef.body1 = ground;
-                jointDef.body2 = b2d.createBall(250 + 40 * i, 200);
-                m_world.CreateJoint(jointDef);
+        var i;
+        var left = 100;
+        var top = 20;
+        var delta = 40;
+        var anchor = b2d.createAnchor(left,top);
+        for(var i=0; i<4; i++) {
+          jointDef = new b2RevoluteJointDef();        
+          jointDef.anchorPoint.Set(left, top+i*delta);
+          jointDef.body1 = anchor;          
+          jointDef.body2 = b2d.createBall(left, top+i*delta, 10);
+          m_world.CreateJoint(jointDef);
+          anchor = jointDef.body2;
         }
-        jointDef.anchorPoint.Set(250 - 40, 200 - L);
-        jointDef.body1 = ground;
-        jointDef.body2 = b2d.createBall(250 - 40 - L, 200 - L);
+        jointDef = new b2RevoluteJointDef();        
+        jointDef.anchorPoint.Set(left, top+4*delta);
+        jointDef.body1 = anchor;          
+        jointDef.body2 = b2d.createBall(left-40, top+4*delta);
         m_world.CreateJoint(jointDef);
+        
+        
 
       }
     }
@@ -355,9 +369,9 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
-//  EPC.initLinkClouds();
-//  EPC.initBgClouds();
-//  EPC.initBird();
+  EPC.initLinkClouds();
+  EPC.initBgClouds();
+  EPC.initBird();
   EPC.initCanvas();
    
 });
