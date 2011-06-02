@@ -66,21 +66,20 @@ var EPC = (function () {
       createJointBall : function(x, y, radius) {
         if (typeof(radius) == 'undefined') radius = 0.1;
         var ballSd = new b2CircleDef();
-        ballSd.density = 25000;
+        ballSd.density = 10000;
         ballSd.radius = radius;
-        ballSd.restitution = 0.2;
-        ballSd.friction = 0;
+        ballSd.restitution = 0.5;
+        ballSd.friction = 0.1;
         var ballBd = new b2BodyDef();
         ballBd.AddShape(ballSd);
         ballBd.position.Set(x,y);      
         return m_world.CreateBody(ballBd);
       },
       
-      createBox : function(x, y, width, height, fixed) {
-        if (typeof(fixed) == 'undefined') fixed = true;
+      createBox : function(x, y, width, height) {
         var boxSd = new b2BoxDef();
-        if (!fixed) boxSd.density = 1.0;
         boxSd.extents.Set(width, height);
+        boxSd.density = 1.0;
         var boxBd = new b2BodyDef();
         boxBd.AddShape(boxSd);
         boxBd.position.Set(x,y);
@@ -212,21 +211,39 @@ var EPC = (function () {
         jointDef = new b2RevoluteJointDef();        
         jointDef.anchorPoint.Set(left, top+(numJoints*delta));
         jointDef.body1 = anchor;
-        jointDef.body2 = b2d.createBall(left+xOffset, top+(numJoints*delta));
+        jointDef.body2 = b2d.createBox(left+xOffset, top+(numJoints*delta),20,20);
         m_world.CreateJoint(jointDef);      
       },
-      
       createLinkedInIcon : function() {      
-        b2d.createRope(230,390,12,8);
+        b2d.createRope(230,390,15,10);
       },
       
       createFacebookIcon : function() {      
-        b2d.createRope(400,380,12,8);
+        b2d.createRope(400,380,15,10);
       },
       
       createYoutubeIcon : function() {      
-        b2d.createRope(700,350,12,8);
-      }            
+        b2d.createRope(700,350,15,10);
+      },
+      
+      getBodyAtMouse : function(e) {
+        var aabb = new b2AABB();
+        var mousePVec = new b2Vec2();
+        aabb.minVertex.Set(e.pageX - 0.001, e.pageY - 0.001);
+        aabb.maxVertex.Set(e.pageX + 0.001, e.pageY + 0.001);
+        mousePVec.Set(e.pageX, e.pageY);
+        for (var b = world.m_bodyList; b; b = b.m_next) {
+          for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+            if(!s.GetBody().IsStatic()){
+              var inside = s.TestPoint(s.GetBody().GetTransform(), mousePVec);
+              if(inside) {
+                console.log("got shape!");
+                break;
+              }
+            }
+          }
+        }        
+      }
       
     }
   })();
@@ -305,14 +322,17 @@ var EPC = (function () {
       b2d.createLinkedInIcon();
       b2d.createFacebookIcon();
       b2d.createYoutubeIcon();
-      Event.observe('canvas', 'click', function(e) {
-        if (Math.random() < 0.5) {
-          b2d.createBall(Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
-        }
-        else {
-          b2d.createBox(Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
-        }
-      });      
+//      Event.observe('canvas', 'click', function(e) {
+//        if (Math.random() < 0.5) {
+//          b2d.createBall(Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
+//        }
+//        else {
+//          b2d.createBox(Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10);          
+//        }
+//      });      
+      jQuery("canvas").bind("mousedown", function(e) {
+        b2d.getBodyAtMouse(e);
+      });
       this.step();
     },
 
