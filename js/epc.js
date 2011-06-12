@@ -228,23 +228,24 @@ var EPC = (function () {
       
       getBodyAtMouse : function(e) {
         var aabb = new b2AABB();
+        
         var mousePVec = new b2Vec2();
         aabb.minVertex.Set(e.pageX - 0.001, e.pageY - 0.001);
         aabb.maxVertex.Set(e.pageX + 0.001, e.pageY + 0.001);
         mousePVec.Set(e.pageX, e.pageY);
+        console.log("(" + e.pageX + ", " + e.pageY +")");
         for (var b = world.m_bodyList; b; b = b.m_next) {
           for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
             if(!s.GetBody().IsStatic()){
-              var inside = s.TestPoint(s.GetBody().GetTransform(), mousePVec);
+              var inside = s.TestPoint(mousePVec);
               if(inside) {
                 console.log("got shape!");
                 break;
               }
             }
           }
-        }        
+        }     
       }
-      
     }
   })();
   
@@ -354,6 +355,10 @@ jQuery(document).ready(function() {
   EPC.initLinkClouds();
   EPC.initBgClouds();
   EPC.initBird();
-  EPC.initCanvas();
-   
+  //EPC.initCanvas();
+
+var runner = new danglies(jQuery("#canvas")[0]);
+runner.draw();	
+runner.resume();
+	
 });
