@@ -105,7 +105,6 @@ Danglies.prototype.createBall = function(world, x, y, radius, fric, rest, dens) 
     fixtureDef.friction = fric;
     fixtureDef.restitution = rest;
     fixtureDef.density = dens;
-    console.log("fric=" + fric + ", rest=" + rest + "dens=" + dens);
     var ballBd = new b2BodyDef();
     ballBd.type = b2Body.b2_dynamicBody;
     ballBd.position.Set(x,y);

@@ -11,6 +11,7 @@ Danglies.prototype.createWorld = function() {
     world.DestroyBody(this._wallTop);
     world.DestroyBody(this._wallLeft);
     world.DestroyBody(this._wallRight);
+    world.DestroyBody(this._wallBottom);
     var boxsize = 1.4;
     function spawn(x, y, a) {
         var bodyDef = new b2BodyDef();
