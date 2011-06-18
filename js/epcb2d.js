@@ -1,10 +1,10 @@
 (function(){
 
-var Test = function() {
+var Danglies = function() {
     this.__constructor(arguments);
 }
 
-Test.__constructor = function(canvas) {
+Danglies.__constructor = function(canvas) {
     var that = this;
     this._canvas = canvas;
     this._paused = true;
@@ -42,17 +42,17 @@ Test.__constructor = function(canvas) {
     
     // sublcasses expect visual area inside 64x36
     this._dbgDraw.m_drawScale = Math.min(canvas.width/64, canvas.height/36);
-    this._dbgDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit | b2DebugDraw.e_centerOfMassBit);
+    this._dbgDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
     this._world = this.createWorld();
 }
 
-Test.prototype.log = function(arg) {
+Danglies.prototype.log = function(arg) {
     if(typeof(window.console) != 'undefined') {
         console.log(arg);
     }
 };
 
-Test.prototype.destroy = function() {
+Danglies.prototype.destroy = function() {
     this.pause();
     
     canvas.removeEventListener("mousemove", this._handleMouseMove, true);
@@ -63,7 +63,7 @@ Test.prototype.destroy = function() {
     this._world = null;
 }
 
-Test.prototype.createWorld = function(){
+Danglies.prototype.createWorld = function(){
     var m_world = new b2World(new b2Vec2(0.0, -9.81), true);
     var m_physScale = 1;
     m_world.SetWarmStarting(true);
@@ -94,15 +94,18 @@ Test.prototype.createWorld = function(){
     return m_world;
 };
 
-Test.prototype.createBall = function(world, x, y, radius) {
+Danglies.prototype.createBall = function(world, x, y, radius, fric, rest, dens) {
     radius = radius || 2;
+    fric = fric || 0.4;
+    rest = rest || 0.6;
+    dens = dens || 1.0;
     
     var fixtureDef = new b2FixtureDef();
     fixtureDef.shape = new b2CircleShape(radius);
-    fixtureDef.friction = 0.4;
-    fixtureDef.restitution = 0.6;
-    fixtureDef.density = 1.0;
-    
+    fixtureDef.friction = fric;
+    fixtureDef.restitution = rest;
+    fixtureDef.density = dens;
+    console.log("fric=" + fric + ", rest=" + rest + "dens=" + dens);
     var ballBd = new b2BodyDef();
     ballBd.type = b2Body.b2_dynamicBody;
     ballBd.position.Set(x,y);
@@ -111,7 +114,7 @@ Test.prototype.createBall = function(world, x, y, radius) {
     return body;
 }
 
-Test.prototype.draw = function() {
+Danglies.prototype.draw = function() {
     var c = this._canvas.getContext("2d");
     
     this._dbgDraw.SetSprite(c);
@@ -128,7 +131,7 @@ Test.prototype.draw = function() {
     }
 }
 
-Test.prototype.step = function(delta) {
+Danglies.prototype.step = function(delta) {
     if(!this._world)
         return;
         
@@ -139,7 +142,7 @@ Test.prototype.step = function(delta) {
     this._world.Step(delta, delta * this._velocityIterationsPerSecond, delta * this._positionIterationsPerSecond);  
 }
 
-Test.prototype._updateMouseInteraction = function() {
+Danglies.prototype._updateMouseInteraction = function() {
     // todo: refactor into world helper or similar
     function getBodyAtPoint(world, p) {
         var aabb = new b2AABB();
@@ -186,11 +189,11 @@ Test.prototype._updateMouseInteraction = function() {
     }   
 }
 
-Test.prototype._updateKeyboardInteraction = function() {
+Danglies.prototype._updateKeyboardInteraction = function() {
     // TBD
 }
 
-Test.prototype._updateUserInteraction = function() {
+Danglies.prototype._updateUserInteraction = function() {
     this._updateMouseInteraction();
     this._updateKeyboardInteraction();
     
@@ -200,7 +203,7 @@ Test.prototype._updateUserInteraction = function() {
     }
 }
 
-Test.prototype._update = function() {
+Danglies.prototype._update = function() {
     // derive passed time since last update. max. 10 secs
     var time = new Date().getTime();
     delta = (time - this._lastUpdate) / 1000;
@@ -219,7 +222,7 @@ Test.prototype._update = function() {
     }
 }
 
-Test.prototype._updateFPS = function() {
+Danglies.prototype._updateFPS = function() {
     this._fpsAchieved = this._fpsCounter;
     this.log("fps: " + this._fpsAchieved);
     this._fpsCounter = 0;
@@ -230,7 +233,7 @@ Test.prototype._updateFPS = function() {
     }
 }
 
-Test.prototype.resume = function() {
+Danglies.prototype.resume = function() {
     if(this._paused) {
         this._paused = false;
         this._lastUpdate = 0;
@@ -240,7 +243,7 @@ Test.prototype.resume = function() {
     }
 }
 
-Test.prototype.pause = function() {
+Danglies.prototype.pause = function() {
     this._paused = true;
     
     window.clearTimeout(this._updateTimeout);
@@ -248,10 +251,10 @@ Test.prototype.pause = function() {
     window.clearTimeout(this._updateUserInteractionTimout);
 }
 
-Test.prototype.isPaused = function() {
+Danglies.prototype.isPaused = function() {
     return this._paused;
 }
 
-window.b2jsTest = Test;
+window.b2jsTest = Danglies;
     
 })();

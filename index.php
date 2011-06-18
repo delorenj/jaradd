@@ -21,9 +21,9 @@
     <div id="wrapper">
       <canvas id="canvas" width="1024" height="900"></canvas>
     </div>
-<!--    <div id="canvas">
+    <div id="canvas">
       <div id="bird"></div>
-    </div>-->
+    </div>
     <div id="content"></div>
       <div class="wrapper">
         <ul id="beeflinks">
