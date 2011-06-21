@@ -25,6 +25,7 @@ Danglies.__constructor = function(canvas) {
         var p = new b2Vec2(e.clientX - x, e.clientY - y);
 
         that._mousePoint = that._dbgDraw.ToWorldPoint(p);
+//        console.log("MOUSE MOVE: " + p.x + "," + p.y + "(" + that._mousePoint.x + "," + that._mousePoint.y + ")");
     };
     this._handleMouseDown = function(e){
         that._mouseDown = true;
@@ -174,6 +175,7 @@ Danglies.prototype._updateMouseInteraction = function() {
             md.collideConnected = true;
             md.maxForce = 300.0 * body.GetMass();
             this._mouseJoint = this._world.CreateJoint(md);
+            this._mouseJoint.m_userData = "mj";
             body.SetAwake(true);
         }
     }
