@@ -78,8 +78,50 @@ Danglies.prototype.createWorld = function() {
 //    createFacebookIcon();
 //    createYoutubeIcon();
     
+    console.log(world);
     return world;
 };
+
+Danglies.prototype.draw = function() {
+    var c = this._canvas.getContext("2d");
+    c.clearRect(0,0,this._canvas.width,this._canvas.height);
+    
+    for (var b = this._world.m_bodyList; b; b = b.m_next) {
+        for (var s = b.GetFixtureList(); s != null; s = s.GetNext()) {
+            this.drawShape(s, c);
+        }
+    }        
+    
+    for (var j = this._world.m_jointList; j; j = j.m_next) {
+      this.drawJoint(j, c);
+    }            
+}
+
+Danglies.prototype.drawShape = function(s, c) {
+  c.strokeStyle = '#0055ee';
+  c.beginPath();  
+  switch(s.m_shape.m_type){
+    case 1:           // icon
+      break;
+  }
+  c.closePath();
+  c.stroke();
+}
+
+Danglies.prototype.drawJoint = function(j,c) {
+    var b1 = j.m_bodyA;
+    var b2 = j.m_bodyB;
+    var x1 = b1.GetPosition();
+    var x2 = b2.GetPosition();
+//    var p1 = j.localAnchor1.GetPosition();
+//    var p2 = j.localAnchor2.GetPosition();
+    c.strokeStyle = '#0055ee';
+    c.beginPath();
+    c.moveTo(x1.x*30, -x1.y*30);
+    c.lineTo(x2.x*30, -x2.y*30);
+    c.closePath();
+    c.stroke();  
+}
 
 window.danglies = Danglies;
     
