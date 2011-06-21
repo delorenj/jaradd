@@ -33,13 +33,16 @@ Object.extend(b2PolyShape.prototype, b2Shape.prototype);
 Object.extend(b2PolyShape.prototype, 
 {
 	TestPoint: function(p){
-
+                console.log("----Testing Poly Point");
+                console.log("------arg: " + p.x + ", " + p.y);
+                console.log("------pos: " + this.m_position.x + ", " + this.m_position.y);
+                console.log("------vex: " + this.m_vertexCount);
 		//var pLocal = b2Math.b2MulTMV(this.m_R, b2Math.SubtractVV(p, this.m_position));
 		var pLocal = new b2Vec2();
 		pLocal.SetV(p);
 		pLocal.Subtract(this.m_position);
 		pLocal.MulTM(this.m_R);
-
+                console.log("------pLocal: " + pLocal.x + ", " + pLocal.y);
 		for (var i = 0; i < this.m_vertexCount; ++i)
 		{
 			//var dot = b2Math.b2Dot(this.m_normals[i], b2Math.SubtractVV(pLocal, this.m_vertices[i]));
@@ -48,6 +51,7 @@ Object.extend(b2PolyShape.prototype,
 			tVec.Subtract(this.m_vertices[i]);
 
 			var dot = b2Math.b2Dot(this.m_normals[i], tVec);
+                        console.log("------dot: " + dot);
 			if (dot > 0.0)
 			{
 				return false;

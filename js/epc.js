@@ -1,9 +1,8 @@
 var EPC = (function () {
   var canvasWidth = jQuery(window).width();
   var canvasHeight = jQuery(window).width();
-  var m_shapeHalfBB = 35;
-  var m_groundBody;
-  var currShape = null;
+  var world;
+  var context;
   var z0_speed = 350000;
   var z1_speed = 450000;
   var z2_speed = 800000;
@@ -22,164 +21,247 @@ var EPC = (function () {
     })
   }
   
-  var b2d = {
-    createWorld : function() {
-      var worldAABB = new b2AABB();
-      worldAABB.minVertex.Set(-1000, -1000);
-      worldAABB.maxVertex.Set(1000, 1000);
-      var gravity = new b2Vec2(0, 300);
-      var doSleep = true;
-      var world = new b2World(worldAABB, gravity, doSleep);
-      m_groundBody = this.createGround(world);
-    //	createBox(world, 0, 125, 10, 250);
-    //	createBox(world, 500, 125, 10, 250);
-      return world;
-    },
+  var b2d = (function() {
+    var m_world;
+    var m_shapeHalfBB = 35;
+    
+    return {
+      createWorld : function() {
+        var worldAABB = new b2AABB();
+        worldAABB.minVertex.Set(-1000, -1000);
+        worldAABB.maxVertex.Set(1000, 1000);
+        var gravity = new b2Vec2(0, 300);
+        var doSleep = true;
+        var canvasElm = jQuery('canvas').get(0);
+        m_context = canvasElm.getContext('2d');      
+        context = m_context;
+        m_world = new b2World(worldAABB, gravity, doSleep);
+        world = m_world;
+        m_groundBody = this.createGround();
+      },
 
-    createGround : function(world) {
-      var groundSd = new b2BoxDef();      
-      groundSd.extents.Set(512, 10);
-      groundSd.restitution = 0.2;
-      var groundBd = new b2BodyDef();
-      groundBd.AddShape(groundSd);     
-      groundBd.position.Set(512, 900);      
-      return world.CreateBody(groundBd)
-    },
-    
-    createBall : function(world, x, y) {
-      var ballSd = new b2CircleDef();
-      ballSd.density = 1.0;
-      ballSd.radius = 20;
-      ballSd.restitution = 0.7;
-      ballSd.friction = 0;
-      var ballBd = new b2BodyDef();
-      ballBd.AddShape(ballSd);
-      ballBd.position.Set(x,y);      
-      return world.CreateBody(ballBd);
-    },
-
-    createBox : function(world, x, y, width, height, fixed) {
-      if (typeof(fixed) == 'undefined') fixed = true;
-      var boxSd = new b2BoxDef();
-      if (!fixed) boxSd.density = 1.0;
-      boxSd.extents.Set(width, height);
-      var boxBd = new b2BodyDef();
-      boxBd.AddShape(boxSd);
-      boxBd.position.Set(x,y);
-      return world.CreateBody(boxBd)
-    },
-    
-    drawWorld : function(world, context) {
-      for (var j = world.m_jointList; j; j = j.m_next) {
-        this.drawJoint(j, context);
-      }
-      for (var b = world.m_bodyList; b; b = b.m_next) {
-        for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
-          this.drawShape(s, context);
-        }
-      }
-    },
-    
-    clearShapes : function(world, context) {
-      for (var b = world.m_bodyList; b; b = b.m_next) {
-        for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
-          context.clearRect(s.m_position.x-m_shapeHalfBB,s.m_position.y-m_shapeHalfBB,s.m_position.x+m_shapeHalfBB, s.m_position.y+m_shapeHalfBB);
-        }
-      }      
-      context.clearRect(0,890, 1024,910);
-    },
-    
-    drawJoint : function(joint, context) {
-      var b1 = joint.m_body1;
-      var b2 = joint.m_body2;
-      var x1 = b1.m_position;
-      var x2 = b2.m_position;
-      var p1 = joint.GetAnchor1();
-      var p2 = joint.GetAnchor2();
-      context.strokeStyle = '#000000';
-      context.beginPath();
-      switch (joint.m_type) {
-      case b2Joint.e_distanceJoint:
-        context.moveTo(p1.x, p1.y);
-        context.lineTo(p2.x, p2.y);
-        break;
-
-      case b2Joint.e_pulleyJoint:
-        // TODO
-        break;
-
-      default:
-        if (b1 == world.m_groundBody) {
-          context.moveTo(p1.x, p1.y);
-          context.lineTo(x2.x, x2.y);
-        }
-        else if (b2 == world.m_groundBody) {
-          context.moveTo(p1.x, p1.y);
-          context.lineTo(x1.x, x1.y);
-        }
-        else {
-          context.moveTo(x1.x, x1.y);
-          context.lineTo(p1.x, p1.y);
-          context.lineTo(x2.x, x2.y);
-          context.lineTo(p2.x, p2.y);
-        }
-        break;
-      }
-      context.stroke();
-    },
-    
-    drawShape : function(shape, context) {
-      context.strokeStyle = '#000000';
-      context.beginPath();
-      switch (shape.m_type) {
-      case b2Shape.e_circleShape:
-        {
-          var circle = shape;
-          var pos = circle.m_position;
-          var r = circle.m_radius;
-          var segments = 16.0;
-          var theta = 0.0;
-          var dtheta = 2.0 * Math.PI / segments;
-          // draw circle
-          context.moveTo(pos.x + r, pos.y);
-          for (var i = 0; i < segments; i++) {
-            var d = new b2Vec2(r * Math.cos(theta), r * Math.sin(theta));
-            var v = b2Math.AddVV(pos, d);
-            context.lineTo(v.x, v.y);
-            theta += dtheta;
-          }
-          context.lineTo(pos.x + r, pos.y);
-          // draw radius
-          context.moveTo(pos.x, pos.y);
-          //var ax = circle.m_R.col1;
-          //var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
-          //context.lineTo(pos2.x, pos2.y);
-        }
-        break;
-      case b2Shape.e_polyShape:
-        {
-          var poly = shape;
-          var tV = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[0]));
-          context.moveTo(tV.x, tV.y);
-          for (var j = 0; j < poly.m_vertexCount; j++) {
-            var w = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[j]));
-            context.lineTo(w.x, w.y);
-          }
-          context.lineTo(tV.x, tV.y);
-        }
-        break;
-      }
-      context.stroke();
-    },
-    createLinkedInIcon : function() {
+      createGround : function() {
+        var groundSd = new b2BoxDef();      
+        groundSd.extents.Set(512, 10);
+        groundSd.restitution = 0.2;
+        var groundBd = new b2BodyDef();
+        groundBd.AddShape(groundSd);     
+        groundBd.position.Set(512, 900);      
+        return m_world.CreateBody(groundBd)
+      },
       
+      createBall : function(x, y, radius) {
+        if (typeof(radius) == 'undefined') radius = 20;
+        var ballSd = new b2CircleDef();
+        ballSd.density = 1.0;
+        ballSd.radius = radius;
+        ballSd.restitution = 0.7;
+        ballSd.friction = 0;
+        var ballBd = new b2BodyDef();
+        ballBd.AddShape(ballSd);
+        ballBd.position.Set(x,y);      
+        return m_world.CreateBody(ballBd);
+      },
+
+      createJointBall : function(x, y, radius) {
+        if (typeof(radius) == 'undefined') radius = 0.1;
+        var ballSd = new b2CircleDef();
+        ballSd.density = 10000;
+        ballSd.radius = radius;
+        ballSd.restitution = 0.5;
+        ballSd.friction = 0.1;
+        var ballBd = new b2BodyDef();
+        ballBd.AddShape(ballSd);
+        ballBd.position.Set(x,y);      
+        return m_world.CreateBody(ballBd);
+      },
+      
+      createBox : function(x, y, width, height) {
+        var boxSd = new b2BoxDef();
+        boxSd.extents.Set(width, height);
+        boxSd.density = 1.0;
+        var boxBd = new b2BodyDef();
+        boxBd.AddShape(boxSd);
+        boxBd.position.Set(x,y);
+        return m_world.CreateBody(boxBd)
+      },
+
+      createAnchor : function(x, y) {
+        var fixed = true;
+        var anchorBd = new b2BodyDef();
+        anchorBd.position.Set(x,y);
+        return m_world.CreateBody(anchorBd)
+      },
+
+      drawWorld : function() {
+        for (var j = m_world.m_jointList; j; j = j.m_next) {
+          this.drawJoint(j);
+        }
+        for (var b = m_world.m_bodyList; b; b = b.m_next) {
+          for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+            this.drawShape(s);
+          }
+        }
+      },
+
+      clearShapes : function() {
+        for (var b = m_world.m_bodyList; b; b = b.m_next) {
+          for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+            m_context.clearRect(s.m_position.x-m_shapeHalfBB,s.m_position.y-m_shapeHalfBB,s.m_position.x+m_shapeHalfBB, s.m_position.y+m_shapeHalfBB);
+          }
+        }      
+        m_context.clearRect(0,890, 1024,910);
+      },
+
+      drawJoint : function(joint) {
+        var b1 = joint.m_body1;
+        var b2 = joint.m_body2;
+        var x1 = b1.m_position;
+        var x2 = b2.m_position;
+        var p1 = joint.GetAnchor1();
+        var p2 = joint.GetAnchor2();
+        m_context.strokeStyle = '#000000';
+        m_context.beginPath();
+        switch (joint.m_type) {
+        case b2Joint.e_distanceJoint:
+          m_context.moveTo(p1.x, p1.y);
+          m_context.lineTo(p2.x, p2.y);
+          break;
+
+        case b2Joint.e_pulleyJoint:
+          // TODO
+          break;
+
+        default:
+          if (b1 == world.m_groundBody) {
+            m_context.moveTo(p1.x, p1.y);
+            m_context.lineTo(x2.x, x2.y);
+          }
+          else if (b2 == world.m_groundBody) {
+            m_context.moveTo(p1.x, p1.y);
+            m_context.lineTo(x1.x, x1.y);
+          }
+          else {
+            m_context.moveTo(x1.x, x1.y);
+            m_context.lineTo(p1.x, p1.y);
+            m_context.lineTo(x2.x, x2.y);
+            m_context.lineTo(p2.x, p2.y);
+          }
+          break;
+        }
+        m_context.stroke();
+      },
+
+      drawShape : function(shape) {
+        m_context.strokeStyle = '#000000';
+        m_context.beginPath();
+        switch (shape.m_type) {
+        case b2Shape.e_circleShape:
+          {
+            var circle = shape;
+            var pos = circle.m_position;
+            var r = circle.m_radius;
+            var segments = 16.0;
+            var theta = 0.0;
+            var dtheta = 2.0 * Math.PI / segments;
+            // draw circle
+            m_context.moveTo(pos.x + r, pos.y);
+            for (var i = 0; i < segments; i++) {
+              var d = new b2Vec2(r * Math.cos(theta), r * Math.sin(theta));
+              var v = b2Math.AddVV(pos, d);
+              m_context.lineTo(v.x, v.y);
+              theta += dtheta;
+            }
+            m_context.lineTo(pos.x + r, pos.y);
+            // draw radius
+            m_context.moveTo(pos.x, pos.y);
+            //var ax = circle.m_R.col1;
+            //var pos2 = new b2Vec2(pos.x + r * ax.x, pos.y + r * ax.y);
+            //context.lineTo(pos2.x, pos2.y);
+          }
+          break;
+        case b2Shape.e_polyShape:
+          {
+            var poly = shape;
+            var tV = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[0]));
+            m_context.moveTo(tV.x, tV.y);
+            for (var j = 0; j < poly.m_vertexCount; j++) {
+              var w = b2Math.AddVV(poly.m_position, b2Math.b2MulMV(poly.m_R, poly.m_vertices[j]));
+              m_context.lineTo(w.x, w.y);
+            }
+            m_context.lineTo(tV.x, tV.y);
+          }
+          break;
+        }
+        m_context.stroke();
+      },
+      createRope : function(x, y, numJoints, delta) {
+        var left = x;
+        var top = y;
+        var anchor = b2d.createAnchor(left,top);
+        var xOffset = (Math.random() - 0.5) * 100
+        for(var i=0; i<numJoints; i++) {
+          jointDef = new b2RevoluteJointDef();        
+          jointDef.anchorPoint.Set(left, top+(i*delta));
+          jointDef.body1 = anchor;          
+          jointDef.body2 = b2d.createJointBall(left, top+(i*delta));
+          m_world.CreateJoint(jointDef);
+          anchor = jointDef.body2;
+        }
+        jointDef = new b2RevoluteJointDef();        
+        jointDef.anchorPoint.Set(left, top+(numJoints*delta));
+        jointDef.body1 = anchor;
+        jointDef.body2 = b2d.createBox(left+xOffset, top+(numJoints*delta),20,20);
+        m_world.CreateJoint(jointDef);      
+      },
+      createLinkedInIcon : function() {      
+        b2d.createRope(230,390,15,10);
+      },
+      
+      createFacebookIcon : function() {      
+        b2d.createRope(400,380,15,10);
+      },
+      
+      createYoutubeIcon : function() {      
+        b2d.createRope(700,350,15,10);
+      },
+      
+      getBodyAtMouse : function(e) {
+        var aabb = new b2AABB();
+        
+        var mousePVec = new b2Vec2();
+        aabb.minVertex.Set(e.pageX - 0.001, e.pageY - 0.001);
+        aabb.maxVertex.Set(e.pageX + 0.001, e.pageY + 0.001);
+        mousePVec.Set(e.pageX, e.pageY);
+        console.log("(" + e.pageX + ", " + e.pageY +")");
+        for (var b = world.m_bodyList; b; b = b.m_next) {
+          for (var s = b.GetShapeList(); s != null; s = s.GetNext()) {
+            if(!s.GetBody().IsStatic()){
+              var inside = s.TestPoint(mousePVec);
+              if(inside) {
+                console.log("got shape!");
+                break;
+              }
+            }
+          }
+        }     
+      }
     }
-  }
-  
-  var world = b2d.createWorld();
-  var ctx;
+  })();
   
   return  {
+    step : function(cnt) {
+      var stepping = false;      
+      var timeStep = 1.0/60;
+      var iteration = 1;
+      //      console.log(currShape);
+      //      b2d.clearShapes(world, ctx);
+      world.Step(timeStep, iteration);
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
+      b2d.drawWorld();
+      setTimeout('EPC.step(' + (cnt || 0) + ')', 10);    
+    },
+    
     initLinkClouds : function() {
       footer_height = jQuery("#footer").css("height");
       footer_height = footer_height.split("px")
@@ -232,35 +314,26 @@ var EPC = (function () {
       animateCloud("#cloud3", Math.random() * (z2_speed-z0_speed) + z0_speed);
     },
     
-    step : function(cnt) {
-      var stepping = false;      
-      var timeStep = 1.0/60;
-      var iteration = 1;
-//      console.log(currShape);
-//      b2d.clearShapes(world, ctx);
-      world.Step(timeStep, iteration);
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-      b2d.drawWorld(world, ctx);
-      setTimeout('EPC.step(' + (cnt || 0) + ')', 10);    
-    }, 
-    
     initPhysics : function() {	    
       
     },
     
     initCanvas : function() {
-      var canvasElm = jQuery('canvas').get(0);
-      ctx = canvasElm.getContext('2d');      
+      b2d.createWorld();      
       b2d.createLinkedInIcon();
+      b2d.createFacebookIcon();
+      b2d.createYoutubeIcon();
 //      Event.observe('canvas', 'click', function(e) {
 //        if (Math.random() < 0.5) {
-//          currShape = b2d.createBall(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
+//          b2d.createBall(Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e));          
 //        }
 //        else {
-//          currShape = b2d.createBox(world, Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10, false);          
+//          b2d.createBox(Event.pointerX(e) - document.getElementById("canvas").offsetLeft, Event.pointerY(e), 10, 10);          
 //        }
-////        EPC.step(10);
 //      });      
+      jQuery("canvas").bind("mousedown", function(e) {
+        b2d.getBodyAtMouse(e);
+      });
       this.step();
     },
 
@@ -281,7 +354,11 @@ var EPC = (function () {
 jQuery(document).ready(function() {
   EPC.initLinkClouds();
   EPC.initBgClouds();
-//  EPC.initBird();
-  EPC.initCanvas();
-   
+  EPC.initBird();
+  //EPC.initCanvas();
+
+var runner = new danglies(jQuery("#canvas")[0]);
+runner.draw();	
+runner.resume();
+	
 });
