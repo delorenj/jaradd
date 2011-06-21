@@ -354,7 +354,7 @@ var EPC = (function () {
 jQuery(document).ready(function() {
   EPC.initLinkClouds();
   EPC.initBgClouds();
-  EPC.initBird();
+//  EPC.initBird();
   //EPC.initCanvas();
 
 var runner = new danglies(jQuery("#canvas")[0]);

@@ -12,7 +12,6 @@
     <script type="text/javascript">
       $j = jQuery.noConflict();    
     </script>    
-<!--  <script type="text/javascript" src="js/epc.js"></script>-->
     <script type="text/javascript" src="js/epcb2d.js"></script>
     <script type="text/javascript" src="js/epcDanglies.js"></script>
     <script type="text/javascript" src="js/epc.js"></script>
@@ -21,9 +20,9 @@
     <div id="wrapper">
       <canvas id="canvas" width="1024" height="900"></canvas>
     </div>
-    <div id="canvas">
+<!--    <div id="canvas">
       <div id="bird"></div>
-    </div>
+    </div>-->
     <div id="content"></div>
       <div class="wrapper">
         <ul id="beeflinks">
