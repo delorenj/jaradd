@@ -12,7 +12,7 @@ Danglies.prototype.createWorld = function() {
     world.DestroyBody(this._wallLeft);
     world.DestroyBody(this._wallRight);
     world.DestroyBody(this._wallBottom);
-    var boxsize = 1.4;
+    var boxsize = 1.8;
     function spawn(x, y, a) {
         var bodyDef = new b2BodyDef();
         bodyDef.type = b2Body.b2_dynamicBody;
@@ -53,9 +53,9 @@ Danglies.prototype.createWorld = function() {
       }
       jointDef = new b2RevoluteJointDef();        
       jointDef.localAnchorA.Set(0, 0);
-      jointDef.localAnchorB.Set(0,1);
+      jointDef.localAnchorB.Set(0,1.2);
       jointDef.bodyA = anchor;
-      jointDef.bodyB = spawn(x+xOffset, y-(numJoints*delta),0);
+      jointDef.bodyB = spawn(x+xOffset, y-(numJoints*delta),1);
       jointDef.bodyB.m_userData = div      
       world.CreateJoint(jointDef);      
     }
@@ -69,17 +69,14 @@ Danglies.prototype.createWorld = function() {
       createRope(30,15,27,0.1, "facebook");
     }
       
-    function createYoutubeIcon() {      
-      createRope(35,10,15,0.1, "youtube");
+    function createTwitterIcon() {      
+      createRope(35,10,15,0.1, "twitter");
     }
         
     createLinkedInIcon();
     createFacebookIcon();
-    createYoutubeIcon();
-//    createFacebookIcon();
-//    createYoutubeIcon();
+    createTwitterIcon();
     
-    console.log(world);
     return world;
 };
 
@@ -93,17 +90,7 @@ Danglies.prototype.draw = function() {
   if(this._world) {
       this._world.SetDebugDraw(this._dbgDraw);
       this._world.DrawDebugData();
-  }    
-  
-//  for (var b = this._world.m_bodyList; b; b = b.m_next) {
-//    for (var s = b.GetFixtureList(); s != null; s = s.GetNext()) {
-//      this.drawShape(s, c);
-//    }
-//  }            
-//  for (var j = this._world.m_jointList; j; j = j.m_next) {
-//    var jprox = j.GetUpperLimit();
-//    this.drawJoint(j, c);
-//  }            
+  }          
 }
 
 Danglies.prototype.drawShape = function(s, c) {
@@ -129,7 +116,34 @@ Danglies.prototype.drawJoint = function(j,c) {
     c.stroke();  
 }
 
-b2DebugDraw.prototype.DrawSolidPolygon=function(a,b,c) {
+b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
+//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+//  this.m_sprite.lineWidth=this.m_lineThickness;
+//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+//  this.m_sprite.beginPath();
+//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//
+//  for(var i=1;i<numVertices;i++) 
+//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+//
+//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//  this.m_sprite.fill();
+//  this.m_sprite.stroke();
+//  this.m_sprite.closePath()
+  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
+  jQuery("#" + body.m_userData + " img.cloudicon")
+    .css("position", "absolute")
+    .css("top", "0px")
+    .css("-moz-transform", rotationStyle)
+    .css("-webkit-transform", rotationStyle)
+//    .css("left", ((((vertices[2].x*this.m_drawScale)+(vertices[3].x*this.m_drawScale))/2)+((vertices[0].x*this.m_drawScale)+(vertices[1].x*this.m_drawScale)/2))/2 + "px")
+//    .css("left", vertices[3].x*this.m_drawScale)
+    .css("left", (body.m_xf.position.x*this.m_drawScale)- (1.6*this.m_drawScale)  + "px")
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + "px");
+
+    if(body.m_userData == "linkedin") {
+      console.log("Calc: " + body.m_xf.position.x);
+    }      
 }
 
 b2World.prototype.DrawJoint=function(a) {
