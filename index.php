@@ -42,8 +42,8 @@
             <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
             <img class="cloudicon" src="images/canvas/rach1.png"></img>
           </li>
-          <li id="test-sign">
-            <img class="cloudicon" src="images/canvas/test-sign.png"></img>
+          <li id="work-stuff">
+            <img class="cloudicon" src="images/canvas/work-stuff.png"></img>
           </li>          
         </ul>
       </div>

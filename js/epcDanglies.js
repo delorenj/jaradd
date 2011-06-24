@@ -109,7 +109,7 @@ Danglies.prototype.createWorld = function() {
     createRope(22,33,1.7,1.7,5,0.1, "facebook");    
 //    createRope(31,33,1.7,1.7,20,0.1, "youtube");
 //    createRope(40,35,1.85,1.85,10,0.1, "rach1");
-    createDoubleRope(41,33.5,46,33.5,4.5,1.8,8,0.1, "test-sign");
+    createDoubleRope(41,33.5,46,33.5,4.5,1.8,8,0.1, "work-stuff");
     
     return world;
 };
