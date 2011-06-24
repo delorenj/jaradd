@@ -47,9 +47,9 @@ Danglies.prototype.createWorld = function() {
       for(var i=0; i<numJoints; i++) {
         jointDef = new b2RevoluteJointDef();
         jointDef.localAnchorA.Set(0, 0);
-        jointDef.localAnchorB.Set(0, 0.2);
+        jointDef.localAnchorB.Set(0, 0.5);
         jointDef.bodyA = anchor;          
-        jointDef.bodyB = that.createBall(world, x, y-delta*i, 0.05, 1, 1, 1000);  //x,y,radius,fric,rest,density
+        jointDef.bodyB = that.createBall(world, x, y-delta*i, 0.25, 1, 1, 10);  //x,y,radius,fric,rest,density
         world.CreateJoint(jointDef);
         anchor = jointDef.bodyB;
       }
@@ -62,10 +62,10 @@ Danglies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);
     }
 
-    createRope(15,32,25,0.1,"linkedin", 1.7);
-    createRope(22,33,27,0.1, "facebook", 1.7);    
-    createRope(31,33,40,0.1, "youtube", 1.7);
-    createRope(40,35,27,0.1, "rach1", 1.85);
+    createRope(15,32,15,0.1,"linkedin", 1.7);
+    createRope(22,33,5,0.1, "facebook", 1.7);    
+    createRope(31,33,25,0.1, "youtube", 1.7);
+    createRope(40,35,10,0.1, "rach1", 1.85);
     
     return world;
 };
