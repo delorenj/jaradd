@@ -85,6 +85,7 @@ canvas {
 .cloudicon {
   position: relative;
   left: 30px;
+  margin-left: -10px;
   top:-60px;
   z-index: 1;
 /*  box-shadow: 10px 10px 5px #888;*/
