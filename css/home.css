@@ -104,3 +104,7 @@ canvas {
   width: 90px;
   z-index: 1000;
 }
+
+#test-sign img {
+  margin-left: -55px;
+}

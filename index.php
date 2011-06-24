@@ -42,12 +42,15 @@
             <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
             <img class="cloudicon" src="images/canvas/rach1.png"></img>
           </li>
+          <li id="test-sign">
+            <img class="cloudicon" src="images/canvas/test-sign.png"></img>
+          </li>          
         </ul>
       </div>
     </div>    
-    <div id="footer">
+<!--    <div id="footer">
       <span>Copyright &copy; 2011 somethin somethin somethin</span>
-    </div>          
+    </div>          -->
 <!--    <img id="linkedin" class="cloudicon" src="images/canvas/linkedin.png"></img>
     <img id="facebook" class="cloudicon" src="images/canvas/facebook.png"></img>
     <img id="twitter" class="cloudicon" src="images/canvas/twitter.png"></img>-->

@@ -12,16 +12,16 @@ Danglies.prototype.createWorld = function() {
     world.DestroyBody(this._wallLeft);
     world.DestroyBody(this._wallRight);
     world.DestroyBody(this._wallBottom);
-    //var boxsize = 1.7;
-    function spawn(x, y, a, s) {
-        var boxsize = s || 1.7;
+    function spawn(x, y, w, h, a) {
+        w = w || 1.7;
+        h = h || 1.7;
         var bodyDef = new b2BodyDef();
         bodyDef.type = b2Body.b2_dynamicBody;
         bodyDef.position.Set(x, y);
         bodyDef.angle = a;
         var body = world.CreateBody(bodyDef);
-        body.w = boxsize;
-        body.h = boxsize;
+        body.w = w;
+        body.h = h;
         var shape = new b2PolygonShape.AsBox(body.w, body.h);
         var fixtureDef = new b2FixtureDef();
         fixtureDef.restitution = 0.0;
@@ -38,8 +38,9 @@ Danglies.prototype.createWorld = function() {
       return world.CreateBody(anchorBd)
     }
 
-    function createRope(x, y, numJoints, delta, div, size) {
-      var boxsize = size || 1.7;
+    function createRope(x, y, w, h, numJoints, delta, div) {
+      w = w || 1.7;
+      h = h || 1.7;
       var anchor = createAnchor(x,y);
       //var xOffset = (Math.random() - 0.5) * 100
       var xOffset = 0
@@ -57,15 +58,58 @@ Danglies.prototype.createWorld = function() {
       jointDef.localAnchorA.Set(0, 0);
       jointDef.localAnchorB.Set(0,1.2);
       jointDef.bodyA = anchor;
-      jointDef.bodyB = spawn(x+xOffset, y-(numJoints*delta),0, boxsize);
+      jointDef.bodyB = spawn(x+xOffset, y-(numJoints*delta),w, h, 0);
       jointDef.bodyB.m_userData = div;
       world.CreateJoint(jointDef);
     }
+    
+    function createDoubleRope(x1, y1, x2, y2, w, h, numJoints, delta, div) {
+      var anchor1 = createAnchor(x1,y1);
+      var anchor2 = createAnchor(x2,y2);
+      var xOffset = 0
+      console.log("createDoubleRope: " + x1 + ", " + y1 + " ---> " + x2 + ", " + y2);
+      for(var i=0; i<numJoints; i++) {
+        jointDef = new b2RevoluteJointDef();
+        jointDef.localAnchorA.Set(0, 0);
+        jointDef.localAnchorB.Set(0, 0.5);
+        jointDef.bodyA = anchor1;          
+        jointDef.bodyB = that.createBall(world, x1, y1-delta*i, 0.25, 1, 1, 10);  //x,y,radius,fric,rest,density
+        world.CreateJoint(jointDef);
+        anchor1 = jointDef.bodyB;
+      }
+      jointDef = new b2RevoluteJointDef();        
+      jointDef.localAnchorA.Set(0, 0);
+      jointDef.localAnchorB.Set(-w/2,1.2);
+      jointDef.bodyA = anchor1;
+      jointDef.bodyB = spawn(x1+xOffset, y1-(numJoints*delta),w, h, 0);
+      jointDef.bodyB.m_userData = div;
+      world.CreateJoint(jointDef);
+      
+      var sign = jointDef.bodyB;
+      
+      for(i=0; i<numJoints; i++) {
+        jointDef = new b2RevoluteJointDef();
+        jointDef.localAnchorA.Set(0, 0);
+        jointDef.localAnchorB.Set(0, 0.5);
+        jointDef.bodyA = anchor2;          
+        jointDef.bodyB = that.createBall(world, x2, y2-delta*i, 0.25, 1, 1, 10);  //x,y,radius,fric,rest,density
+        world.CreateJoint(jointDef);
+        anchor2 = jointDef.bodyB;
+      }
+      jointDef = new b2RevoluteJointDef();        
+      jointDef.localAnchorA.Set(0, 0);
+      jointDef.localAnchorB.Set(w/2,1.2);
+      jointDef.bodyA = anchor2;
+      jointDef.bodyB = sign;
+      jointDef.bodyB.m_userData = div;
+      world.CreateJoint(jointDef);      
+    }    
 
-    createRope(15,32,15,0.1,"linkedin", 1.7);
-    createRope(22,33,5,0.1, "facebook", 1.7);    
-    createRope(31,33,25,0.1, "youtube", 1.7);
-    createRope(40,35,10,0.1, "rach1", 1.85);
+//    createRope(15,32,1.7,1.7,15,0.1,"linkedin");
+//    createRope(22,33,1.7,1.7,5,0.1, "facebook");    
+//    createRope(31,33,1.7,1.7,20,0.1, "youtube");
+//    createRope(40,35,1.85,1.85,10,0.1, "rach1");
+    createDoubleRope(41,33.5,46,33.5,4.5,1.8,8,0.1, "test-sign");
     
     return world;
 };
@@ -102,7 +146,7 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
     .css("position", "absolute")
     .css("-moz-transform", rotationStyle)
     .css("-webkit-transform", rotationStyle)
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (1.6*this.m_drawScale)  + "px")
+    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + "px");
 }
 
