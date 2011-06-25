@@ -12,7 +12,6 @@
     <script type="text/javascript">
       $j = jQuery.noConflict();    
     </script>    
-<!--  <script type="text/javascript" src="js/epc.js"></script>-->
     <script type="text/javascript" src="js/epcb2d.js"></script>
     <script type="text/javascript" src="js/epcDanglies.js"></script>
     <script type="text/javascript" src="js/epc.js"></script>
@@ -21,9 +20,9 @@
     <div id="wrapper">
       <canvas id="canvas" width="1024" height="900"></canvas>
     </div>
-<!--    <div id="canvas">
-      <div id="bird"></div>
-    </div>-->
+    <div id="canvas">
+<!--      <div id="bird"></div>-->
+    </div>
     <div id="content"></div>
       <div class="wrapper">
         <ul id="beeflinks">
@@ -35,19 +34,25 @@
             <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
             <img class="cloudicon" src="images/canvas/facebook.png"></img>
           </li>
-          <li id="twitter">
+          <li id="youtube">
             <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
-            <img class="cloudicon" src="images/canvas/twitter.png"></img>
+            <img class="cloudicon" src="images/canvas/youtube.png"></img>
           </li>
-          <li id="somethin">
+          <li id="rach1">
             <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
-            <img class="cloudicon" src="images/canvas/linkedin.png"></img>
+            <img class="cloudicon" src="images/canvas/rach1.png"></img>
           </li>
+          <li id="work-stuff">
+            <img class="cloudicon" src="images/canvas/work-stuff.png"></img>
+          </li>          
         </ul>
       </div>
     </div>    
-    <div id="footer">
+<!--    <div id="footer">
       <span>Copyright &copy; 2011 somethin somethin somethin</span>
-    </div>          
+    </div>          -->
+<!--    <img id="linkedin" class="cloudicon" src="images/canvas/linkedin.png"></img>
+    <img id="facebook" class="cloudicon" src="images/canvas/facebook.png"></img>
+    <img id="twitter" class="cloudicon" src="images/canvas/twitter.png"></img>-->
   </body>
 </html>

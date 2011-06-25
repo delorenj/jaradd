@@ -13,7 +13,7 @@ canvas {
   top: 0;
   left: 0;
   margin: 0 auto;
-  z-index: 4;
+  z-index: 100;
 }
 
 #content {
@@ -85,9 +85,10 @@ canvas {
 .cloudicon {
   position: relative;
   left: 30px;
+  margin-left: -10px;
   top:-60px;
   z-index: 1;
-  box-shadow: 10px 10px 5px #888;
+/*  box-shadow: 10px 10px 5px #888;*/
 }
 
 #footer {
@@ -103,4 +104,8 @@ canvas {
   height: 62px;
   width: 90px;
   z-index: 1000;
+}
+
+#work-stuff img {
+  margin-left: -55px;
 }
