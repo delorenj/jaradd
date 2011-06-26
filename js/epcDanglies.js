@@ -73,7 +73,7 @@ Danglies.prototype.createWorld = function() {
         jointDef.localAnchorA.Set(0, 0);
         jointDef.localAnchorB.Set(0, 0.5);
         jointDef.bodyA = anchor1;          
-        jointDef.bodyB = that.createBall(world, x1, y1-delta*i, 0.25, 1, 1, 10);  //x,y,radius,fric,rest,density
+        jointDef.bodyB = that.createBall(world, x1, y1-delta*i, 0.25, 1, 1, 70);  //x,y,radius,fric,rest,density
         world.CreateJoint(jointDef);
         anchor1 = jointDef.bodyB;
       }
@@ -109,7 +109,7 @@ Danglies.prototype.createWorld = function() {
     createRope(22,33,1.7,1.7,5,0.1, "facebook");    
 //    createRope(31,33,1.7,1.7,20,0.1, "youtube");
 //    createRope(40,35,1.85,1.85,10,0.1, "rach1");
-    createDoubleRope(41,33.5,46,33.5,4.5,1.8,8,0.1, "work-stuff");
+    createDoubleRope(35,33.5,44,33.5,8.5,3.8,8,0.1, "work-stuff");
     
     return world;
 };
@@ -128,19 +128,19 @@ Danglies.prototype.draw = function() {
 }
 
 b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-//  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-//  this.m_sprite.beginPath();
-//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//
-//  for(var i=1;i<numVertices;i++) 
-//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-//
-//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//  this.m_sprite.fill();
-//  this.m_sprite.stroke();
-//  this.m_sprite.closePath()
+  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+  this.m_sprite.lineWidth=this.m_lineThickness;
+  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+  this.m_sprite.beginPath();
+  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+
+  for(var i=1;i<numVertices;i++) 
+    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+
+  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+  this.m_sprite.fill();
+  this.m_sprite.stroke();
+  this.m_sprite.closePath()
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   jQuery("#" + body.m_userData + " img.cloudicon")
     .css("position", "absolute")
