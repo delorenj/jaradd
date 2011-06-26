@@ -107,5 +107,13 @@ canvas {
 }
 
 #work-stuff img {
-  margin-left: -135px;
+  margin-left: -55px;
+  margin-top: -9px;
+  box-shadow: 2px 2px 5px #444;
+}
+
+#music-stuff img {
+  margin-left: -55px;
+  margin-top: -9px;
+  box-shadow: 2px 2px 5px #444;
 }

@@ -45,6 +45,9 @@
           <li id="work-stuff">
             <img class="cloudicon" src="images/canvas/work-stuff.png"></img>
           </li>          
+          <li id="music-stuff">
+            <img class="cloudicon" src="images/canvas/music-stuff.png"></img>
+          </li>                    
         </ul>
       </div>
     </div>    
