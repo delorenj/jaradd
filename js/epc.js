@@ -19,33 +19,6 @@ var EPC = (function () {
   }
   
   return  {
-    initLinkClouds : function() {
-      //****** set canvas dimensions
-      jQuery("#content").css("height", "900px");
-      
-      //****** bind cloud hover animations
-      jQuery("img.cloudlink").hover(function() {        
-        jQuery(this).siblings("img.cloudicon").animate({top: "-100px"}, {queue: false, duration: 100, easing: "linear"});
-        }, function() {
-          jQuery(this).siblings("img.cloudicon").animate({top: "-60px"}, {queue: false, duration: 450, easing: "easeOutBounce"});
-        }
-      ).click(function() {
-          jQuery(this).siblings("img.cloudicon").animate({
-            height: 20,
-            width: 80,
-            top: -40
-          }, 500, "easeOutCubic", function() {
-            jQuery(this).animate({
-              height: 200,
-              width: 10              
-            },{
-              duration: 50,
-              queue: false              
-            }).animate({top: -1000}, 300, function() {jQuery(this).hide()});
-          })
-      });
-    },
-    
     initBgClouds : function() {
       jQuery("body").append("<img id='cloud1' src='images/canvas/cloud_370x147.png' alt='' />");
       jQuery("body").append("<img id='cloud2' src='images/canvas/cloud_500x200.png' alt='' />");      
@@ -54,13 +27,7 @@ var EPC = (function () {
         jQuery(this).css({
         left: Math.random() * jQuery(window).width(),
         top: Math.random() * jQuery(window).height()
-        });
-        
-//        jQuery(this).hover(function() {
-//          jQuery(this).css("border", "1px dashed red");
-//        }, function() {
-//          jQuery(this).css("border", "none");
-//        });
+        });        
       });
       animateCloud("#cloud1", Math.random() * (z2_speed-z0_speed) + z0_speed);
       animateCloud("#cloud2", Math.random() * (z2_speed-z0_speed) + z0_speed);
@@ -82,10 +49,8 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
-  EPC.initLinkClouds();
   EPC.initBgClouds();
 //  EPC.initBird();
-  //EPC.initCanvas();
 
 var runner = new danglies(jQuery("#canvas")[0]);
 runner.draw();	

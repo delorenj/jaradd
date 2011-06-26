@@ -18,11 +18,12 @@ canvas {
 
 #content {
   background-image: url("../images/grad4.png");
-  background-position: center;
+  background-position: 0 -150px;
   background-repeat: no-repeat;
   width: 1024px;
-  height: 900px;
+  height: 600px;
   margin: 0 auto;
+/*  border: 1px solid blue;*/
 }
 
 #cloud1 {
@@ -58,7 +59,6 @@ canvas {
 
 #beeflinks {
   position: absolute;
-  top:-350px;
   z-index: 5;
   width: 100%;
   margin: 0 auto;
@@ -76,19 +76,11 @@ canvas {
   margin-right: 0;
 }
 
-.cloudlink {
-  position: relative;
-  top:70px;
-  z-index: 2;
-}
-
 .cloudicon {
   position: relative;
-  left: 30px;
-  margin-left: -10px;
-  top:-60px;
+  margin-left: -55px;
+  margin-top: -60px;
   z-index: 1;
-/*  box-shadow: 10px 10px 5px #888;*/
 }
 
 #footer {
@@ -107,13 +99,9 @@ canvas {
 }
 
 #work-stuff img {
-  margin-left: -55px;
-  margin-top: -9px;
   box-shadow: 2px 2px 5px #444;
 }
 
 #music-stuff img {
-  margin-left: -55px;
-  margin-top: -9px;
   box-shadow: 2px 2px 5px #444;
 }

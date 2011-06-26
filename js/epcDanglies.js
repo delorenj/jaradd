@@ -81,7 +81,7 @@ Danglies.prototype.createWorld = function() {
       jointDef.localAnchorA.Set(0, 0);
       jointDef.localAnchorB.Set(-w/2,1.2);
       jointDef.bodyA = anchor1;
-      jointDef.bodyB = spawn(x1+xOffset, y1-(numJoints*delta),w, h, 0);
+      jointDef.bodyB = spawn(x1+xOffset, y1-(numJoints*delta),w, h, Math.random()/2);
       jointDef.bodyB.m_userData = div;
       world.CreateJoint(jointDef);
       
@@ -109,15 +109,15 @@ Danglies.prototype.createWorld = function() {
 //    createRope(22,33,1.7,1.7,5,0.1, "facebook");    
 //    createRope(31,33,1.7,1.7,20,0.1, "youtube");
 //    createRope(40,35,1.85,1.85,10,0.1, "rach1");
-    createDoubleRope(38.5,33.0,
-                     43.0,33.7,
+    createDoubleRope(38.5,24.0,
+                     43.0,24.7,
                      4.35,1.95,
-                     9,0.1, "work-stuff");
+                     12,0.1, "work-stuff");
 
-    createDoubleRope(28.5,33.0,
-                     33.0,33.7,
+    createDoubleRope(18.5,24.0,
+                     23.0,24.7,
                      4.35,1.95,
-                     9,0.1, "music-stuff");
+                     12,0.1, "music-stuff");
 
     return world;
 };

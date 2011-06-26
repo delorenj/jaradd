@@ -18,7 +18,7 @@
   </head>
   <body>
     <div id="wrapper">
-      <canvas id="canvas" width="1024" height="900"></canvas>
+      <canvas id="canvas" width="1024" height="600"></canvas>
     </div>
     <div id="canvas">
 <!--      <div id="bird"></div>-->
@@ -26,22 +26,6 @@
     <div id="content"></div>
       <div class="wrapper">
         <ul id="beeflinks">
-          <li id="linkedin">
-            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
-            <img class="cloudicon" src="images/canvas/linkedin.png"></img>
-          </li>
-          <li id="facebook">
-            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
-            <img class="cloudicon" src="images/canvas/facebook.png"></img>
-          </li>
-          <li id="youtube">
-            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
-            <img class="cloudicon" src="images/canvas/youtube.png"></img>
-          </li>
-          <li id="rach1">
-            <img class="cloudlink" src="images/canvas/cloudlink.png"></img>
-            <img class="cloudicon" src="images/canvas/rach1.png"></img>
-          </li>
           <li id="work-stuff">
             <img class="cloudicon" src="images/canvas/work-stuff.png"></img>
           </li>          
@@ -51,11 +35,5 @@
         </ul>
       </div>
     </div>    
-<!--    <div id="footer">
-      <span>Copyright &copy; 2011 somethin somethin somethin</span>
-    </div>          -->
-<!--    <img id="linkedin" class="cloudicon" src="images/canvas/linkedin.png"></img>
-    <img id="facebook" class="cloudicon" src="images/canvas/facebook.png"></img>
-    <img id="twitter" class="cloudicon" src="images/canvas/twitter.png"></img>-->
   </body>
 </html>
