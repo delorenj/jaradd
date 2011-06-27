@@ -47,16 +47,27 @@ var EPC = (function () {
     },
     
     initMusicStuff : function() {
-      console.log("transition to music page");
       jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
-        setTimeout(jQuery("#flash").fadeOut("slow"), 10000);
+        jQuery("#flash").fadeOut("slow");
       });
     },
     
     initWorkStuff : function() {
-      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
-        setTimeout(jQuery("#flash").fadeOut("slow"), 10000);
+//      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
+//        jQuery("#flash").fadeOut("slow");
+//      });
+      jQuery("#content").animate({
+        backgroundPosition: "(0 0)"
+      }, {
+        duration: 4000,
+        easing: "easeInOutExpo"
       });
+      jQuery("canvas, img.sprite").animate({
+        top: "+=4250px"
+      }, {
+        duration: 4000,
+        easing: "easeInOutExpo"
+      });      
     }   
     
   };

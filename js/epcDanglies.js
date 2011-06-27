@@ -186,7 +186,6 @@ switch(a.m_type){
     break;
 
   default:
-    if(a.m_userData == "dont") return
     b!=this.m_groundBody&&this.m_debugDraw.DrawSegment(d,h,f);
     this.m_debugDraw.DrawSegment(h,g,f);
     c!=this.m_groundBody&&this.m_debugDraw.DrawSegment(e,g,f)
