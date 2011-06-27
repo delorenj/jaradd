@@ -3,11 +3,18 @@ var EPC = (function () {
   var z0_speed = 350000;
   var z1_speed = 450000;
   var z2_speed = 800000;
+  var bgPosOffset = 0;
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
-      left: "+=" + canvasWidth
-    }, layer);    
+      left: "+=" + canvasWidth,
+      top: "+=" + bgPosOffset
+    },{
+      duration: layer,
+      step: function(now, fx) {
+        fx.elem.top = bgPosOffset
+      }
+    });    
   }
   
   var oscilate = function(x, vel) {
@@ -18,7 +25,7 @@ var EPC = (function () {
     })
   }
   
-  return  {
+  return  {    
     initBgClouds : function() {
       jQuery("body").append("<img id='cloud1' src='images/canvas/cloud_370x147.png' alt='' />");
       jQuery("body").append("<img id='cloud2' src='images/canvas/cloud_500x200.png' alt='' />");      
@@ -52,6 +59,14 @@ var EPC = (function () {
       });
     },
     
+    setBgOffset : function(pos) {
+      bgPosOffset = pos;
+    },
+    
+    getBgOffset : function() {
+      return bgPosOffset;
+    },
+    
     initWorkStuff : function() {
 //      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
 //        jQuery("#flash").fadeOut("slow");
@@ -59,13 +74,13 @@ var EPC = (function () {
       jQuery("#content").animate({
         backgroundPosition: "(0 0)"
       }, {
-        duration: 4000,
+        duration: 6000,
         easing: "easeInOutExpo"
       });
       jQuery("canvas, img.sprite").animate({
-        top: "+=4250px"
+        top: "+=7250px"
       }, {
-        duration: 4000,
+        duration: 6000,
         easing: "easeInOutExpo"
       });      
     }   

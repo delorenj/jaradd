@@ -160,7 +160,7 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + "px");
 }
 
 b2World.prototype.DrawJoint=function(a) {
