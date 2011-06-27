@@ -24,16 +24,11 @@
 <!--      <div id="bird"></div>-->
     </div>
     <div id="content"></div>
-      <div class="wrapper">
-        <ul id="beeflinks">
-          <li id="work-stuff">
-            <img class="cloudicon" src="images/canvas/work-stuff.png"></img>
-          </li>          
-          <li id="music-stuff">
-            <img class="cloudicon" src="images/canvas/music-stuff.png"></img>
-          </li>                    
-        </ul>
-      </div>
-    </div>    
+    <div class="wrapper">
+      <img id="work-stuff" class="sprite" src="images/canvas/work-stuff.png"></img>
+      <img id="music-stuff" class="sprite" src="images/canvas/music-stuff.png"></img>
+      <img id="facebook" class="sprite" src="images/canvas/facebook.png"></img>
+      <img id="linkedin" class="sprite" src="images/canvas/linkedin.png"></img>
+    </div>   
   </body>
 </html>

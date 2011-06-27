@@ -44,7 +44,16 @@ var EPC = (function () {
           speed: 4000,
           pause: 3000
       }).isDraggable();
-    }
+    },
+    
+    initMusicStuff : function() {
+      console.log("transition to music page");
+    },
+    
+    initWorkStuff : function() {
+      console.log("transition to work page");
+    }   
+    
   };
 })();
 

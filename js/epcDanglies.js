@@ -105,10 +105,14 @@ Danglies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);      
     }    
 
-//    createRope(15,32,1.7,1.7,15,0.1,"linkedin");
-//    createRope(22,33,1.7,1.7,5,0.1, "facebook");    
-//    createRope(31,33,1.7,1.7,20,0.1, "youtube");
-//    createRope(40,35,1.85,1.85,10,0.1, "rach1");
+    createRope(28,24,
+               1.7,1.7,
+               25,0.1,"linkedin");
+               
+    createRope(32,24,
+               1.7,1.7,
+               20,0.1, "facebook");    
+               
     createDoubleRope(38.5,24.0,
                      43.0,24.7,
                      4.35,1.95,
@@ -150,10 +154,11 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
 //  this.m_sprite.stroke();
 //  this.m_sprite.closePath()
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
-  jQuery("#" + body.m_userData + " img.cloudicon")
+  jQuery("#" + body.m_userData)
     .css("position", "absolute")
     .css("-moz-transform", rotationStyle)
     .css("-webkit-transform", rotationStyle)
+    .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + "px");
 }

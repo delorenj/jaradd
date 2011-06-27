@@ -9,6 +9,8 @@ Danglies.__constructor = function(canvas) {
     this._canvas = canvas;
     this._paused = true;
     this._fps = 200;
+    this._lastClick = 0;
+    this._mouseClicked = false;
     this._dbgDraw = new b2DebugDraw();
     
     this._handleMouseMove = function(e){
@@ -27,11 +29,21 @@ Danglies.__constructor = function(canvas) {
         that._mousePoint = that._dbgDraw.ToWorldPoint(p);
 //        console.log("MOUSE MOVE: " + p.x + "," + p.y + "(" + that._mousePoint.x + "," + that._mousePoint.y + ")");
     };
+    
     this._handleMouseDown = function(e){
         that._mouseDown = true;
+        that._mouseClicked = false;
+        that._lastClick = new Date().getTime();
     };
     this._handleMouseUp = function(e) {
         that._mouseDown = false;
+        var time = new Date().getTime();
+        delta = (time - that._lastClick) / 1000;
+        console.log("delta=" + delta);
+        if(delta < 0.25) {
+            that._mouseClicked = true;
+            console.log("mouseClicked=" + that._mouseClicked);
+        }
     };
     // see _updateUserInteraction
     canvas.addEventListener("mousemove", this._handleMouseMove, true);
@@ -179,6 +191,27 @@ Danglies.prototype._updateMouseInteraction = function() {
             body.SetAwake(true);
         }
     }
+    
+    if(!this._mouseDown && (this._mouseClicked)) {
+      this._mouseClicked = false;
+      body = getBodyAtPoint(this._world, this._mousePoint);
+      if(body) {
+        switch(body.m_userData) {
+          case "facebook":
+            window.open("http://www.facebook.com/jaradd", "_blank");
+            break;
+          case "linkedin":
+            window.open("http://www.linkedin.com/in/delorenj", "_blank");
+            break;
+          case "music-stuff":
+            EPC.initMusicStuff();
+            break;
+          case "work-stuff":
+            EPC.initWorkStuff();
+            break;
+        }
+      }
+    }
 
     if(this._mouseJoint) {
         if(this._mouseDown) {
@@ -225,7 +258,6 @@ Danglies.prototype._update = function() {
 
 Danglies.prototype._updateFPS = function() {
     this._fpsAchieved = this._fpsCounter;
-    this.log("fps: " + this._fpsAchieved);
     this._fpsCounter = 0;
     
     if(!this._paused) {

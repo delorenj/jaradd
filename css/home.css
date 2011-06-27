@@ -57,32 +57,6 @@ canvas {
   width:1024px;
 }
 
-#beeflinks {
-  position: absolute;
-  z-index: 5;
-  width: 100%;
-  margin: 0 auto;
-  display: inline;
-}
-
-#beeflinks li {
-  float: left;
-  margin: 0 3.5%;
-  width:180px;
-  margin-right: 40px;
-}
-
-#beeflinks li:last-child {
-  margin-right: 0;
-}
-
-.cloudicon {
-  position: relative;
-  margin-left: -55px;
-  margin-top: -60px;
-  z-index: 1;
-}
-
 #footer {
   width: 1024px;
   height: 40px;
@@ -98,10 +72,18 @@ canvas {
   z-index: 1000;
 }
 
-#work-stuff img {
-  box-shadow: 2px 2px 5px #444;
+.sprite {
+  position: relative;
+  margin-top: -60px;
+  z-index: 1;
 }
 
-#music-stuff img {
+#facebook, #linkedin {
+  margin-left: -10px;
+  margin-top: -54px;
+}
+
+#music-stuff, #work-stuff {
   box-shadow: 2px 2px 5px #444;
+  margin-left: -56px;
 }
