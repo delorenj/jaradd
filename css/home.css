@@ -87,3 +87,14 @@ canvas {
   box-shadow: 2px 2px 5px #444;
   margin-left: -56px;
 }
+
+#flash {
+  position: fixed;
+  top: 0;
+  display: none;
+  width: 80%;
+  font-size: 20em;
+  font-family: "Amaranth", "arial";
+  text-align: center;
+  color: #000033;
+}

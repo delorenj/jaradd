@@ -48,10 +48,15 @@ var EPC = (function () {
     
     initMusicStuff : function() {
       console.log("transition to music page");
+      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
+        setTimeout(jQuery("#flash").fadeOut("slow"), 10000);
+      });
     },
     
     initWorkStuff : function() {
-      console.log("transition to work page");
+      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
+        setTimeout(jQuery("#flash").fadeOut("slow"), 10000);
+      });
     }   
     
   };

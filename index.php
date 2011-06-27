@@ -3,6 +3,7 @@
   <head>
     <title>Jarad DeLorenzo</title>
     <link type="text/css" rel="stylesheet" href="css/reset.css" />
+    <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="css/home.css" />    
     <script type="text/javascript" src="js/box2d.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -29,6 +30,7 @@
       <img id="music-stuff" class="sprite" src="images/canvas/music-stuff.png"></img>
       <img id="facebook" class="sprite" src="images/canvas/facebook.png"></img>
       <img id="linkedin" class="sprite" src="images/canvas/linkedin.png"></img>
+      <div id="flash"></div>
     </div>   
   </body>
 </html>

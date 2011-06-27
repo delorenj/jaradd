@@ -198,10 +198,10 @@ Danglies.prototype._updateMouseInteraction = function() {
       if(body) {
         switch(body.m_userData) {
           case "facebook":
-            window.open("http://www.facebook.com/jaradd", "_blank");
+            location.href = "http://www.facebook.com/jaradd";
             break;
           case "linkedin":
-            window.open("http://www.linkedin.com/in/delorenj", "_blank");
+            location.href = "http://www.linkedin.com/in/delorenj";
             break;
           case "music-stuff":
             EPC.initMusicStuff();
