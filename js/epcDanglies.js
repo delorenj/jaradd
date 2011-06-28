@@ -154,13 +154,19 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
 //  this.m_sprite.stroke();
 //  this.m_sprite.closePath()
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
-  jQuery("#" + body.m_userData)
+  var sprite = jQuery("#" + body.m_userData);
+  jQuery(sprite)
     .css("position", "absolute")
     .css("-moz-transform", rotationStyle)
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + "px");
+    
+  if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
+    jQuery(sprite).css("display", "none");
+  }
+  jQuery("img[id*='cloud']")[0].top = EPC.bgPosOffset; //TODO: Doesn't work
 }
 
 b2World.prototype.DrawJoint=function(a) {
@@ -190,6 +196,16 @@ switch(a.m_type){
     this.m_debugDraw.DrawSegment(h,g,f);
     c!=this.m_groundBody&&this.m_debugDraw.DrawSegment(e,g,f)
   }
+};
+
+b2DebugDraw.prototype.DrawSegment=function(a,b,c){
+  this.m_sprite.lineWidth=this.m_lineThickness;
+  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+  this.m_sprite.beginPath();
+  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.stroke();
+  this.m_sprite.closePath()
 };
 
 b2DebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {

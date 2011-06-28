@@ -10,10 +10,7 @@ var EPC = (function () {
       left: "+=" + canvasWidth,
       top: "+=" + bgPosOffset
     },{
-      duration: layer,
-      step: function(now, fx) {
-        fx.elem.top = bgPosOffset
-      }
+      duration: layer
     });    
   }
   
@@ -77,8 +74,8 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo"
       });
-      jQuery("canvas, img.sprite").animate({
-        top: "+=7250px"
+      jQuery("body").animate({
+        backgroundPosition: "(0 0)"
       }, {
         duration: 6000,
         easing: "easeInOutExpo"

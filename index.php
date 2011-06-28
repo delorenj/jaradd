@@ -22,9 +22,9 @@
     <div id="wrapper">
       <canvas id="canvas" width="1024" height="600"></canvas>
     </div>
-    <div id="canvas">
+<!--    <div id="canvas">-->
 <!--      <div id="bird"></div>-->
-    </div>
+<!--    </div>-->
     <div id="content"></div>
     <div class="wrapper">
       <img id="work-stuff" class="sprite" src="images/canvas/work-stuff.png"></img>
