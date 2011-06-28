@@ -166,7 +166,18 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
   if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
     jQuery(sprite).css("display", "none");
   }
-  jQuery("img[id*='cloud']")[0].top = EPC.bgPosOffset; //TODO: Doesn't work
+  if(EPC.getBgOffset() > 0) {
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
+        jQuery(this).hide();
+      } else {
+      jQuery(this).stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });
+  }
+  
 }
 
 b2World.prototype.DrawJoint=function(a) {

@@ -33,24 +33,18 @@ canvas {
 
 #cloud1 {
   position: absolute;
-  left: 100px;
-  top: 200px;
   width: 370px;
   height: 197px;  
 }
 
 #cloud2 {
   position: absolute;
-  top: 20px;
-  left: 700px;
   width: 500px;
   height: 200px;
 }
 
 #cloud3 {
   position: absolute;
-  top: 350px;
-  left: 800px;
   width: 410px;
   height: 272px;
 }

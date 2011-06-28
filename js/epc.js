@@ -7,8 +7,7 @@ var EPC = (function () {
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
-      left: "+=" + canvasWidth,
-      top: "+=" + bgPosOffset
+      left: "+=" + canvasWidth
     },{
       duration: layer
     });    
@@ -52,7 +51,9 @@ var EPC = (function () {
     
     initMusicStuff : function() {
       jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
-        jQuery("#flash").fadeOut("slow");
+        setTimeout(function () {
+          jQuery("#flash").fadeOut("slow");
+        }, 2000);
       });
     },
     
@@ -72,8 +73,12 @@ var EPC = (function () {
         backgroundPosition: "(0 0)"
       }, {
         duration: 6000,
-        easing: "easeInOutExpo"
+        easing: "easeInOutExpo",
+        complete: function() {
+          jQuery("#flash").html("Coming Soon").fadeIn("slow") ;
+        }
       });
+      
       jQuery("body").animate({
         backgroundPosition: "(0 0)"
       }, {
