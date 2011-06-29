@@ -51,11 +51,25 @@ var EPC = (function () {
     },
       
     initMusicStuff : function() {
-      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
-        setTimeout(function () {
-          jQuery("#flash").fadeOut("slow");
-        }, 2000);
+      jQuery("#content").animate({
+        backgroundPosition: "(0 -15255)"
+      }, {
+        duration: 6000,
+        easing: "easeInOutExpo",
+        complete: function() {
+          runner.pause();
+          //jQuery("#flash").html("Coming Soon").fadeIn("slow");
+          jQuery("#canvas").hide();
+          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome()');'>Go back up</a>")
+        }
       });
+      
+      jQuery("body").animate({
+        backgroundPosition: "(0 -15255)"
+      }, {
+        duration: 6000,
+        easing: "easeInOutExpo"
+      });      
     },
     
     setBgOffset : function(pos) {
