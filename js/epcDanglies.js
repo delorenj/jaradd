@@ -137,6 +137,13 @@ Danglies.prototype.draw = function() {
       this._world.SetDebugDraw(this._dbgDraw);
       this._world.DrawDebugData();
   }          
+//    c.fillStyle = "black";
+//    if(this._paused) {
+//        c.fillText("paused", 5, 15);
+//    } else {
+//        c.fillText("FPS: " + this._fpsAchieved, 5, 15);
+//    }
+//      
 }
 
 b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
@@ -153,6 +160,7 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
 //  this.m_sprite.fill();
 //  this.m_sprite.stroke();
 //  this.m_sprite.closePath()
+
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   var sprite = jQuery("#" + body.m_userData);
   jQuery(sprite)
@@ -164,14 +172,18 @@ b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + "px");
     
   if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
-    jQuery(sprite).css("display", "none");
+    jQuery(sprite).hide();
+  } else {
+    jQuery(sprite).show();
   }
+  
   if(EPC.getBgOffset() > 0) {
     jQuery("img[id*='cloud']").each(function() {
       if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
         jQuery(this).hide();
       } else {
-      jQuery(this).stop()
+        jQuery(this).show()
+         .stop()
          .css("position","absolute")
          .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
       }
@@ -209,7 +221,9 @@ switch(a.m_type){
   }
 };
 
-b2DebugDraw.prototype.DrawSegment=function(a,b,c){
+b2DebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
+  mouseDown = mouseDown || false;
+  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
   this.m_sprite.lineWidth=this.m_lineThickness;
   this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
   this.m_sprite.beginPath();

@@ -4,6 +4,7 @@ var EPC = (function () {
   var z1_speed = 450000;
   var z2_speed = 800000;
   var bgPosOffset = 0;
+  var runner = null;
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
@@ -48,7 +49,7 @@ var EPC = (function () {
           pause: 3000
       }).isDraggable();
     },
-    
+      
     initMusicStuff : function() {
       jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
         setTimeout(function () {
@@ -58,11 +59,21 @@ var EPC = (function () {
     },
     
     setBgOffset : function(pos) {
-      bgPosOffset = pos;
+      bgPosOffset = pos + 7255;
+      console.log("new offset: " + bgPosOffset);
     },
     
     getBgOffset : function() {
       return bgPosOffset;
+    },
+    
+    setRunner : function(r) {
+      runner = r;
+    },
+    
+    startCanvas : function() {
+      runner.draw();	
+      runner.resume();
     },
     
     initWorkStuff : function() {
@@ -75,7 +86,10 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
-          jQuery("#flash").html("Coming Soon").fadeIn("slow") ;
+          runner.pause();
+          //jQuery("#flash").html("Coming Soon").fadeIn("slow");
+          jQuery("#canvas").hide();
+          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome()');'>Go back down</a>")
         }
       });
       
@@ -85,17 +99,39 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo"
       });      
-    }   
+    },
+    
+    initHome : function() {
+      jQuery("#homelink").fadeOut("slow", function() {
+        jQuery(this).remove();
+      });      
+      jQuery("#canvas").show();
+      runner.resume();
+      jQuery("#content").animate({
+        backgroundPosition: "(0 -7255)"
+      }, {
+        duration: 6000,
+        easing: "easeInOutExpo",
+        complete: function() {
+        }
+      });
+      
+      jQuery("body").animate({
+        backgroundPosition: "(0 -7255)"
+      }, {
+        duration: 6000,
+        easing: "easeInOutExpo"
+      });            
+    }
     
   };
 })();
 
 jQuery(document).ready(function() {
+  var runner = new danglies(jQuery("#canvas")[0]);
+  EPC.setRunner(runner);
+  EPC.startCanvas();
   EPC.initBgClouds();
 //  EPC.initBird();
 
-var runner = new danglies(jQuery("#canvas")[0]);
-runner.draw();	
-runner.resume();
-	
 });

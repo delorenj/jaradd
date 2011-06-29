@@ -62,6 +62,7 @@
 		nowPosX[0] = ((fx.end[0] - fx.start[0]) * fx.pos) + fx.start[0] + fx.unit[0];
 		nowPosX[1] = ((fx.end[1] - fx.start[1]) * fx.pos) + fx.start[1] + fx.unit[1];           
 		fx.elem.style.backgroundPosition = nowPosX[0]+' '+nowPosX[1];
-    EPC.setBgOffset(-(parseInt(fx.start[1]) - parseInt(fx.end[1]) - parseInt(nowPosX[1])));
+//    EPC.setBgOffset(-(parseInt(fx.start[1]) - parseInt(fx.end[1]) - parseInt(nowPosX[1])));
+    EPC.setBgOffset(parseInt(nowPosX[1]));
 	};
 })(jQuery);
