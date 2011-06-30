@@ -5,6 +5,8 @@ var EPC = (function () {
   var z2_speed = 800000;
   var bgPosOffset = 0;
   var runner = null;
+  var homerunner = null
+  var workrunner = null
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
@@ -59,7 +61,7 @@ var EPC = (function () {
         complete: function() {
           runner.pause();
           //jQuery("#flash").html("Coming Soon").fadeIn("slow");
-          jQuery("#canvas").hide();
+          jQuery("#homecanvas").hide();
           jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome()');'>Go back up</a>")
         }
       });
@@ -85,25 +87,24 @@ var EPC = (function () {
       runner = r;
     },
     
-    startCanvas : function() {
-      runner.draw();	
-      runner.resume();
+    startHomeCanvas : function() {
+      homerunner = new spacies(jQuery("#homecanvas")[0]);
+      workrunner = new danglies(jQuery("#workcanvas")[0]);
+
+      homerunner.draw();	
+      homerunner.resume();
     },
     
     initWorkStuff : function() {
-//      jQuery("#flash").html("Coming Soon").fadeIn("slow", function() {        
-//        jQuery("#flash").fadeOut("slow");
-//      });
       jQuery("#content").animate({
         backgroundPosition: "(0 0)"
       }, {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
-          runner.pause();
-          //jQuery("#flash").html("Coming Soon").fadeIn("slow");
-          jQuery("#canvas").hide();
-          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome()');'>Go back down</a>")
+          homerunner.pause();
+          workrunner.draw();
+          workrunner.resume();
         }
       });
       
@@ -119,8 +120,9 @@ var EPC = (function () {
       jQuery("#homelink").fadeOut("slow", function() {
         jQuery(this).remove();
       });      
-      jQuery("#canvas").show();
-      runner.resume();
+      jQuery("#homecanvas").show();
+      workrunner.pause();
+      homerunner.resume();
       jQuery("#content").animate({
         backgroundPosition: "(0 -7255)"
       }, {
@@ -142,9 +144,7 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
-  var runner = new danglies(jQuery("#canvas")[0]);
-  EPC.setRunner(runner);
-  EPC.startCanvas();
+  EPC.startHomeCanvas();
   EPC.initBgClouds();
 //  EPC.initBird();
 
