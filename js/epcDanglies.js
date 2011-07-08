@@ -1,17 +1,14 @@
 (function() {
     
 var Danglies = function() {
-    b2jsTest.__constructor.apply(this, arguments);
+    b2jsDanglies.__constructor.apply(this, arguments);
 };
-extend(Danglies.prototype, b2jsTest.prototype)
+
+extend(Danglies.prototype, b2jsDanglies.prototype)
 
 Danglies.prototype.createWorld = function() {
     var that = this;
-    var world = b2jsTest.prototype.createWorld.apply(this, arguments);
-    world.DestroyBody(this._wallTop);
-    world.DestroyBody(this._wallLeft);
-    world.DestroyBody(this._wallRight);
-    world.DestroyBody(this._wallBottom);
+    var world = b2jsDanglies.prototype.createWorld.apply(this, arguments);
     function spawn(x, y, w, h, a) {
         w = w || 1.7;
         h = h || 1.7;
@@ -112,7 +109,7 @@ Danglies.prototype.createWorld = function() {
     createRope(32,24,
                1.7,1.7,
                20,0.1, "facebook");    
-               
+
     createDoubleRope(38.5,24.0,
                      43.0,24.7,
                      4.35,1.95,
@@ -146,51 +143,6 @@ Danglies.prototype.draw = function() {
 //      
 }
 
-b2DebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-//  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-//  this.m_sprite.beginPath();
-//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//
-//  for(var i=1;i<numVertices;i++) 
-//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-//
-//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//  this.m_sprite.fill();
-//  this.m_sprite.stroke();
-//  this.m_sprite.closePath()
-
-  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
-  var sprite = jQuery("#" + body.m_userData);
-  jQuery(sprite)
-    .css("position", "absolute")
-    .css("-moz-transform", rotationStyle)
-    .css("-webkit-transform", rotationStyle)
-    .css("transform", rotationStyle)
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + "px");
-    
-  if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
-    jQuery(sprite).hide();
-  } else {
-    jQuery(sprite).show();
-  }
-  
-  if(EPC.getBgOffset() > 0) {
-    jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
-        jQuery(this).hide();
-      } else {
-        jQuery(this).show()
-         .stop()
-         .css("position","absolute")
-         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
-      }
-    });
-  }
-  
-}
 
 b2World.prototype.DrawJoint=function(a) {
 var b=a.GetBodyA(),c=a.GetBodyB(),d=b.m_xf.position,e=c.m_xf.position,h=a.GetAnchorA(),g=a.GetAnchorB(),f=b2World.s_jointColor;
@@ -220,22 +172,6 @@ switch(a.m_type){
     c!=this.m_groundBody&&this.m_debugDraw.DrawSegment(e,g,f)
   }
 };
-
-b2DebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
-  mouseDown = mouseDown || false;
-  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineWidth=this.m_lineThickness;
-  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-  this.m_sprite.beginPath();
-  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.stroke();
-  this.m_sprite.closePath()
-};
-
-b2DebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
-  return;
-}
 
 window.danglies = Danglies;
     

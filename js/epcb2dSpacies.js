@@ -1,17 +1,19 @@
 (function(){
 
-var Danglies = function() {
+var Spacies = function() {
     this.__constructor(arguments);
 }
 
-Danglies.__constructor = function(canvas) {
+Spacies.__constructor = function(canvas) {
     var that = this;
     this._canvas = canvas;
     this._paused = true;
     this._fps = 200;
     this._lastClick = 0;
     this._mouseClicked = false;
-    this._dbgDraw = new b2DebugDraw();
+    this._dbgDraw = new b2SpaceyDebugDraw();
+    this.satbounds = 60;
+    this.satdir = 1;
     
     this._handleMouseMove = function(e){
         // adapted from cocos2d-js/Director.js
@@ -55,17 +57,17 @@ Danglies.__constructor = function(canvas) {
     
     // sublcasses expect visual area inside 64x36
     this._dbgDraw.m_drawScale = Math.min(canvas.width/64, canvas.height/36);
-    this._dbgDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+    this._dbgDraw.SetFlags(b2SpaceyDebugDraw.e_shapeBit | b2SpaceyDebugDraw.e_jointBit);
     this._world = this.createWorld();
 }
 
-Danglies.prototype.log = function(arg) {
+Spacies.prototype.log = function(arg) {
     if(typeof(window.console) != 'undefined') {
         console.log(arg);
     }
 };
 
-Danglies.prototype.destroy = function() {
+Spacies.prototype.destroy = function() {
     this.pause();
     
     canvas.removeEventListener("mousemove", this._handleMouseMove, true);
@@ -76,38 +78,14 @@ Danglies.prototype.destroy = function() {
     this._world = null;
 }
 
-Danglies.prototype.createWorld = function(){
+Spacies.prototype.createWorld = function(){
     var m_world = new b2World(new b2Vec2(0.0, -9.81), true);
     var m_physScale = 1;
     m_world.SetWarmStarting(true);
-    
-    // Create border of boxes
-    var wall = new b2PolygonShape();
-    var wallBd = new b2BodyDef();
-    
-    // Left
-    wallBd.position.Set( -9.5 / m_physScale, 36 / m_physScale / 2);
-    wall.SetAsBox(10/m_physScale, 40/m_physScale/2);
-    this._wallLeft = m_world.CreateBody(wallBd);
-    this._wallLeft.CreateFixture2(wall);
-    // Right
-    wallBd.position.Set((64 + 9.5) / m_physScale, 36 / m_physScale / 2);
-    this._wallRight = m_world.CreateBody(wallBd);
-    this._wallRight.CreateFixture2(wall);
-    // Top
-    wallBd.position.Set(64 / m_physScale / 2, (36 + 9.5) / m_physScale);
-    wall.SetAsBox(68/m_physScale/2, 10/m_physScale);
-    this._wallTop = m_world.CreateBody(wallBd);
-    this._wallTop.CreateFixture2(wall); 
-    // Bottom
-    wallBd.position.Set(64 / m_physScale / 2, -9.5 / m_physScale);
-    this._wallBottom = m_world.CreateBody(wallBd);
-    this._wallBottom.CreateFixture2(wall);
-    
     return m_world;
 };
 
-Danglies.prototype.createBall = function(world, x, y, radius, fric, rest, dens) {
+Spacies.prototype.createBall = function(world, x, y, radius, fric, rest, dens) {
     radius = radius || 2;
     fric = fric || 0.4;
     rest = rest || 0.6;
@@ -126,7 +104,7 @@ Danglies.prototype.createBall = function(world, x, y, radius, fric, rest, dens) 
     return body;
 }
 
-Danglies.prototype.draw = function() {
+Spacies.prototype.draw = function() {
     var c = this._canvas.getContext("2d");
     
     this._dbgDraw.SetSprite(c);
@@ -143,18 +121,37 @@ Danglies.prototype.draw = function() {
     }
 }
 
-Danglies.prototype.step = function(delta) {
+Spacies.prototype.step = function(delta) {
     if(!this._world)
         return;
         
     this._world.ClearForces();
+//    this.twitterAnchor.ApplyForce(new b2Vec2(1000,0), this.twitterAnchor.GetPosition());
+    var pos = this.twitterAnchor.GetPosition();
+    if(this.satdir > 0) {
+      if(pos.x > this.satbounds) {
+        this.satdir *= -1;
+        this.satbounds = 0;
+      }
+    } else {
+      if(pos.x < this.satbounds) {
+        this.satdir *= -1;
+        this.satbounds = 600;
+      }
+    }
+    this.twitterAnchor.SetPosition(new b2Vec2(pos.x+0.1 * this.satdir, pos.y));
+    
+    jQuery("#sat")
+      .css("position", "absolute")
+      .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-150  + "px")
+      .css("top",  pos.y*this._dbgDraw.m_drawScale-575 + EPC.getBgOffset() - 7615 + "px");
     
     var delta = (typeof delta == "undefined") ? 1/this._fps : delta;
     
     this._world.Step(delta, delta * this._velocityIterationsPerSecond, delta * this._positionIterationsPerSecond);  
 }
 
-Danglies.prototype._updateMouseInteraction = function() {
+Spacies.prototype._updateMouseInteraction = function() {
     // todo: refactor into world helper or similar
     function getBodyAtPoint(world, p) {
         var aabb = new b2AABB();
@@ -197,18 +194,6 @@ Danglies.prototype._updateMouseInteraction = function() {
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
-          case "facebook":
-            location.href = "http://www.facebook.com/jaradd";
-            break;
-          case "linkedin":
-            location.href = "http://www.linkedin.com/in/delorenj";
-            break;
-          case "music-stuff":
-            EPC.initMusicStuff();
-            break;
-          case "work-stuff":
-            EPC.initWorkStuff();
-            break;
         }
       }
     }
@@ -223,11 +208,11 @@ Danglies.prototype._updateMouseInteraction = function() {
     }   
 }
 
-Danglies.prototype._updateKeyboardInteraction = function() {
+Spacies.prototype._updateKeyboardInteraction = function() {
     // TBD
 }
 
-Danglies.prototype._updateUserInteraction = function() {
+Spacies.prototype._updateUserInteraction = function() {
     this._updateMouseInteraction();
     this._updateKeyboardInteraction();
     
@@ -237,7 +222,7 @@ Danglies.prototype._updateUserInteraction = function() {
     }
 }
 
-Danglies.prototype._update = function() {
+Spacies.prototype._update = function() {
     // derive passed time since last update. max. 10 secs
     var time = new Date().getTime();
     delta = (time - this._lastUpdate) / 1000;
@@ -256,7 +241,7 @@ Danglies.prototype._update = function() {
     }
 }
 
-Danglies.prototype._updateFPS = function() {
+Spacies.prototype._updateFPS = function() {
     this._fpsAchieved = this._fpsCounter;
     this._fpsCounter = 0;
     
@@ -266,7 +251,7 @@ Danglies.prototype._updateFPS = function() {
     }
 }
 
-Danglies.prototype.resume = function() {
+Spacies.prototype.resume = function() {
     if(this._paused) {
         this._paused = false;
         this._lastUpdate = 0;
@@ -276,7 +261,7 @@ Danglies.prototype.resume = function() {
     }
 }
 
-Danglies.prototype.pause = function() {
+Spacies.prototype.pause = function() {
     this._paused = true;
     
     window.clearTimeout(this._updateTimeout);
@@ -284,10 +269,72 @@ Danglies.prototype.pause = function() {
     window.clearTimeout(this._updateUserInteractionTimout);
 }
 
-Danglies.prototype.isPaused = function() {
+Spacies.prototype.isPaused = function() {
     return this._paused;
 }
 
-window.b2jsTest = Danglies;
+b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
+//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+//  this.m_sprite.lineWidth=this.m_lineThickness;
+//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+//  this.m_sprite.beginPath();
+//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//
+//  for(var i=1;i<numVertices;i++) 
+//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+//
+//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//  this.m_sprite.fill();
+//  this.m_sprite.stroke();
+//  this.m_sprite.closePath()
+
+  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
+  var sprite = jQuery("#" + body.m_userData);
+  jQuery(sprite)
+    .css("position", "absolute")
+    .css("-moz-transform", rotationStyle)
+    .css("-webkit-transform", rotationStyle)
+    .css("transform", rotationStyle)
+    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-20  + "px")
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() - 7250 + "px");
+
+      
+  if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
+    jQuery(sprite).hide();
+  } else {
+    jQuery(sprite).show();
+  }
+  
+  if(EPC.getBgOffset() > 0) {
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this).show()
+         .stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });
+  }  
+}
+
+b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
+  mouseDown = mouseDown || false;
+  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.lineWidth=this.m_lineThickness;
+  this.m_sprite.strokeSyle=this.ColorStyle(new b2Color(255,255,255),this.m_alpha);
+  this.m_sprite.beginPath();
+  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.stroke();
+  this.m_sprite.closePath()
+};
+
+//b2SpaceyDebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
+//  return;
+//}
+
+window.b2jsSpacies = Spacies;
     
 })();

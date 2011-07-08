@@ -59,7 +59,7 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
-          runner.pause();
+          homerunner.pause();
           //jQuery("#flash").html("Coming Soon").fadeIn("slow");
           jQuery("#homecanvas").hide();
           jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome()');'>Go back up</a>")
@@ -76,7 +76,7 @@ var EPC = (function () {
     
     setBgOffset : function(pos) {
       bgPosOffset = pos + 7255;
-      console.log("new offset: " + bgPosOffset);
+//      console.log("new offset: " + bgPosOffset);
     },
     
     getBgOffset : function() {
@@ -88,23 +88,30 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
-      homerunner = new spacies(jQuery("#homecanvas")[0]);
-      workrunner = new danglies(jQuery("#workcanvas")[0]);
-
+      homerunner = new danglies(jQuery("#homecanvas")[0]);
+      workrunner = new spacies(jQuery("#workcanvas")[0]);
+      jQuery("#workcanvas").hide();
       homerunner.draw();	
       homerunner.resume();
     },
     
     initWorkStuff : function() {
+      setTimeout(function() {
+        jQuery("#workcanvas").show();
+        jQuery("#homecanvas").hide();
+        jQuery(".worksprite").show();
+        homerunner.pause();
+        workrunner.draw();
+        workrunner.resume();        
+      }, 3000);
+      
       jQuery("#content").animate({
         backgroundPosition: "(0 0)"
       }, {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
-          homerunner.pause();
-          workrunner.draw();
-          workrunner.resume();
+          jQuery("#content").html("<a id='homelink' style='z-index:10001;' href='#' onclick='EPC.initHome();'>Home</a>");
         }
       });
       
@@ -117,11 +124,11 @@ var EPC = (function () {
     },
     
     initHome : function() {
+      homerunner.resume();
       jQuery("#homelink").fadeOut("slow", function() {
         jQuery(this).remove();
       });      
       jQuery("#homecanvas").show();
-      workrunner.pause();
       homerunner.resume();
       jQuery("#content").animate({
         backgroundPosition: "(0 -7255)"
@@ -129,6 +136,7 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
+          workruner.pause();
         }
       });
       
