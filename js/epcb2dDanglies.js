@@ -314,7 +314,7 @@ b2DanglyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   mouseDown = mouseDown || false;
   if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
   this.m_sprite.lineWidth=this.m_lineThickness;
-  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+  this.m_sprite.strokeStyle=this.ColorStyle(new b2Color(0,0,0),this.m_alpha);  
   this.m_sprite.beginPath();
   this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
   this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset());
