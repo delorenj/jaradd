@@ -136,10 +136,10 @@ Spacies.prototype.step = function(delta) {
     } else {
       if(pos.x < this.satbounds) {
         this.satdir *= -1;
-        this.satbounds = 600;
+        this.satbounds = 60;
       }
     }
-    this.twitterAnchor.SetPosition(new b2Vec2(pos.x+0.1 * this.satdir, pos.y));
+    this.twitterAnchor.SetPosition(new b2Vec2(pos.x+0.01 * this.satdir, pos.y));
     
     jQuery("#sat")
       .css("position", "absolute")
@@ -296,7 +296,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-20  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() - 7250 + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + "px");
 
       
   if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
@@ -321,19 +321,19 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
 
 b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   mouseDown = mouseDown || false;
-  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineWidth=this.m_lineThickness;
-  this.m_sprite.strokeSyle=this.ColorStyle(new b2Color(255,255,255),this.m_alpha);
+//  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.lineWidth=3;
+  this.m_sprite.strokeStyle='#1F1F1F';
   this.m_sprite.beginPath();
-  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset() - 7250);
+  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset() - 7250);
   this.m_sprite.stroke();
   this.m_sprite.closePath()
 };
 
-//b2SpaceyDebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
-//  return;
-//}
+b2SpaceyDebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
+  return;
+}
 
 window.b2jsSpacies = Spacies;
     
