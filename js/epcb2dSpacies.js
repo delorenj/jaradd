@@ -136,10 +136,10 @@ Spacies.prototype.step = function(delta) {
     } else {
       if(pos.x < this.satbounds) {
         this.satdir *= -1;
-        this.satbounds = 600;
+        this.satbounds = 60;
       }
     }
-    this.twitterAnchor.SetPosition(new b2Vec2(pos.x+0.1 * this.satdir, pos.y));
+    this.twitterAnchor.SetPosition(new b2Vec2(pos.x+0.01 * this.satdir, pos.y));
     
     jQuery("#sat")
       .css("position", "absolute")
@@ -194,6 +194,8 @@ Spacies.prototype._updateMouseInteraction = function() {
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
+          case "twitter":
+            EPC.initHome();
         }
       }
     }
@@ -331,9 +333,9 @@ b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   this.m_sprite.closePath()
 };
 
-//b2SpaceyDebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
-//  return;
-//}
+b2SpaceyDebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
+  return;
+}
 
 window.b2jsSpacies = Spacies;
     

@@ -110,8 +110,7 @@ var EPC = (function () {
       }, {
         duration: 6000,
         easing: "easeInOutExpo",
-        complete: function() {
-          jQuery("#content").html("<a id='homelink' style='z-index:10001;' href='#' onclick='EPC.initHome();'>Home</a>");
+        complete: function() {          
         }
       });
       
@@ -124,19 +123,22 @@ var EPC = (function () {
     },
     
     initHome : function() {
-      homerunner.resume();
-      jQuery("#homelink").fadeOut("slow", function() {
-        jQuery(this).remove();
-      });      
-      jQuery("#homecanvas").show();
-      homerunner.resume();
+      setTimeout(function() {
+        jQuery("#homecanvas").show();
+        jQuery("#workcanvas").hide();
+        jQuery(".worksprite").hide();
+        workrunner.pause();
+        homerunner.draw();
+        homerunner.resume();        
+      }, 3000);
+      
       jQuery("#content").animate({
         backgroundPosition: "(0 -7255)"
       }, {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
-          workruner.pause();
+
         }
       });
       
