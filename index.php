@@ -36,7 +36,10 @@
       <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
       <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>
       <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
-      <img id="sobe-sign" class="worksprite sprite" src="images/canvas/sobe-sign.png"></img>
+      <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
+      <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
+      <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/canvas/eclipse-sign.png"></img>
+      <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/canvas/5gum-sign.png"></img>
       <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
       <div id="flash"></div>
     </div>

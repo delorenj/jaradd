@@ -22,7 +22,7 @@ Spacies.prototype.createWorld = function() {
         body.h = h;
         var shape = new b2PolygonShape.AsBox(body.w, body.h);
         var fixtureDef = new b2FixtureDef();
-        fixtureDef.restitution = 0.0;
+        fixtureDef.restitution = .25;
         fixtureDef.density = 2.0;
         fixtureDef.friction = 0.9;
         fixtureDef.shape = shape;
@@ -115,9 +115,18 @@ Spacies.prototype.createWorld = function() {
 //                     11.1,6,
 //                     6,1.1, "sobe-sign");
 
-    var sobe = spawn(28, 29,11.1, 6, Math.random()/2);
+    var sobe = spawn(17, 12,9.43, 5.25, Math.random()/2);
     sobe.m_userData = "sobe-sign";
-                     
+
+    var orbit = spawn(40, 18,9.43, 5.25, Math.random()/2.1);
+    orbit.m_userData = "orbit-sign";
+
+    var eclipse = spawn(48, 25,9.43, 5.25, Math.random()/2.2);
+    eclipse.m_userData = "eclipse-sign";
+
+    var fivegum = spawn(48, 25,9.43, 5.25, Math.random()/2.3);
+    fivegum.m_userData = "fivegum-sign";
+
     return world;
 };
 

@@ -100,9 +100,9 @@ height:100%;
   display: none;
 }
 
-#sobe-sign {
-  margin-left: -150px;
-  margin-top: -430px !important;  
+.floaty-sign {
+  margin-left: -126px;
+  margin-top: -420px !important;  
 }
 
 #music-stuff, #work-stuff {
