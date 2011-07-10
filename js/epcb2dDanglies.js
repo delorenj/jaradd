@@ -179,6 +179,9 @@ Danglies.prototype._updateMouseInteraction = function() {
           case "linkedin":
             location.href = "http://www.linkedin.com/in/delorenj";
             break;
+          case "gplus":
+            location.href = "https://plus.google.com/108059363375872918083";
+            break;                        
           case "music-stuff":
             EPC.initMusicStuff();
             break;
@@ -299,6 +302,7 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
   if(EPC.getBgOffset() > 0) {
     jQuery("img[id*='cloud']").each(function() {
       if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
+//      if(jQuery(this).css("top") > jQuery(window).height()) {
         jQuery(this).hide();
       } else {
         jQuery(this).show()

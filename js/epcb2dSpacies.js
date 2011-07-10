@@ -127,7 +127,7 @@ Spacies.prototype.step = function(delta) {
         
     this._world.ClearForces();
 //    this.twitterAnchor.ApplyForce(new b2Vec2(1000,0), this.twitterAnchor.GetPosition());
-    var pos = this.twitterAnchor.GetPosition();
+    var pos = this.satAnchor.GetPosition();
     if(this.satdir > 0) {
       if(pos.x > this.satbounds) {
         this.satdir *= -1;
@@ -139,12 +139,12 @@ Spacies.prototype.step = function(delta) {
         this.satbounds = 60;
       }
     }
-    this.twitterAnchor.SetPosition(new b2Vec2(pos.x+0.01 * this.satdir, pos.y));
+    this.satAnchor.SetPosition(new b2Vec2(pos.x+0.01 * this.satdir, pos.y));
     
     jQuery("#sat")
       .css("position", "absolute")
-      .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-150  + "px")
-      .css("top",  pos.y*this._dbgDraw.m_drawScale-575 + EPC.getBgOffset() - 7615 + "px");
+      .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-72  + "px")
+      .css("top",  pos.y*this._dbgDraw.m_drawScale-575 + EPC.getBgOffset() - 7619 + "px");
     
     var delta = (typeof delta == "undefined") ? 1/this._fps : delta;
     
@@ -194,7 +194,7 @@ Spacies.prototype._updateMouseInteraction = function() {
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
-          case "twitter":
+          case "satAnchor":
             EPC.initHome();
         }
       }
@@ -297,7 +297,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     .css("-moz-transform", rotationStyle)
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-20  + "px")
+    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-10  + "px")
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + "px");
 
       
@@ -324,7 +324,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
 b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   mouseDown = mouseDown || false;
 //  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineWidth=3;
+  this.m_sprite.lineWidth=2;
   this.m_sprite.strokeStyle='#1F1F1F';
   this.m_sprite.beginPath();
   this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset() - 7250);

@@ -27,19 +27,19 @@
       <canvas id="homecanvas" width="1024" height="600"></canvas>
       <canvas id="workcanvas" width="1024" height="600"></canvas>
     </div>
-<!--    <div id="canvas">-->
-<!--      <div id="bird"></div>-->
-<!--    </div>-->
     <div id="content"></div>
     <div id="container"></div>
     <div class="wrapper">
-      <img id="work-stuff" class="sprite" src="images/canvas/work-stuff.png"></img>
-      <img id="music-stuff" class="sprite" src="images/canvas/music-stuff.png"></img>
-      <img id="facebook" class="sprite" src="images/canvas/facebook.png"></img>
-      <img id="linkedin" class="sprite" src="images/canvas/linkedin.png"></img>
-      <img id="twitter" class="worksprite sprite" src="images/canvas/twitter.png"></img>
+      <img id="work-stuff" class="homesprite sprite" src="images/canvas/work-stuff.png"></img>
+      <img id="music-stuff" class="homesprite sprite" src="images/canvas/music-stuff.png"></img>
+      <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
+      <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
+      <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>
+      <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
+      <img id="sobe-sign" class="worksprite sprite" src="images/canvas/sobe-sign.png"></img>
       <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
       <div id="flash"></div>
-    </div>   
+    </div>
+<!--    <div id="footer"></div>-->
   </body>
 </html>

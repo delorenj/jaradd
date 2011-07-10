@@ -8,7 +8,7 @@ extend(Spacies.prototype, b2jsSpacies.prototype)
 
 Spacies.prototype.createWorld = function() {
     var that = this;
-    var twitterAnchor = null;
+    var satAnchor = null;
     var world = b2jsSpacies.prototype.createWorld.apply(this, arguments);
     function spawn(x, y, w, h, a) {
         w = w || 1.7;
@@ -40,9 +40,8 @@ Spacies.prototype.createWorld = function() {
       w = w || 1.7;
       h = h || 1.7;
       var anchor = createAnchor(x,y);
-      if(div == "twitter") {
-        console.log("got twitter div");
-        that.twitterAnchor = anchor;
+      if(div == "satAnchor") {
+        that.satAnchor = anchor;
       }
       //var xOffset = (Math.random() - 0.5) * 100
       var xOffset = 0
@@ -107,10 +106,15 @@ Spacies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);      
     }    
 
-    createRope(28,26,
+    createRope(28,29,
                1.7,1.7,
-               10,0.1,"twitter");
-               
+               10,0.1,"satAnchor");
+
+    createDoubleRope(38.5,24.0,
+                     43.0,24.7,
+                     4.35,1.95,
+                     12,0.1, "sobe-sign");
+                     
     return world;
 };
 

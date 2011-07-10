@@ -100,6 +100,7 @@ var EPC = (function () {
         jQuery("#workcanvas").show();
         jQuery("#homecanvas").hide();
         jQuery(".worksprite").show();
+        jQuery(".homesprite").hide();
         homerunner.pause();
         workrunner.draw();
         workrunner.resume();        
@@ -123,10 +124,12 @@ var EPC = (function () {
     },
     
     initHome : function() {
+      jQuery("#homelink").fadeOut();
       setTimeout(function() {
         jQuery("#homecanvas").show();
         jQuery("#workcanvas").hide();
         jQuery(".worksprite").hide();
+        jQuery(".homesprite").show();        
         workrunner.pause();
         homerunner.draw();
         homerunner.resume();        

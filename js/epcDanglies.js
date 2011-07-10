@@ -110,6 +110,10 @@ Danglies.prototype.createWorld = function() {
                1.7,1.7,
                20,0.1, "facebook");    
 
+    createRope(45.5,26,
+               1.7,1.7,
+               25,0.1, "gplus");    
+
     createDoubleRope(38.5,24.0,
                      43.0,24.7,
                      4.35,1.95,
