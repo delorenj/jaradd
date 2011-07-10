@@ -79,9 +79,30 @@ Spacies.prototype.destroy = function() {
 }
 
 Spacies.prototype.createWorld = function(){
-    var m_world = new b2World(new b2Vec2(0.0, -9.81), true);
-    var m_physScale = 1;
+    var m_world = new b2World(new b2Vec2(0.0, -0.1), true);
     m_world.SetWarmStarting(true);
+    // Create border of boxes
+    var wall = new b2PolygonShape();
+    var wallBd = new b2BodyDef();
+    
+    // Left
+    wallBd.position.Set( -9.5, 18);
+    wall.SetAsBox(10, 20);
+    this._wallLeft = m_world.CreateBody(wallBd);
+    this._wallLeft.CreateFixture2(wall);
+    // Right
+    wallBd.position.Set(53.5, 18);
+    this._wallRight = m_world.CreateBody(wallBd);
+    this._wallRight.CreateFixture2(wall);
+    // Top
+    wallBd.position.Set(32, 45.5);
+    wall.SetAsBox(34, -5);
+    this._wallTop = m_world.CreateBody(wallBd);
+    this._wallTop.CreateFixture2(wall); 
+    // Bottom
+    wallBd.position.Set(32, -9.5);
+    this._wallBottom = m_world.CreateBody(wallBd);
+    this._wallBottom.CreateFixture2(wall);    
     return m_world;
 };
 
@@ -301,7 +322,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + "px");
 
       
-  if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
+  if(jQuery(sprite).css("top") > jQuery(window).height()) {
     jQuery(sprite).hide();
   } else {
     jQuery(sprite).show();
@@ -324,7 +345,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
 b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   mouseDown = mouseDown || false;
 //  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineWidth=2;
+  this.m_sprite.lineWidth=4;
   this.m_sprite.strokeStyle='#1F1F1F';
   this.m_sprite.beginPath();
   this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset() - 7250);

@@ -85,14 +85,24 @@ height:100%;
 }
 
 .sprite {
-  position: relative;
-  margin-top: -360px;
+  position: relative;  
   z-index: 1;
 }
 
 .homesprite {
   margin-left: -10px;
   margin-top: -354px;
+  display: block;
+}
+
+.worksprite {
+  margin-top: -360px;
+  display: none;
+}
+
+#sobe-sign {
+  margin-left: -150px;
+  margin-top: -430px !important;  
 }
 
 #music-stuff, #work-stuff {
@@ -148,5 +158,3 @@ height:100%;
 .orbit-caption {
 
 }
-.worksprite {display: none;}
-.homesprite {display: block;}

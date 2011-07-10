@@ -72,15 +72,15 @@ Spacies.prototype.createWorld = function() {
       for(var i=0; i<numJoints; i++) {
         jointDef = new b2RevoluteJointDef();
         jointDef.localAnchorA.Set(0, 0);
-        jointDef.localAnchorB.Set(0, 0.5);
+        jointDef.localAnchorB.Set(0, 1);
         jointDef.bodyA = anchor1;          
-        jointDef.bodyB = that.createBall(world, x1, y1-delta*i, 0.25, 1, 1, 70);  //x,y,radius,fric,rest,density
+        jointDef.bodyB = that.createBall(world, x1, y1-delta*i, 0.5, 1, 1, 70);  //x,y,radius,fric,rest,density
         world.CreateJoint(jointDef);
         anchor1 = jointDef.bodyB;
       }
       jointDef = new b2RevoluteJointDef();        
       jointDef.localAnchorA.Set(0, 0);
-      jointDef.localAnchorB.Set(-w/2,1.2);
+      jointDef.localAnchorB.Set(-w/2,4.2);
       jointDef.bodyA = anchor1;
       jointDef.bodyB = spawn(x1+xOffset, y1-(numJoints*delta),w, h, Math.random()/2);
       jointDef.bodyB.m_userData = div;
@@ -91,15 +91,15 @@ Spacies.prototype.createWorld = function() {
       for(i=0; i<numJoints; i++) {
         jointDef = new b2RevoluteJointDef();
         jointDef.localAnchorA.Set(0, 0);
-        jointDef.localAnchorB.Set(0, 0.5);
+        jointDef.localAnchorB.Set(0, 1);
         jointDef.bodyA = anchor2;          
-        jointDef.bodyB = that.createBall(world, x2, y2-delta*i, 0.25, 1, 1, 10);  //x,y,radius,fric,rest,density
+        jointDef.bodyB = that.createBall(world, x2, y2-delta*i, 0.5, 1, 1, 70);  //x,y,radius,fric,rest,density
         world.CreateJoint(jointDef);
         anchor2 = jointDef.bodyB;
       }
       jointDef = new b2RevoluteJointDef();        
       jointDef.localAnchorA.Set(0, 0);
-      jointDef.localAnchorB.Set(w/2,1.2);
+      jointDef.localAnchorB.Set(w/2,4.2);
       jointDef.bodyA = anchor2;
       jointDef.bodyB = sign;
       jointDef.bodyB.m_userData = div;
@@ -110,10 +110,13 @@ Spacies.prototype.createWorld = function() {
                1.7,1.7,
                10,0.1,"satAnchor");
 
-    createDoubleRope(38.5,24.0,
-                     43.0,24.7,
-                     4.35,1.95,
-                     12,0.1, "sobe-sign");
+//    createDoubleRope(14.5,18.0,
+//                     26.0,18.0,
+//                     11.1,6,
+//                     6,1.1, "sobe-sign");
+
+    var sobe = spawn(28, 29,11.1, 6, Math.random()/2);
+    sobe.m_userData = "sobe-sign";
                      
     return world;
 };
