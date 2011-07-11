@@ -97,11 +97,12 @@ height:100%;
 
 .worksprite {
   margin-top: -360px;
+  margin-left: -90px;
   display: none;
 }
 
 .floaty-sign {
-  margin-left: -126px;
+  margin-left: -210px;
   margin-top: -420px !important;  
 }
 

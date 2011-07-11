@@ -86,21 +86,21 @@ Spacies.prototype.createWorld = function(){
     var wallBd = new b2BodyDef();
     
     // Left
-    wallBd.position.Set( -9.5, 18);
-    wall.SetAsBox(10, 20);
+    wallBd.position.Set( -27.0, 18);
+    wall.SetAsBox(10, 40);
     this._wallLeft = m_world.CreateBody(wallBd);
     this._wallLeft.CreateFixture2(wall);
     // Right
-    wallBd.position.Set(73.5, 18);
+    wallBd.position.Set(99.0, 18);
     this._wallRight = m_world.CreateBody(wallBd);
     this._wallRight.CreateFixture2(wall);
     // Top
-    wallBd.position.Set(32, 48.5);
-    wall.SetAsBox(34, 10);
+    wallBd.position.Set(70, 48.5);
+    wall.SetAsBox(64, 10);
     this._wallTop = m_world.CreateBody(wallBd);
     this._wallTop.CreateFixture2(wall); 
     // Bottom
-    wallBd.position.Set(32, -9.5);
+    wallBd.position.Set(32, -18.0);
     this._wallBottom = m_world.CreateBody(wallBd);
     this._wallBottom.CreateFixture2(wall); 
     return m_world;

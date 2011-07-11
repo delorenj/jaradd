@@ -1,5 +1,6 @@
 var EPC = (function () {
-  var canvasWidth = jQuery(window).width();
+  var windowWidth = jQuery(window).width();
+  var windowHeight = jQuery(window).height();
   var z0_speed = 350000;
   var z1_speed = 450000;
   var z2_speed = 800000;
@@ -10,7 +11,7 @@ var EPC = (function () {
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
-      left: "+=" + canvasWidth
+      left: "+=" + windowWidth
     },{
       duration: layer
     });    
@@ -88,9 +89,10 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
-      homerunner = new danglies(jQuery("#homecanvas")[0]);
-      workrunner = new spacies(jQuery("#workcanvas")[0]);
       jQuery("#workcanvas").hide();
+//      jQuery("#workcanvas").hide();
+      homerunner = new danglies(jQuery("#homecanvas")[0]);            
+      workrunner = new spacies(jQuery("#workcanvas")[0]);
       homerunner.draw();	
       homerunner.resume();
     },
@@ -111,7 +113,10 @@ var EPC = (function () {
       }, {
         duration: 6000,
         easing: "easeInOutExpo",
-        complete: function() {          
+        complete: function() {
+          console.log("canvasWidth: " + jQuery("#workcanvas").width());
+          console.log("floatyOffset: " + jQuery(".floaty-sign").css("margin-left"));
+          console.log("ratio: " + (parseInt(jQuery(".floaty-sign").css("margin-left").split("px")[0]))/jQuery("#workcanvas").width());
         }
       });
       
@@ -157,6 +162,11 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
+  
+//  jQuery(window).bind("resize", function(e) {
+//    jQuery("#workcanvas").attr("width", jQuery("#workcanvas").width());
+//  });
+  
   EPC.startHomeCanvas();
   EPC.initBgClouds();
 //  EPC.initBird();

@@ -25,7 +25,7 @@
   <body>
     <div id="wrapper">
       <canvas id="homecanvas" width="1024" height="600"></canvas>
-      <canvas id="workcanvas" width="1024" height="600"></canvas>
+      <canvas id="workcanvas" width="1200" height="600"></canvas>
     </div>
     <div id="content"></div>
     <div id="container"></div>
