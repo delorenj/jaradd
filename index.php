@@ -4,7 +4,7 @@
     <title>Jarad DeLorenzo</title>
     <link type="text/css" rel="stylesheet" href="css/reset.css" />
     <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>
-    <link type="text/css" rel="stylesheet" href="css/orbit/orbit-1.2.3.css" />        
+    <link type="text/css" rel="stylesheet" href="css/shadowbox.css" />        
     <link type="text/css" rel="stylesheet" href="css/home.css" />    
     <script type="text/javascript" src="js/box2dDangly.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -12,7 +12,7 @@
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/jquery.backgroundPosition.js"></script>
     <script type="text/javascript" src="js/jquery.spritely-0.4.js"></script>
-    <script type="text/javascript" src="js/jquery.orbit-1.2.3.js"></script>
+        <script type="text/javascript" src="js/shadowbox.js"></script>
     <script type="text/javascript">
       $j = jQuery.noConflict();    
     </script>    
@@ -43,6 +43,19 @@
       <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
       <div id="flash"></div>
     </div>
+    <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
+    <a class="sb sobe-sign" title="SoBe's Facebook Profile" href="images/sobe_skinsuit_facebook.jpg"></a>
+    <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_01.png"></a>
+    <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_02.jpg"></a>
+    
+    <a class="sb orbit-sign" title="Orbit Gum" href="images/orbitgum.jpg"></a>
+
+    <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_01.jpg"></a>
+    <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_02.jpg"></a>
+
+    <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_02.jpg"></a>
+    <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_01.jpg"></a>
+    
 <!--    <div id="footer"></div>-->
   </body>
 </html>

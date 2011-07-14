@@ -102,9 +102,13 @@ height:100%;
 }
 
 .floaty-sign {
-  margin-left: -210px;
-  margin-top: -420px !important;  
+  width: 305px !important;
+  height: 202px !important;
+  margin-left: -210px !important;
+  margin-top: -435px !important;  
 }
+
+.sb {visibility: hidden}
 
 #music-stuff, #work-stuff {
   box-shadow: 2px 2px 5px #444;

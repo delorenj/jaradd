@@ -106,6 +106,14 @@ Spacies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);      
     }    
 
+    function spawnFloatySign(x, y, sign_id) {
+      var dbgWidth = jQuery("#"+sign_id).width()/that._dbgDraw.m_drawScale/2;
+      var dbgHeight = jQuery("#"+sign_id).height()/that._dbgDraw.m_drawScale/2;
+      var sign = spawn(x, y, dbgWidth, dbgHeight, Math.random()/2);
+      sign.m_userData = sign_id;
+      return sign;
+    }
+    
     createRope(28,29,
                1.7,1.7,
                10,0.1,"satAnchor");
@@ -115,18 +123,11 @@ Spacies.prototype.createWorld = function() {
 //                     11.1,6,
 //                     6,1.1, "sobe-sign");
 
-    var sobe = spawn(17, 12,9.0, 5.25, Math.random()/2);
-    sobe.m_userData = "sobe-sign";
-
-    var orbit = spawn(40, 18,9.0, 5.25, Math.random()/2.1);
-    orbit.m_userData = "orbit-sign";
-
-    var eclipse = spawn(48, 25,9.0, 5.25, Math.random()/2.2);
-    eclipse.m_userData = "eclipse-sign";
-
-    var fivegum = spawn(48, 25,9.0, 5.25, Math.random()/2.3);
-    fivegum.m_userData = "fivegum-sign";
-
+    spawnFloatySign(17, 12, "sobe-sign");
+    spawnFloatySign(40, 18, "orbit-sign");
+    spawnFloatySign(48, 25,"eclipse-sign");
+    spawnFloatySign(48, 25, "fivegum-sign");
+    
     return world;
 };
 

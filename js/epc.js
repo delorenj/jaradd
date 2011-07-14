@@ -128,6 +128,21 @@ var EPC = (function () {
       });      
     },
     
+    gallerize : function(div) {
+      switch(div) {
+//        case "sobe-sign":
+//          Shadowbox.open({
+//            content:    "<img src='images/sobe_tryeverything.jpg' />",
+//            player:     "html",
+//            title:      "SoBe",
+//            height:     400,
+//            width:      657
+//         });
+//         break;
+//
+      }
+    },
+    
     initHome : function() {
       jQuery("#homelink").fadeOut();
       setTimeout(function() {
@@ -169,6 +184,26 @@ jQuery(document).ready(function() {
   
   EPC.startHomeCanvas();
   EPC.initBgClouds();
+  Shadowbox.init({
+    skipSetup: true
+  });
+  
+  Shadowbox.setup("a.sobe-sign", {
+    gallery: "SoBe: Try Everything Campaign"
+  });
+
+  Shadowbox.setup("a.fivegum-sign", {
+    gallery: "Wrigley 5gum Coachella Promo"
+  });
+
+  Shadowbox.setup("a.eclipse-sign", {
+    gallery: "Wrigley Twilight Eclipse Promo"
+  });
+
+  Shadowbox.setup("a.orbit-sign", {
+    gallery: "Wrigley Orbit: Clean Campaign"
+  });
+
 //  EPC.initBird();
 
 });

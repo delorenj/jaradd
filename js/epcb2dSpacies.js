@@ -217,6 +217,11 @@ Spacies.prototype._updateMouseInteraction = function() {
         switch(body.m_userData) {
           case "satAnchor":
             EPC.initHome();
+            break;
+            
+          default:
+            //EPC.gallerize(body.m_userData);
+            jQuery("." + body.m_userData).click();
         }
       }
     }
@@ -309,7 +314,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
 //  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
 //  this.m_sprite.fill();
 //  this.m_sprite.stroke();
-//  this.m_sprite.closePath()
+//  this.m_sprite.closePath();
 
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   var sprite = jQuery("#" + body.m_userData);
