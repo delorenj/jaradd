@@ -311,7 +311,32 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
          .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
       }
     });
-  }  
+  }
+
+  if(EPC.getBgOffset() < 0) {    
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") < 0) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this)
+         .stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });        
+  }
+  
+  if((EPC.getBgOffset() < EPC.getBgTriggerOffset()) && !EPC.isFooterOn()) {
+    EPC.setFooterOn();
+    jQuery("#footer")
+    .show()
+    .animate({
+      marginTop: "-40"
+    }, {
+      duration: 1000,
+      easing: "easeInOutExpo"
+    });
+  }
 }
 
 b2DanglyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){

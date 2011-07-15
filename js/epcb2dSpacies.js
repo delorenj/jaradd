@@ -332,6 +332,34 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
   } else {
     jQuery(sprite).show();
   }  
+  
+  if(EPC.getBgOffset() > 0) {
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
+//      if(jQuery(this).css("top") > jQuery(window).height()) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this).show()
+         .stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });
+  }
+
+  if(EPC.getBgOffset() < 0) {    
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") < 0) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this)
+         .stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });        
+  }
+   
 }
 
 b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){

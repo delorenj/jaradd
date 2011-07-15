@@ -8,6 +8,8 @@ var EPC = (function () {
   var runner = null;
   var homerunner = null
   var workrunner = null
+  var footerShowing = false;
+  var bgTriggerOffset = -7000;
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
@@ -27,9 +29,9 @@ var EPC = (function () {
   
   return  {    
     initBgClouds : function() {
-      jQuery("body").append("<img id='cloud1' src='images/canvas/cloud_370x147.png' alt='' />");
-      jQuery("body").append("<img id='cloud2' src='images/canvas/cloud_500x200.png' alt='' />");      
-      jQuery("body").append("<img id='cloud3' src='images/canvas/cloud_410x272.png' alt='' />");      
+      jQuery("#wrapper").append("<img id='cloud1' src='images/canvas/cloud_370x147.png' alt='' />");
+      jQuery("#wrapper").append("<img id='cloud2' src='images/canvas/cloud_500x200.png' alt='' />");      
+      jQuery("#wrapper").append("<img id='cloud3' src='images/canvas/cloud_410x272.png' alt='' />");      
       jQuery("img[id*='cloud']").each(function() {
         jQuery(this).css({
         left: Math.random() * jQuery(window).width(),
@@ -39,6 +41,30 @@ var EPC = (function () {
       animateCloud("#cloud1", Math.random() * (z2_speed-z0_speed) + z0_speed);
       animateCloud("#cloud2", Math.random() * (z2_speed-z0_speed) + z0_speed);
       animateCloud("#cloud3", Math.random() * (z2_speed-z0_speed) + z0_speed);
+    },
+        
+    isFooterOn : function() {
+      return footerShowing;
+    },
+    
+    setFooterOn : function() {
+      footerShowing = true;
+    },
+
+    setFooterOff : function() {
+      footerShowing = false;
+    },
+
+    hideFooter : function() {
+      console.log("hide footer");
+      jQuery("#footer").animate({
+        marginTop: "+=251px"
+      }, {
+        duration: 1000,
+        step: function(a,b) {
+          console.log(a + " : " + b);
+        }
+      });
     },
     
     initBird : function() {
@@ -63,7 +89,7 @@ var EPC = (function () {
           homerunner.pause();
           //jQuery("#flash").html("Coming Soon").fadeIn("slow");
           jQuery("#homecanvas").hide();
-          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome()');'>Go back up</a>")
+          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome();');'>Go back up</a>")
         }
       });
       
@@ -82,6 +108,10 @@ var EPC = (function () {
     
     getBgOffset : function() {
       return bgPosOffset;
+    },
+    
+    getBgTriggerOffset : function() {
+      return bgTriggerOffset;
     },
     
     setRunner : function(r) {
@@ -145,6 +175,20 @@ var EPC = (function () {
     
     initHome : function() {
       jQuery("#homelink").fadeOut();
+      
+      if(EPC.isFooterOn()) {
+        jQuery("#footer").animate({
+          marginTop: "251"
+        }, {
+          duration: 1000,
+          easing: "easeInOutExpo",
+          complete: function() {
+            jQuery(this).hide();
+            EPC.setFooterOff();
+          }
+        });
+      }
+      
       setTimeout(function() {
         jQuery("#homecanvas").show();
         jQuery("#workcanvas").hide();

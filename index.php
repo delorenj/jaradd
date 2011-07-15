@@ -46,16 +46,13 @@
     <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
     <a class="sb sobe-sign" title="SoBe's Facebook Profile" href="images/sobe_skinsuit_facebook.jpg"></a>
     <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_01.png"></a>
-    <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_02.jpg"></a>
-    
+    <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_02.jpg"></a>    
     <a class="sb orbit-sign" title="Orbit Gum" href="images/orbitgum.jpg"></a>
-
     <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_01.jpg"></a>
     <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_02.jpg"></a>
-
     <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_02.jpg"></a>
     <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_01.jpg"></a>
     
-<!--    <div id="footer"></div>-->
+    <div id="footer"></div>
   </body>
 </html>

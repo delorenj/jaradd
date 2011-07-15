@@ -1,11 +1,11 @@
 body {
   text-align: center;
   background-color: #9fa0a3;  
-background-image: url("../images/bg-margin.png");
-background-position: 0 -7255px;
-background-repeat: repeat-x;
-width: 100%;
-height:100%;
+  background-image: url("../images/bg-margin.png");
+  background-position: 0 -7255px;
+  background-repeat: repeat-x;
+  width: 100%;
+  height:100%;
 }
 
 #wrapper {
@@ -67,13 +67,6 @@ height:100%;
   margin:0 auto;
   text-align:left;
   width:1024px;
-}
-
-#footer {
-  background: transparent url("../images/footer1.jpg") 0 0 repeat;  
-  width: 100%;
-  height: 380px;
-  margin:0;
 }
 
 #bird {
@@ -159,7 +152,11 @@ height:100%;
   top: -650px;
 }
 
-/* captions */
-.orbit-caption {
-
+#footer {
+  background: transparent url("../images/grass.png") 0 0 repeat-x;
+  position: relative;
+  height: 251px;
+  margin-top:251px;
+  clear: both;
+  display: none;
 }
