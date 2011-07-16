@@ -220,7 +220,6 @@ Spacies.prototype._updateMouseInteraction = function() {
             break;
             
           default:
-            //EPC.gallerize(body.m_userData);
             jQuery("." + body.m_userData).click();
         }
       }

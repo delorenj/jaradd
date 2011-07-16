@@ -80,6 +80,12 @@ var EPC = (function () {
     },
       
     initMusicStuff : function() {
+      setTimeout(function() {
+        jQuery("#homecanvas").hide();
+        jQuery("#musiccanvas").show();
+        jQuery(".musicsprite").show();
+      }, 3000);
+      
       jQuery("#content").animate({
         backgroundPosition: "(0 -15255)"
       }, {
@@ -119,10 +125,17 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
+      console.log("Window height: " + jQuery(document).height());
       jQuery("#workcanvas").hide();
-//      jQuery("#workcanvas").hide();
+      jQuery("#musiccanvas").attr("width", jQuery(document).width())
+        .attr("height", jQuery(document).height())
+        .hide()
+        .bind("click", function() {
+          EPC.initHome();
+        });        
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);
+      
       homerunner.draw();	
       homerunner.resume();
     },
@@ -174,6 +187,12 @@ var EPC = (function () {
     },
     
     initHome : function() {
+      setTimeout(function() {
+        jQuery("#homecanvas").show();
+        jQuery("#musiccanvas").hide();
+        jQuery(".musicsprite").hide();
+      }, 3000);
+      
       jQuery("#homelink").fadeOut();
       
       if(EPC.isFooterOn()) {

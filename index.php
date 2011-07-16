@@ -23,36 +23,38 @@
     <script type="text/javascript" src="js/epc.js"></script>
   </head>
   <body>
-    <div id="wrapper">
-      <canvas id="homecanvas" width="1024" height="600"></canvas>
-      <canvas id="workcanvas" width="1200" height="600"></canvas>
+    <div class="mainwrap">
+      <div id="wrapper">
+        <canvas id="homecanvas" width="1024" height="600"></canvas>
+        <canvas id="workcanvas" width="1200" height="600"></canvas>
+        <canvas id="musiccanvas"></canvas>
+      </div>
+      <div id="content"></div>
+      <div id="container"></div>
+      <div class="wrapper">
+        <img id="work-stuff" class="homesprite sprite" src="images/canvas/work-stuff.png"></img>
+        <img id="music-stuff" class="homesprite sprite" src="images/canvas/music-stuff.png"></img>
+        <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
+        <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
+        <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>
+        <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
+        <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
+        <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
+        <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/canvas/eclipse-sign.png"></img>
+        <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/canvas/5gum-sign.png"></img>
+        <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
+        <div id="flash"></div>
+      </div>
+      <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
+      <a class="sb sobe-sign" title="SoBe's Facebook Profile" href="images/sobe_skinsuit_facebook.jpg"></a>
+      <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_01.png"></a>
+      <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_02.jpg"></a>    
+      <a class="sb orbit-sign" title="Orbit Gum" href="images/orbitgum.jpg"></a>
+      <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_01.jpg"></a>
+      <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_02.jpg"></a>
+      <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_02.jpg"></a>
+      <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_01.jpg"></a>
     </div>
-    <div id="content"></div>
-    <div id="container"></div>
-    <div class="wrapper">
-      <img id="work-stuff" class="homesprite sprite" src="images/canvas/work-stuff.png"></img>
-      <img id="music-stuff" class="homesprite sprite" src="images/canvas/music-stuff.png"></img>
-      <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
-      <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
-      <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>
-      <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
-      <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
-      <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
-      <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/canvas/eclipse-sign.png"></img>
-      <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/canvas/5gum-sign.png"></img>
-      <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
-      <div id="flash"></div>
-    </div>
-    <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
-    <a class="sb sobe-sign" title="SoBe's Facebook Profile" href="images/sobe_skinsuit_facebook.jpg"></a>
-    <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_01.png"></a>
-    <a class="sb sobe-sign" title="SoBe Mobile Website" href="images/sobe_girl_02.jpg"></a>    
-    <a class="sb orbit-sign" title="Orbit Gum" href="images/orbitgum.jpg"></a>
-    <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_01.jpg"></a>
-    <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_02.jpg"></a>
-    <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_02.jpg"></a>
-    <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_01.jpg"></a>
-    
     <div id="footer"></div>
   </body>
 </html>

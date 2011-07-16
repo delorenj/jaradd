@@ -331,7 +331,7 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     jQuery("#footer")
     .show()
     .animate({
-      marginTop: "-40"
+      marginTop: "-250"
     }, {
       duration: 1000,
       easing: "easeInOutExpo"
