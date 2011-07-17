@@ -95,7 +95,8 @@ var EPC = (function () {
           homerunner.pause();
           //jQuery("#flash").html("Coming Soon").fadeIn("slow");
           jQuery("#homecanvas").hide();
-          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome();');'>Go back up</a>")
+          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome();');'>Go back up</a>");
+          EPC.DT.initCanvas();
         }
       });
       
@@ -132,7 +133,8 @@ var EPC = (function () {
         .hide()
         .bind("click", function() {
           EPC.initHome();
-        });        
+        });   
+      jQuery("#footer").css("top", (jQuery(window).height()));
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);
       
@@ -170,22 +172,7 @@ var EPC = (function () {
         easing: "easeInOutExpo"
       });      
     },
-    
-    gallerize : function(div) {
-      switch(div) {
-//        case "sobe-sign":
-//          Shadowbox.open({
-//            content:    "<img src='images/sobe_tryeverything.jpg' />",
-//            player:     "html",
-//            title:      "SoBe",
-//            height:     400,
-//            width:      657
-//         });
-//         break;
-//
-      }
-    },
-    
+
     initHome : function() {
       setTimeout(function() {
         jQuery("#homecanvas").show();
@@ -197,7 +184,7 @@ var EPC = (function () {
       
       if(EPC.isFooterOn()) {
         jQuery("#footer").animate({
-          marginTop: "251"
+          top: "+=641"
         }, {
           duration: 1000,
           easing: "easeInOutExpo",

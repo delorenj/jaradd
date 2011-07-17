@@ -21,6 +21,7 @@
     <script type="text/javascript" src="js/epcb2dSpacies.js"></script>
     <script type="text/javascript" src="js/epcSpacies.js"></script>    
     <script type="text/javascript" src="js/epc.js"></script>
+    <script type="text/javascript" src="js/epcDuckTunt.js"></script>    
   </head>
   <body>
     <div class="mainwrap">
@@ -55,6 +56,8 @@
       <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_02.jpg"></a>
       <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_01.jpg"></a>
     </div>
-    <div id="footer"></div>
+    <div id="footer">
+      <img src="images/grass_tree.png"></img>
+    </div>
   </body>
 </html>

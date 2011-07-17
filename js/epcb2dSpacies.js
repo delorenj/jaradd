@@ -323,7 +323,7 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-10  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-470 + EPC.getBgOffset() - 7250 + "px");
 
       
   if(jQuery(sprite).css("top") > jQuery(window).height()) {

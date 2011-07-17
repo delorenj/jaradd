@@ -32,7 +32,6 @@ body {
 #musiccanvas {
   position: relative;
   top: 0;
-  border: 1px solid red;
   left: 0;
   margin: 0 auto;
   z-index: 100;
@@ -43,7 +42,7 @@ body {
   background-position: 0 -7255px;
   background-repeat: no-repeat;
   width: 1024px;
-  height: 900px;
+  height: 800px;
   margin: 0 auto;
 }
 
@@ -162,10 +161,14 @@ body {
 }
 
 #footer {
-  background: transparent url("../images/grass.png") 0 0 repeat-x;
-  position: relative;
-  height: 251px;
-  margin-top:251px;
+  background: transparent url("../images/grass.png") 0 0 repeat-x;  
+  position: absolute;
+  height: 641px;
+  width: 100%;
   clear: both;
   display: none;
+}
+
+#footer img {
+  margin-left: -400px;
 }
