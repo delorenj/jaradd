@@ -7,11 +7,15 @@ EPC.DT = (function () {
   var _mouseY = 0;
   var _images = {};
   var _bird = {
-    x: 200,
-    y: 300,
+    x: 0,
+    y: 600,
+    w: 40,
+    h: 49,    
     dx: 1,
-    dy: 0.5,
-    speed: 10
+    dy: -0.5,
+    frame: 0,
+    nframes: 2,
+    speed: 15
   };
   
   var draw = function() {
@@ -62,7 +66,15 @@ EPC.DT = (function () {
   }
   
   var drawBird = function() {
-    _ctx.drawImage(_images.bird, _bird.x, _bird.y, _bird.x+10, _bird.y+10);    
+//    if(_bird.dx < 0) {
+//      foff = 62;
+//    } else {
+//      foff = 0;
+//    }
+    foff=0;
+    _ctx.drawImage(_images.bird, _bird.frame*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
+    _bird.frame++;
+    if(_bird.frame == _bird.nframes) _bird.frame = 0;
   }
   
   var ev_mousemove = function(ev) {
@@ -87,14 +99,14 @@ EPC.DT = (function () {
       jQuery("#musiccanvas")[0].addEventListener('mousemove', ev_mousemove, false);
       
       var sources = {
-        bird: "images/canvas/bird_90x90.png"
+        bird: "images/canvas/duck.png"
       }
       
       loadImages(sources, function() {
         console.log("images loaded");
       });
       
-      return setInterval(draw, 10);     
+      return setInterval(draw, 100);
     }
   }
 })();

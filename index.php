@@ -12,7 +12,7 @@
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="js/jquery.backgroundPosition.js"></script>
     <script type="text/javascript" src="js/jquery.spritely-0.4.js"></script>
-        <script type="text/javascript" src="js/shadowbox.js"></script>
+    <script type="text/javascript" src="js/shadowbox.js"></script>
     <script type="text/javascript">
       $j = jQuery.noConflict();    
     </script>    

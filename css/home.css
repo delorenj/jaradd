@@ -42,7 +42,7 @@ body {
   background-position: 0 -7255px;
   background-repeat: no-repeat;
   width: 1024px;
-  height: 800px;
+  height: 900px;
   margin: 0 auto;
 }
 
@@ -75,14 +75,6 @@ body {
   margin:0 auto;
   text-align:left;
   width:1024px;
-}
-
-#bird {
-  position: absolute;
-  background: transparent url("../images/canvas/bird_90x90.png") 0 0 no-repeat;  
-  height: 62px;
-  width: 90px;
-  z-index: 1000;
 }
 
 .sprite {

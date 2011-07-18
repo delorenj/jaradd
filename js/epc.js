@@ -254,6 +254,4 @@ jQuery(document).ready(function() {
     gallery: "Wrigley Orbit: Clean Campaign"
   });
 
-//  EPC.initBird();
-
 });
