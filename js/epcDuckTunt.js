@@ -7,6 +7,7 @@ EPC.DT = (function () {
   var _mouseY = 0;
   var _images = {};
   var _bird = {
+    active: false,
     x: 0,
     y: 600,
     w: 40,
@@ -15,7 +16,7 @@ EPC.DT = (function () {
     dy: -0.5,
     frame: 0,
     nframes: 2,
-    speed: 15
+    speed: 4
   };
   
   var draw = function() {
@@ -54,15 +55,18 @@ EPC.DT = (function () {
   }
   
   var updateBird = function() {
+    if(!_bird.active) return;
+    
     _bird.x += _bird.speed * _bird.dx;
     _bird.y += _bird.speed * _bird.dy;
   }
   
   var drawScore = function() {
     _ctx.textBaseline = "top";
-    _ctx.font = "bold 28px Courier";
+    _ctx.font = "bold 16px Arial";
     _ctx.fillStyle = "#fff";
-    _ctx.fillText("(" + _mouseX + "," + _mouseY + ")", 5, 5);
+//    _ctx.fillText("(" + _mouseX + "," + _mouseY + ")", 5, 5);
+   _ctx.fillText("Score: " + _score, 5, 5);
   }
   
   var drawBird = function() {
@@ -71,6 +75,8 @@ EPC.DT = (function () {
 //    } else {
 //      foff = 0;
 //    }
+    if(!_bird.active) return;
+    
     foff=0;
     _ctx.drawImage(_images.bird, _bird.frame*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
     _bird.frame++;
@@ -91,6 +97,24 @@ EPC.DT = (function () {
     _mouseY = y;    
   }
   
+  var initBird = function() {
+    _bird.x = Math.random() * (jQuery("#musiccanvas").width()/2);
+    _bird.y = jQuery(window).height() - 251;
+    _bird.dx = (Math.random()) * 2;
+    _bird.dy = -(Math.random() * 2 );
+    _bird.active = true;
+    setTimeout(changeBird, Math.random() * 3000);
+    setTimeout(initBird, Math.random() * 20000);
+  }
+  
+  var changeBird = function() {
+    var x = Math.random();
+    if(x < 0.5) _bird.dx *= -1;
+
+    var y = Math.random();
+    if(y < 0.5) _bird.dy *= -1;
+    setTimeout(changeBird, Math.random() * 3000);
+  }
   return  {    
     initCanvas : function() {
       _ctx = jQuery("#musiccanvas")[0].getContext("2d");
@@ -106,7 +130,8 @@ EPC.DT = (function () {
         console.log("images loaded");
       });
       
-      return setInterval(draw, 100);
+      setTimeout(initBird, Math.random() * 10000);
+      return setInterval(draw, 30);
     }
   }
 })();

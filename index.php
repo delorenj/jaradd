@@ -44,6 +44,7 @@
         <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
         <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/canvas/eclipse-sign.png"></img>
         <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/canvas/5gum-sign.png"></img>
+        <img id="sonic-sign" class="worksprite sprite floaty-sign" src="images/canvas/sonic-sign.png"></img>
         <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
         <div id="flash"></div>
       </div>
@@ -56,6 +57,10 @@
       <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="images/Twilight_Eclipse_02.jpg"></a>
       <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_02.jpg"></a>
       <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="images/coachella_5gum_01.jpg"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic01.png"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic02.png"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic03.png"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic04.png"></a>
     </div>
     <div id="footer">
       <img src="images/grass_tree.png"></img>

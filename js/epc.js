@@ -95,7 +95,6 @@ var EPC = (function () {
           homerunner.pause();
           //jQuery("#flash").html("Coming Soon").fadeIn("slow");
           jQuery("#homecanvas").hide();
-          jQuery("#content").html("<a id='homelink' href='#' onclick='EPC.initHome();');'>Go back up</a>");
           EPC.DT.initCanvas();
         }
       });
@@ -252,6 +251,10 @@ jQuery(document).ready(function() {
 
   Shadowbox.setup("a.orbit-sign", {
     gallery: "Wrigley Orbit: Clean Campaign"
+  });
+
+  Shadowbox.setup("a.sonic-sign", {
+    gallery: "Sonic Burgers Contest Site"
   });
 
 });
