@@ -182,6 +182,9 @@ Danglies.prototype._updateMouseInteraction = function() {
           case "gplus":
             location.href = "https://plus.google.com/108059363375872918083";
             break;                        
+          case "jacksnaps":
+            location.href = "http://www.jacksnaps.com";
+            break;                                   
           case "music-stuff":
             EPC.initMusicStuff();
             break;

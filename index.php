@@ -38,6 +38,7 @@
         <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
         <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
         <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>
+        <img id="jacksnaps" class="homesprite sprite" src="images/canvas/jacksnaps.png"></img>
         <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
         <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
         <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
