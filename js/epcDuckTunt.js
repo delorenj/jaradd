@@ -17,7 +17,7 @@ EPC.DT = (function () {
     frame: 0,
     nframes: 3,
     frameIncrease: true,
-    speed: 1
+    speed: 5
   };
   
   var draw = function() {
@@ -79,17 +79,13 @@ EPC.DT = (function () {
     if(!_bird.active) return;
     _ctx.drawImage(_images.bird, _bird.frame*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
 
-    if(_bird.frameIncrease){
-      _bird.frame++;
-    } else {
-      _bird.frame--;
-    }
-    
-    if(_bird.frame == _bird.nframes) {
-      _bird.frameIncrease = false;
+    if(_bird.frame == _bird.nframes-1) {
+        _bird.frameIncrease = false;
     } else if(_bird.frame == 0) {
       _bird.frameIncrease = true;
     }
+    
+    _bird.frame = _bird.frameIncrease == true ? _bird.frame+1 : _bird.frame-1
   }
   
   var ev_mousemove = function(ev) {
@@ -140,7 +136,7 @@ EPC.DT = (function () {
       });
       
       setTimeout(initBird, Math.random() * 10000);
-      return setInterval(draw, 10);
+      return setInterval(draw, 25);
     }
   }
 })();
