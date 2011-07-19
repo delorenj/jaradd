@@ -10,13 +10,14 @@ EPC.DT = (function () {
     active: false,
     x: 0,
     y: 600,
-    w: 40,
+    w: 37,
     h: 49,    
     dx: 1,
     dy: -0.5,
     frame: 0,
-    nframes: 2,
-    speed: 4
+    nframes: 3,
+    frameIncrease: true,
+    speed: 1
   };
   
   var draw = function() {
@@ -70,17 +71,25 @@ EPC.DT = (function () {
   }
   
   var drawBird = function() {
-//    if(_bird.dx < 0) {
-//      foff = 62;
-//    } else {
-//      foff = 0;
-//    }
+    if(_bird.dx < 0) {
+      foff = _bird.h;
+    } else {
+      foff = 0;
+    }
     if(!_bird.active) return;
-    
-    foff=0;
     _ctx.drawImage(_images.bird, _bird.frame*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
-    _bird.frame++;
-    if(_bird.frame == _bird.nframes) _bird.frame = 0;
+
+    if(_bird.frameIncrease){
+      _bird.frame++;
+    } else {
+      _bird.frame--;
+    }
+    
+    if(_bird.frame == _bird.nframes) {
+      _bird.frameIncrease = false;
+    } else if(_bird.frame == 0) {
+      _bird.frameIncrease = true;
+    }
   }
   
   var ev_mousemove = function(ev) {
@@ -131,7 +140,7 @@ EPC.DT = (function () {
       });
       
       setTimeout(initBird, Math.random() * 10000);
-      return setInterval(draw, 30);
+      return setInterval(draw, 10);
     }
   }
 })();
