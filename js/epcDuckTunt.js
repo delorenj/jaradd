@@ -7,9 +7,11 @@ EPC.DT = (function () {
   var _mouseY = 0;
   var _images = {};
   var _quackInt;
+  var _flapInt;
   var _bird = {
     active: false,
     ending: false,
+    alive: true,
     x: 0,
     y: 600,
     w: 37,
@@ -24,7 +26,6 @@ EPC.DT = (function () {
   
   var draw = function() {
     clear();
-    updateScore();
     updateBird();
     
     
@@ -53,19 +54,24 @@ EPC.DT = (function () {
     }
   }
  
-  var updateScore = function() {
-    _score = 0;
-  }
-  
   var updateBird = function() {
     if(!_bird.active) return;
     
-    _bird.x += _bird.speed * _bird.dx;
-    _bird.y += _bird.speed * _bird.dy;
-    
+    if(_bird.alive) {
+      _bird.x += _bird.speed * _bird.dx;
+      _bird.y += _bird.speed * _bird.dy;      
+    } else {
+      _bird.y += _bird.speed;
+      if(_bird.y > _height) {
+        _bird.active = false;
+        setTimeout(initBird, Math.random() * 30000);
+      }
+    }
+
     if(_bird.ending && ((_bird.x > _width)) || (_bird.x < 0) || (_bird.y > _height) || (_bird.y < 0)) {
       _bird.active = false;
       clearInterval(_quackInt);
+      clearInterval(_flapInt);
       jQuery("#end-round")[0].play();
       setTimeout(initBird, Math.random() * 30000);
     }
@@ -75,7 +81,6 @@ EPC.DT = (function () {
     _ctx.textBaseline = "top";
     _ctx.font = "bold 16px Arial";
     _ctx.fillStyle = "#fff";
-//    _ctx.fillText("(" + _mouseX + "," + _mouseY + ")", 5, 5);
    _ctx.fillText("Score: " + _score, 5, 5);
   }
   
@@ -85,7 +90,7 @@ EPC.DT = (function () {
     } else {
       foff = 0;
     }
-    if(!_bird.active) return;
+    if(!_bird.active && _bird.alive) return;
     _ctx.drawImage(_images.bird, _bird.frame*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
 
     if(_bird.frame == _bird.nframes-1) {
@@ -117,8 +122,30 @@ EPC.DT = (function () {
     _ctx.fillRect(0,0,_width, _height);
     _ctx.restore();
     audio = document.getElementById("blast");
-    audio.play();
+    if(audio.currentTime == 0) {
+      audio.play();    
+    } else {
+      audio.currentTime = 0;
+    }
     
+    //check for collision
+    if(collision(ev, _bird)) {
+      killBird();
+    }
+  }
+  
+  var ev_keydown = function(ev) {
+    alert("key");
+  }
+  
+  var collision = function(mouseevent, obj) {
+    var px = mouseevent.layerX;
+    var py = mouseevent.layerY;
+    if((px > obj.x) && (px < obj.x + obj.w) && (py > obj.y) && (py < obj.y+obj.h)) {
+      return true;
+    } else {
+      return false;
+    }
   }
   
   var initBird = function() {
@@ -127,13 +154,20 @@ EPC.DT = (function () {
     _bird.dx = (Math.random()) * 2;
     _bird.dy = -(Math.random() * 2 );
     _bird.active = true;
+    _bird.ending = false;
+    _bird.alive = true;
     _quackInt = setInterval(function() {
       audio = document.getElementById("quack");
       audio.play();
     }, 2000);
-    
+
+    _flapInt = setInterval(function() {
+      audio = document.getElementById("wings");
+      audio.play();
+    }, 100);
+
     setTimeout(changeBird, Math.random() * 3000);
-    setTimeout(endBird, 8000);
+    setTimeout(endBird, 10000);
   }
   
   var changeBird = function() {
@@ -152,6 +186,17 @@ EPC.DT = (function () {
     _bird.ending = true;
   }
   
+  var killBird = function() {
+    _bird.active = false;
+    _bird.alive = false;
+    _score++;
+    clearInterval(_quackInt);
+    clearInterval(_flapInt);            
+    setTimeout(function() {
+      _bird.active = true
+    }, 1500);
+  }
+  
   return  {    
     initCanvas : function() {
       _ctx = jQuery("#musiccanvas")[0].getContext("2d");
@@ -159,6 +204,7 @@ EPC.DT = (function () {
       _height = jQuery("#musiccanvas").height();
 //      jQuery("#musiccanvas")[0].addEventListener('mousemove', ev_mousemove, false);
       jQuery("#musiccanvas")[0].addEventListener('click', ev_click, false);
+      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, false);
       
       var sources = {
         bird: "images/canvas/duck.png"

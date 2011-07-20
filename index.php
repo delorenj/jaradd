@@ -77,5 +77,9 @@
       <source src="js/end_round.ogg" type="audio/ogg"></source>
       <source src="js/end_round.mp3" type="audio/mpeg"></source>
     </audio>        
+    <audio id="wings">
+      <source src="js/wings.ogg" type="audio/ogg"></source>
+      <source src="js/wings.wav" type="audio/wav"></source>
+    </audio>            
   </body>
 </html>
