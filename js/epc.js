@@ -66,19 +66,7 @@ var EPC = (function () {
         }
       });
     },
-    
-    initBird : function() {
-      jQuery('#bird').sprite({fps: 8, no_of_frames: 3, rewind:true})
-      .spRandom({
-          top: 70,
-          left: 100,
-          right: 800,
-          bottom: 640,
-          speed: 4000,
-          pause: 3000
-      }).isDraggable();
-    },
-      
+         
     initMusicStuff : function() {
       setTimeout(function() {
         jQuery("#homecanvas").hide();
@@ -129,10 +117,7 @@ var EPC = (function () {
       jQuery("#workcanvas").hide();
       jQuery("#musiccanvas").attr("width", jQuery(document).width())
         .attr("height", jQuery(document).height())
-        .hide()
-        .bind("click", function() {
-          EPC.initHome();
-        });   
+        .hide();        
       jQuery("#footer").css("top", (jQuery(window).height()));
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);

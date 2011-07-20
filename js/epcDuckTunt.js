@@ -6,8 +6,10 @@ EPC.DT = (function () {
   var _mouseX = 0;
   var _mouseY = 0;
   var _images = {};
+  var _quackInt;
   var _bird = {
     active: false,
+    ending: false,
     x: 0,
     y: 600,
     w: 37,
@@ -60,6 +62,13 @@ EPC.DT = (function () {
     
     _bird.x += _bird.speed * _bird.dx;
     _bird.y += _bird.speed * _bird.dy;
+    
+    if(_bird.ending && ((_bird.x > _width)) || (_bird.x < 0) || (_bird.y > _height) || (_bird.y < 0)) {
+      _bird.active = false;
+      clearInterval(_quackInt);
+      jQuery("#end-round")[0].play();
+      setTimeout(initBird, Math.random() * 30000);
+    }
   }
   
   var drawScore = function() {
@@ -102,14 +111,29 @@ EPC.DT = (function () {
     _mouseY = y;    
   }
   
+  var ev_click = function(ev) {
+    _ctx.save();
+    _ctx.fillStyle="#fff";
+    _ctx.fillRect(0,0,_width, _height);
+    _ctx.restore();
+    audio = document.getElementById("blast");
+    audio.play();
+    
+  }
+  
   var initBird = function() {
     _bird.x = Math.random() * (jQuery("#musiccanvas").width()/2);
     _bird.y = jQuery(window).height() - 251;
     _bird.dx = (Math.random()) * 2;
     _bird.dy = -(Math.random() * 2 );
     _bird.active = true;
+    _quackInt = setInterval(function() {
+      audio = document.getElementById("quack");
+      audio.play();
+    }, 2000);
+    
     setTimeout(changeBird, Math.random() * 3000);
-    setTimeout(initBird, Math.random() * 20000);
+    setTimeout(endBird, 8000);
   }
   
   var changeBird = function() {
@@ -118,14 +142,23 @@ EPC.DT = (function () {
 
     var y = Math.random();
     if(y < 0.5) _bird.dy *= -1;
-    setTimeout(changeBird, Math.random() * 3000);
+    
+    if(!_bird.ending) {
+      setTimeout(changeBird, Math.random() * 3000);    
+    }
   }
+  
+  var endBird = function() {
+    _bird.ending = true;
+  }
+  
   return  {    
     initCanvas : function() {
       _ctx = jQuery("#musiccanvas")[0].getContext("2d");
       _width = jQuery("#musiccanvas").width();
       _height = jQuery("#musiccanvas").height();
-      jQuery("#musiccanvas")[0].addEventListener('mousemove', ev_mousemove, false);
+//      jQuery("#musiccanvas")[0].addEventListener('mousemove', ev_mousemove, false);
+      jQuery("#musiccanvas")[0].addEventListener('click', ev_click, false);
       
       var sources = {
         bird: "images/canvas/duck.png"

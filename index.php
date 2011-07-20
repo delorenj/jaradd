@@ -65,5 +65,17 @@
     <div id="footer">
       <img src="images/grass_tree.png"></img>
     </div>
+    <audio id="blast">
+      <source src="js/blast.ogg" type="audio/ogg"></source>
+      <source src="js/blast.mp3" type="audio/mpeg"></source>
+    </audio>    
+    <audio id="quack">
+      <source src="js/quack.ogg" type="audio/ogg"></source>
+      <source src="js/quack.mp3" type="audio/mpeg"></source>
+    </audio>        
+    <audio id="end-round">
+      <source src="js/end_round.ogg" type="audio/ogg"></source>
+      <source src="js/end_round.mp3" type="audio/mpeg"></source>
+    </audio>        
   </body>
 </html>
