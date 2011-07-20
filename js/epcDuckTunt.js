@@ -61,7 +61,7 @@ EPC.DT = (function () {
       _bird.x += _bird.speed * _bird.dx;
       _bird.y += _bird.speed * _bird.dy;      
     } else {
-      _bird.y += _bird.speed;
+      _bird.y += 10;
       if(_bird.y > _height) {
         _bird.active = false;
         setTimeout(initBird, Math.random() * 30000);
@@ -91,6 +91,21 @@ EPC.DT = (function () {
       foff = 0;
     }
     if(!_bird.active && _bird.alive) return;
+    
+    if(!_bird.active && !_bird.alive){
+      _ctx.drawImage(_images.bird, 3*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
+      return;
+    }
+    
+    if(_bird.active && !_bird.alive) {
+      _ctx.drawImage(_images.bird, _bird.frame*_bird.w, _bird.h*2, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
+      if(_bird.frame == _bird.nframes-1) {
+        _bird.frame = 0;
+      } else {
+        _bird.frame++;
+      }
+      return;
+    }
     _ctx.drawImage(_images.bird, _bird.frame*_bird.w, foff, _bird.w, _bird.h, _bird.x, _bird.y, _bird.w, _bird.h);
 
     if(_bird.frame == _bird.nframes-1) {
@@ -189,6 +204,7 @@ EPC.DT = (function () {
   var killBird = function() {
     _bird.active = false;
     _bird.alive = false;
+    _bird.frame = 0;
     _score++;
     clearInterval(_quackInt);
     clearInterval(_flapInt);            
@@ -204,7 +220,7 @@ EPC.DT = (function () {
       _height = jQuery("#musiccanvas").height();
 //      jQuery("#musiccanvas")[0].addEventListener('mousemove', ev_mousemove, false);
       jQuery("#musiccanvas")[0].addEventListener('click', ev_click, false);
-      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, false);
+      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
       
       var sources = {
         bird: "images/canvas/duck.png"
@@ -215,7 +231,7 @@ EPC.DT = (function () {
       });
       
       setTimeout(initBird, Math.random() * 10000);
-      return setInterval(draw, 25);
+      return setInterval(draw, 40);
     }
   }
 })();
