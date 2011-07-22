@@ -242,4 +242,8 @@ jQuery(document).ready(function() {
     gallery: "Sonic Burgers Contest Site"
   });
 
+  Shadowbox.setup("a.dentsu-sign", {
+    gallery: "Dentsu Network Public Site & CMS"
+  });
+
 });

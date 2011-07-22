@@ -44,6 +44,7 @@
         <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/canvas/eclipse-sign.png"></img>
         <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/canvas/5gum-sign.png"></img>
         <img id="sonic-sign" class="worksprite sprite floaty-sign" src="images/canvas/sonic-sign.png"></img>
+        <img id="dentsu-sign" class="worksprite sprite floaty-sign" src="images/canvas/dentsu-sign.png"></img>
         <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
         <div id="flash"></div>
       </div>
@@ -60,6 +61,10 @@
       <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic02.png"></a>
       <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic03.png"></a>
       <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="images/sonic04.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="images/dentsu01.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="images/dentsu02.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="images/dentsu03.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Internal CMS" href="images/dentsu04.png"></a>
     </div>
     <div id="footer">
       <img src="images/grass_tree.png"></img>

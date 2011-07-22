@@ -28,7 +28,6 @@ EPC.DT = (function () {
     clear();
     updateBird();
     
-    
     drawScore();    
     drawBird();
   }

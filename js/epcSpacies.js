@@ -128,6 +128,7 @@ Spacies.prototype.createWorld = function() {
     spawnFloatySign(48, 25,"eclipse-sign");
     spawnFloatySign(50, 30, "fivegum-sign");
     spawnFloatySign(25, 35, "sonic-sign");
+    spawnFloatySign(35, 13, "dentsu-sign");
     
     return world;
 };
