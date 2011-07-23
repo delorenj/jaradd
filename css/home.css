@@ -37,6 +37,14 @@ body {
   z-index: 100;
 }
 
+#musiccanvas2d {
+  position: absolute;
+  height: 641px;
+  clear: both;
+  display: none;
+  z-index: 200;
+}
+
 #content {
   background-image: url("../images/bg.jpg");
   background-position: 0 -7255px;
@@ -83,14 +91,18 @@ body {
 }
 
 .homesprite {
+  margin-top: -354px;  
   margin-left: -10px;
-  margin-top: -354px;
   display: block;
 }
 
 .worksprite {
   margin-top: -360px;
   margin-left: -90px;
+  display: none;
+}
+
+.musicsprite {
   display: none;
 }
 

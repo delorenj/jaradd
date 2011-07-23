@@ -57,7 +57,7 @@ var EPC = (function () {
     },
 
     hideFooter : function() {
-      jQuery("#footer").animate({
+      jQuery("#footer, #musiccanvas2d").animate({
         marginTop: "+=251px"
       }, {
         duration: 1000,
@@ -69,7 +69,7 @@ var EPC = (function () {
     initMusicStuff : function() {
       setTimeout(function() {
         jQuery("#homecanvas").hide();
-        jQuery("#musiccanvas, #musiccanvas2d, .musicsprite").show();
+        jQuery("#musiccanvas, .musicsprite").show();
         musicrunner.draw();
         musicrunner.resume();
       }, 3000);
@@ -110,11 +110,11 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
-      jQuery("#workcanvas, #musiccanvas2d").hide();
+      jQuery("#workcanvas").hide();
       jQuery("#musiccanvas").attr("width", jQuery(document).width())
         .attr("height", jQuery(document).height())
         .hide();        
-      jQuery("#footer").css("top", (jQuery(window).height()));
+      jQuery("#footer, #musiccanvas2d").css("top", (jQuery(window).height()));
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);
       musicrunner = new musickies(jQuery("#musiccanvas2d")[0]);
@@ -154,7 +154,7 @@ var EPC = (function () {
     initHome : function() {
       setTimeout(function() {
         jQuery("#homecanvas, .homesprite").show();
-        jQuery("#musiccanvas, #musiccanvas2d, #workcanvas, .musicsprite, .worksprite").hide();
+        jQuery("#musiccanvas, #workcanvas, .musicsprite, .worksprite").hide();
         workrunner.pause();
         musicrunner.pause();
         homerunner.draw();
@@ -172,6 +172,16 @@ var EPC = (function () {
             EPC.setFooterOff();
           }
         });
+        jQuery("#musiccanvas2d").animate({
+          top: "+=741"
+        }, {
+          duration: 1000,
+          easing: "easeInOutExpo",
+          complete: function() {
+            jQuery(this).hide();
+            EPC.setFooterOff();
+          }
+        });        
       }
       
       jQuery("#content").animate({

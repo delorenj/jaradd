@@ -19,6 +19,8 @@
     <script type="text/javascript" src="js/epcDanglies.js"></script>
     <script type="text/javascript" src="js/epcb2dSpacies.js"></script>
     <script type="text/javascript" src="js/epcSpacies.js"></script>    
+    <script type="text/javascript" src="js/epcb2dMusickies.js"></script>
+    <script type="text/javascript" src="js/epcMusickies.js"></script>    
     <script type="text/javascript" src="js/epc.js"></script>
     <script type="text/javascript" src="js/epcDuckTunt.js"></script>    
   </head>
@@ -28,6 +30,7 @@
         <canvas id="homecanvas" width="1024" height="600"></canvas>
         <canvas id="workcanvas" width="1200" height="600"></canvas>
         <canvas id="musiccanvas"></canvas>
+        <canvas id="musiccanvas2d" width="1024" height="518"></canvas>
       </div>
       <div id="content"></div>
       <div id="container"></div>
@@ -36,7 +39,7 @@
         <img id="music-stuff" class="homesprite sprite" src="images/canvas/music-stuff.png"></img>
         <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
         <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
-        <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>
+        <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>        
         <img id="jacksnaps" class="homesprite sprite" src="images/canvas/jacksnaps.png"></img>
         <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
         <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
@@ -46,6 +49,7 @@
         <img id="sonic-sign" class="worksprite sprite floaty-sign" src="images/canvas/sonic-sign.png"></img>
         <img id="dentsu-sign" class="worksprite sprite floaty-sign" src="images/canvas/dentsu-sign.png"></img>
         <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
+        <img id="youtube" class="musicsprite sprite" src="images/canvas/youtube.png"></img>
         <div id="flash"></div>
       </div>
       <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
@@ -67,7 +71,7 @@
       <a class="sb dentsu-sign" title="Dentsu Network Internal CMS" href="images/dentsu04.png"></a>
     </div>
     <div id="footer">
-      <img src="images/grass_tree.png"></img>
+<!--      <img src="images/grass_tree.png"></img>-->
     </div>
     <audio id="blast">
       <source src="js/blast.ogg" type="audio/ogg"></source>
