@@ -8,6 +8,7 @@ var EPC = (function () {
   var runner = null;
   var homerunner = null
   var workrunner = null
+  var musicrunner = null
   var footerShowing = false;
   var bgTriggerOffset = -7000;
   
@@ -56,13 +57,11 @@ var EPC = (function () {
     },
 
     hideFooter : function() {
-      console.log("hide footer");
       jQuery("#footer").animate({
         marginTop: "+=251px"
       }, {
         duration: 1000,
         step: function(a,b) {
-          console.log(a + " : " + b);
         }
       });
     },
@@ -70,8 +69,9 @@ var EPC = (function () {
     initMusicStuff : function() {
       setTimeout(function() {
         jQuery("#homecanvas").hide();
-        jQuery("#musiccanvas").show();
-        jQuery(".musicsprite").show();
+        jQuery("#musiccanvas, #musiccanvas2d, .musicsprite").show();
+        musicrunner.draw();
+        musicrunner.resume();
       }, 3000);
       
       jQuery("#content").animate({
@@ -81,8 +81,6 @@ var EPC = (function () {
         easing: "easeInOutExpo",
         complete: function() {
           homerunner.pause();
-          //jQuery("#flash").html("Coming Soon").fadeIn("slow");
-          jQuery("#homecanvas").hide();
           EPC.DT.initCanvas();
         }
       });
@@ -97,7 +95,6 @@ var EPC = (function () {
     
     setBgOffset : function(pos) {
       bgPosOffset = pos + 7255;
-//      console.log("new offset: " + bgPosOffset);
     },
     
     getBgOffset : function() {
@@ -113,14 +110,14 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
-      console.log("Window height: " + jQuery(document).height());
-      jQuery("#workcanvas").hide();
+      jQuery("#workcanvas, #musiccanvas2d").hide();
       jQuery("#musiccanvas").attr("width", jQuery(document).width())
         .attr("height", jQuery(document).height())
         .hide();        
       jQuery("#footer").css("top", (jQuery(window).height()));
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);
+      musicrunner = new musickies(jQuery("#musiccanvas2d")[0]);
       
       homerunner.draw();	
       homerunner.resume();
@@ -143,9 +140,6 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo",
         complete: function() {
-          console.log("canvasWidth: " + jQuery("#workcanvas").width());
-          console.log("floatyOffset: " + jQuery(".floaty-sign").css("margin-left"));
-          console.log("ratio: " + (parseInt(jQuery(".floaty-sign").css("margin-left").split("px")[0]))/jQuery("#workcanvas").width());
         }
       });
       
@@ -159,12 +153,13 @@ var EPC = (function () {
 
     initHome : function() {
       setTimeout(function() {
-        jQuery("#homecanvas").show();
-        jQuery("#musiccanvas").hide();
-        jQuery(".musicsprite").hide();
+        jQuery("#homecanvas, .homesprite").show();
+        jQuery("#musiccanvas, #musiccanvas2d, #workcanvas, .musicsprite, .worksprite").hide();
+        workrunner.pause();
+        musicrunner.pause();
+        homerunner.draw();
+        homerunner.resume();                
       }, 3000);
-      
-      jQuery("#homelink").fadeOut();
       
       if(EPC.isFooterOn()) {
         jQuery("#footer").animate({
@@ -178,16 +173,6 @@ var EPC = (function () {
           }
         });
       }
-      
-      setTimeout(function() {
-        jQuery("#homecanvas").show();
-        jQuery("#workcanvas").hide();
-        jQuery(".worksprite").hide();
-        jQuery(".homesprite").show();        
-        workrunner.pause();
-        homerunner.draw();
-        homerunner.resume();        
-      }, 3000);
       
       jQuery("#content").animate({
         backgroundPosition: "(0 -7255)"
@@ -211,10 +196,6 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
-  
-//  jQuery(window).bind("resize", function(e) {
-//    jQuery("#workcanvas").attr("width", jQuery("#workcanvas").width());
-//  });
   
   EPC.startHomeCanvas();
   EPC.initBgClouds();
