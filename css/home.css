@@ -38,9 +38,7 @@ body {
 }
 
 #musiccanvas2d {
-  position: absolute;
-  height: 641px;
-  clear: both;
+  position: relative;
   display: none;
   z-index: 200;
 }
@@ -104,6 +102,7 @@ body {
 
 .musicsprite {
   display: none;
+  margin-top: 0px;
 }
 
 .floaty-sign {

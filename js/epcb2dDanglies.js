@@ -336,16 +336,14 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
       top: "-=641px"
     }, {
       duration: 1000,
-      easing: "easeInOutExpo"
+      easing: "easeInOutExpo",
+      step : function(a, b) {
+        var off = b.now-b.start;
+        console.log("step: " + off);
+        EPC.setFooterOffset(off);
+      }
     });
-    jQuery("#musiccanvas2d")
-    .show()
-    .animate({
-      top: "-=741px"
-    }, {
-      duration: 1000,
-      easing: "easeInOutExpo"
-    });    
+    jQuery("#musiccanvas2d").show();    
   }
 }
 

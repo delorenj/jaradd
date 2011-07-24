@@ -29,8 +29,7 @@
       <div id="wrapper">
         <canvas id="homecanvas" width="1024" height="600"></canvas>
         <canvas id="workcanvas" width="1200" height="600"></canvas>
-        <canvas id="musiccanvas"></canvas>
-        <canvas id="musiccanvas2d" width="1024" height="518"></canvas>
+        <canvas id="musiccanvas"></canvas>    
       </div>
       <div id="content"></div>
       <div id="container"></div>
@@ -71,7 +70,7 @@
       <a class="sb dentsu-sign" title="Dentsu Network Internal CMS" href="images/dentsu04.png"></a>
     </div>
     <div id="footer">
-<!--      <img src="images/grass_tree.png"></img>-->
+      <canvas id="musiccanvas2d" width="1024" height="641"></canvas>
     </div>
     <audio id="blast">
       <source src="js/blast.ogg" type="audio/ogg"></source>

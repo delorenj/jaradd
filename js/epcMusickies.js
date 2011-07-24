@@ -40,10 +40,6 @@ Musickies.prototype.createWorld = function() {
       w = w || 1.7;
       h = h || 1.7;
       var anchor = createAnchor(x,y);
-      if(div == "satAnchor") {
-        that.satAnchor = anchor;
-      }
-      //var xOffset = (Math.random() - 0.5) * 100
       var xOffset = 0
       console.log("createRope: " + x + ", " + y);
       for(var i=0; i<numJoints; i++) {
@@ -114,7 +110,7 @@ Musickies.prototype.createWorld = function() {
       return sign;
     }
     
-    createRope(14,18,
+    createRope(10,24,
                1.7,1.7,
                10,0.1,"youtube");
 
@@ -135,7 +131,7 @@ Musickies.prototype.draw = function() {
   if(this._world) {
       this._world.SetDebugDraw(this._dbgDraw);      
       this._world.DrawDebugData();
-      c.drawImage(this._tree, 150, 0);
+      c.drawImage(this._tree, 100, 0);
   }          
 }
 

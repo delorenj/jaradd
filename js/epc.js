@@ -10,6 +10,7 @@ var EPC = (function () {
   var workrunner = null
   var musicrunner = null
   var footerShowing = false;
+  var footerOffset = 0;
   var bgTriggerOffset = -7000;
   
   var animateCloud = function(img, layer) {
@@ -55,16 +56,6 @@ var EPC = (function () {
     setFooterOff : function() {
       footerShowing = false;
     },
-
-    hideFooter : function() {
-      jQuery("#footer, #musiccanvas2d").animate({
-        marginTop: "+=251px"
-      }, {
-        duration: 1000,
-        step: function(a,b) {
-        }
-      });
-    },
          
     initMusicStuff : function() {
       setTimeout(function() {
@@ -101,6 +92,14 @@ var EPC = (function () {
       return bgPosOffset;
     },
     
+    setFooterOffset : function(pos) {
+      footerOffset = pos;
+    },
+    
+    getFooterOffset : function() {
+      return footerOffset;
+    },
+    
     getBgTriggerOffset : function() {
       return bgTriggerOffset;
     },
@@ -114,7 +113,7 @@ var EPC = (function () {
       jQuery("#musiccanvas").attr("width", jQuery(document).width())
         .attr("height", jQuery(document).height())
         .hide();        
-      jQuery("#footer, #musiccanvas2d").css("top", (jQuery(window).height()));
+      jQuery("#footer").css("top", (jQuery(window).height()));
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);
       musicrunner = new musickies(jQuery("#musiccanvas2d")[0]);
@@ -172,16 +171,6 @@ var EPC = (function () {
             EPC.setFooterOff();
           }
         });
-        jQuery("#musiccanvas2d").animate({
-          top: "+=741"
-        }, {
-          duration: 1000,
-          easing: "easeInOutExpo",
-          complete: function() {
-            jQuery(this).hide();
-            EPC.setFooterOff();
-          }
-        });        
       }
       
       jQuery("#content").animate({

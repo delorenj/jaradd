@@ -13,6 +13,7 @@ Musickies.__constructor = function(canvas) {
     this._mouseClicked = false;
     this._dbgDraw = new b2MusickyDebugDraw();
     this._tree = null;
+    this.m_lineThickness = 1;
     
     this._handleMouseMove = function(e){
         var o = that._canvas;
@@ -79,29 +80,6 @@ Musickies.prototype.createWorld = function(){
     
     this._tree = new Image();
     this._tree.src = "images/canvas/tree.png";
-    
-    // Create border of boxes
-    var wall = new b2PolygonShape();
-    var wallBd = new b2BodyDef();
-    
-    // Left
-    wallBd.position.Set( -27.0, 18);
-    wall.SetAsBox(10, 40);
-    this._wallLeft = m_world.CreateBody(wallBd);
-    this._wallLeft.CreateFixture2(wall);
-    // Right
-    wallBd.position.Set(99.0, 18);
-    this._wallRight = m_world.CreateBody(wallBd);
-    this._wallRight.CreateFixture2(wall);
-    // Top
-    wallBd.position.Set(70, 48.5);
-    wall.SetAsBox(64, 10);
-    this._wallTop = m_world.CreateBody(wallBd);
-    this._wallTop.CreateFixture2(wall); 
-    // Bottom
-    wallBd.position.Set(32, -18.0);
-    this._wallBottom = m_world.CreateBody(wallBd);
-    this._wallBottom.CreateFixture2(wall); 
     return m_world;
     
     
@@ -128,12 +106,9 @@ Musickies.prototype.createBall = function(world, x, y, radius, fric, rest, dens)
 
 Musickies.prototype.step = function(delta) {
     if(!this._world)
-        return;
-        
-    this._world.ClearForces();
-    
+        return;       
+    this._world.ClearForces();    
     var delta = (typeof delta == "undefined") ? 1/this._fps : delta;
-    
     this._world.Step(delta, delta * this._velocityIterationsPerSecond, delta * this._positionIterationsPerSecond);  
 }
 
@@ -172,14 +147,14 @@ Musickies.prototype._updateMouseInteraction = function() {
             this._mouseJoint.m_userData = "mj";
             body.SetAwake(true);
         }
-    }
-    
+    }    
     if(!this._mouseDown && (this._mouseClicked)) {
       this._mouseClicked = false;
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
-          case "satAnchor":
+          case "youtube":
+            EPC.initHome();
             break;
             
           default:
@@ -263,19 +238,19 @@ Musickies.prototype.isPaused = function() {
 }
 
 b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-//  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-//  this.m_sprite.beginPath();
-//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//
-//  for(var i=1;i<numVertices;i++) 
-//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-//
-//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//  this.m_sprite.fill();
-//  this.m_sprite.stroke();
-//  this.m_sprite.closePath();
+  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+  this.m_sprite.lineWidth=this.m_lineThickness;
+  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+  this.m_sprite.beginPath();
+  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+
+  for(var i=1;i<numVertices;i++) 
+    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+
+  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+  this.m_sprite.fill();
+  this.m_sprite.stroke();
+  this.m_sprite.closePath();
 
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   var sprite = jQuery("#" + body.m_userData);
@@ -284,8 +259,9 @@ b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, b
     .css("-moz-transform", rotationStyle)
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)- 405  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) - (1150 - document.getElementById("footer").offsetHeight) + ((145/148)*jQuery(window).height()+(-38520/37)) + "px");
+    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 12  + "px")
+    //.css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + ((147/130)*jQuery(window).height() + (-66168/65)) + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-909) + "px");
 
       
   if(jQuery(sprite).css("top") > jQuery(window).height()) {
@@ -298,13 +274,13 @@ b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, b
 
 b2MusickyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   mouseDown = mouseDown || false;
-  this.m_sprite.lineWidth=4;
-  this.m_sprite.strokeStyle='#1F1F1F';
+  this.m_sprite.lineWidth=2;
+  this.m_sprite.strokeStyle='#2F2F2F';
   this.m_sprite.beginPath();
-  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + -(640 - document.getElementById("footer").offsetHeight));
-  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + -(640 - document.getElementById("footer").offsetHeight));
+  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + -(652 - document.getElementById("footer").offsetHeight));
+  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + -(652 - document.getElementById("footer").offsetHeight));
   this.m_sprite.stroke();
-  this.m_sprite.closePath()
+  this.m_sprite.closePath();
 };
 
 b2MusickyDebugDraw.prototype.DrawSolidCircle=function(a,b,c,d) {
