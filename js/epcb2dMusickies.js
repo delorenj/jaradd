@@ -11,6 +11,8 @@ Musickies.__constructor = function(canvas) {
     this._fps = 200;
     this._lastClick = 0;
     this._mouseClicked = false;
+    this._mouseX = null;
+    this._mouseY = null;
     this._dbgDraw = new b2MusickyDebugDraw();
     this._tree = null;
     this.m_lineThickness = 1;
@@ -28,6 +30,14 @@ Musickies.__constructor = function(canvas) {
         var p = new b2Vec2(e.clientX - x, e.clientY - y);
 
         that._mousePoint = that._dbgDraw.ToWorldPoint(p);
+        that._mouseX = e.clientX;
+        that._mouseY = e.clientY;
+//        var nev = jQuery.Event("mousemove");
+//        nev.pageX = e.clientX + jQuery("#musiccanvas2d")[0].offsetLeft;
+//        nev.pageY = e.clientY - jQuery("#musiccanvas2d")[0].offsetTop;
+//        nev.pageX = e.clientX;
+//        nev.pageY = e.clientY;
+//        jQuery("#musiccanvas").trigger(nev);
     };
     
     this._handleMouseDown = function(e){
@@ -150,6 +160,10 @@ Musickies.prototype._updateMouseInteraction = function() {
     }    
     if(!this._mouseDown && (this._mouseClicked)) {
       this._mouseClicked = false;
+      var nev = jQuery.Event("click");
+      nev.pageX = this._mouseX;
+      nev.pageY = this._mouseY;
+      jQuery("#musiccanvas").trigger(nev);
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
@@ -238,19 +252,19 @@ Musickies.prototype.isPaused = function() {
 }
 
 b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-  this.m_sprite.lineWidth=this.m_lineThickness;
-  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-  this.m_sprite.beginPath();
-  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-
-  for(var i=1;i<numVertices;i++) 
-    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-
-  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-  this.m_sprite.fill();
-  this.m_sprite.stroke();
-  this.m_sprite.closePath();
+//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+//  this.m_sprite.lineWidth=this.m_lineThickness;
+//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+//  this.m_sprite.beginPath();
+//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//
+//  for(var i=1;i<numVertices;i++) 
+//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+//
+//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//  this.m_sprite.fill();
+//  this.m_sprite.stroke();
+//  this.m_sprite.closePath();
 
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   var sprite = jQuery("#" + body.m_userData);
@@ -260,8 +274,7 @@ b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, b
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 12  + "px")
-    //.css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + ((147/130)*jQuery(window).height() + (-66168/65)) + "px");
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-909) + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-929) + "px");
 
       
   if(jQuery(sprite).css("top") > jQuery(window).height()) {

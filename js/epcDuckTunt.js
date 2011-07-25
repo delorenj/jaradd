@@ -117,17 +117,8 @@ EPC.DT = (function () {
   }
   
   var ev_mousemove = function(ev) {
-    var x;
-    var y;
-    if (ev.layerX || ev.layerX == 0) { // Firefox
-      x = ev.layerX;
-      y = ev.layerY;
-    } else if (ev.offsetX || ev.offsetX == 0) { // Opera
-      x = ev.offsetX;
-      y = ev.offsetY;
-    }    
-    _mouseX = x;
-    _mouseY = y;    
+    _mouseX = ev.pageX;
+    _mouseY = ev.pageY;    
   }
   
   var ev_click = function(ev) {
@@ -153,8 +144,8 @@ EPC.DT = (function () {
   }
   
   var collision = function(mouseevent, obj) {
-    var px = mouseevent.layerX;
-    var py = mouseevent.layerY;
+    var px = mouseevent.pageX;
+    var py = mouseevent.pageY;
     if((px > obj.x) && (px < obj.x + obj.w) && (py > obj.y) && (py < obj.y+obj.h)) {
       return true;
     } else {
@@ -217,8 +208,8 @@ EPC.DT = (function () {
       _ctx = jQuery("#musiccanvas")[0].getContext("2d");
       _width = jQuery("#musiccanvas").width();
       _height = jQuery("#musiccanvas").height();
-//      jQuery("#musiccanvas")[0].addEventListener('mousemove', ev_mousemove, false);
-      jQuery("#musiccanvas")[0].addEventListener('click', ev_click, false);
+      jQuery("#musiccanvas").bind('mousemove', ev_mousemove);
+      jQuery("#musiccanvas").bind('click', ev_click);
       jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
       
       var sources = {
@@ -231,6 +222,10 @@ EPC.DT = (function () {
       
       setTimeout(initBird, Math.random() * 10000);
       return setInterval(draw, 40);
+    },
+    
+    mousemouse : function(ev) {
+      ev_mousemove(ev);
     }
   }
 })();
