@@ -65,7 +65,7 @@ EPC.DT = (function () {
       _bird.y += 10;
       if(_bird.y > _height) {
         _bird.active = false;
-        _birdInt = setTimeout(initBird, Math.random() * 30000);
+        _birdInt = setTimeout(initBird, Math.random() * 30000 + 30000);
       }
     }
 
@@ -74,7 +74,7 @@ EPC.DT = (function () {
       clearInterval(_quackInt);
       clearInterval(_flapInt);
       jQuery("#end-round")[0].play();
-      _birdInt = setTimeout(initBird, Math.random() * 30000);
+      _birdInt = setTimeout(initBird, Math.random() * 30000 + 30000);
     }
   }
   
@@ -159,17 +159,17 @@ EPC.DT = (function () {
     _bird.active = true;
     _bird.ending = false;
     _bird.alive = true;
-    _quackInt = setInterval(function() {
-      audio = document.getElementById("quack");
-      audio.play();
-    }, 2000);
+//    _quackInt = setInterval(function() {
+//      audio = document.getElementById("quack");
+//      audio.play();
+//    }, 2000);
+//
+//    _flapInt = setInterval(function() {
+//      audio = document.getElementById("wings");
+//      audio.play();
+//    }, 1000);
 
-    _flapInt = setInterval(function() {
-      audio = document.getElementById("wings");
-      audio.play();
-    }, 100);
-
-    _changeInt = setTimeout(changeBird, Math.random() * 3000);
+    _changeInt = setTimeout(changeBird, Math.random() * 3000 + 1000);
     setTimeout(endBird, 10000);
   }
   
@@ -181,7 +181,7 @@ EPC.DT = (function () {
     if(y < 0.5) _bird.dy *= -1;
     
     if(!_bird.ending) {
-      setTimeout(changeBird, Math.random() * 3000);    
+      _changeInt = setTimeout(changeBird, Math.random() * 3000 + 1000);
     }
   }
   
@@ -195,7 +195,7 @@ EPC.DT = (function () {
     _bird.frame = 0;
     _score++;
     clearInterval(_quackInt);
-    clearInterval(_flapInt);            
+    clearInterval(_flapInt);
     setTimeout(function() {
       _bird.active = true
     }, 1500);
