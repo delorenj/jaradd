@@ -40,6 +40,7 @@ Musickies.prototype.createWorld = function() {
       w = w || 1.7;
       h = h || 1.7;
       var anchor = createAnchor(x,y);
+      //var xOffset = (Math.random() - 0.5) * 100
       var xOffset = 0
       console.log("createRope: " + x + ", " + y);
       for(var i=0; i<numJoints; i++) {
@@ -109,10 +110,53 @@ Musickies.prototype.createWorld = function() {
       sign.m_userData = sign_id;
       return sign;
     }
+
+
+    function createMusicNote(x, y, w, h, numJoints, delta, div) {
+      w = w || 1.7;
+      h = h || 1.7;
+      var anchor = createAnchor(x,y);
+      console.log("createMusicNote: " + x + ", " + y);
+      
+      //create wall to set swinging contraints
+      var wall = new b2PolygonShape();
+      var wallBd = new b2BodyDef();
+      wallBd.position.Set(x, y+3);
+      wall.SetAsBox(3, 0.1);
+      var notetop = world.CreateBody(wallBd);
+      notetop.CreateFixture2(wall);
+      jointDef = new b2RevoluteJointDef();        
+      jointDef.localAnchorA.Set(0, 0);
+      jointDef.localAnchorB.Set(0,2);
+      jointDef.bodyA = anchor;
+      jointDef.bodyB = spawn(x, y,w, h, 0);
+      jointDef.bodyB.m_userData = div;
+      world.CreateJoint(jointDef);
+    }
     
-    createRope(10,24,
-               1.7,1.7,
-               10,0.1,"youtube");
+    createMusicNote(10,22,
+                    57/32,86/32,
+                    6,0.1,"music-note2");
+
+    createMusicNote(20,30,
+                    57/32,86/32,
+                    6,0.1,"music-note1");
+
+//    createRope(26,23,
+//               1.7,1.7,
+//               4,0.1,"youtube");
+
+    createMusicNote(11,33,
+                    57/32,86/32,
+                    6,0.1,"music-note3");
+
+    createMusicNote(24,22,
+                    57/32,86/32,
+                    6,0.1,"music-note4");
+
+//    createRope(18,24,
+//               85/32,114/32,
+//               6,0.1,"sheet-bill");
 
 //    createDoubleRope(14.5,18.0,
 //                     26.0,18.0,

@@ -8,6 +8,8 @@ EPC.DT = (function () {
   var _images = {};
   var _quackInt;
   var _flapInt;
+  var _birdInt;
+  var _changeInt;
   var _bird = {
     active: false,
     ending: false,
@@ -63,7 +65,7 @@ EPC.DT = (function () {
       _bird.y += 10;
       if(_bird.y > _height) {
         _bird.active = false;
-        setTimeout(initBird, Math.random() * 30000);
+        _birdInt = setTimeout(initBird, Math.random() * 30000);
       }
     }
 
@@ -72,7 +74,7 @@ EPC.DT = (function () {
       clearInterval(_quackInt);
       clearInterval(_flapInt);
       jQuery("#end-round")[0].play();
-      setTimeout(initBird, Math.random() * 30000);
+      _birdInt = setTimeout(initBird, Math.random() * 30000);
     }
   }
   
@@ -80,7 +82,7 @@ EPC.DT = (function () {
     _ctx.textBaseline = "top";
     _ctx.font = "bold 16px Arial";
     _ctx.fillStyle = "#fff";
-   _ctx.fillText("Score: " + _score, 5, 5);
+   _ctx.fillText("SCORE: " + _score, 5, 5);
   }
   
   var drawBird = function() {
@@ -138,11 +140,7 @@ EPC.DT = (function () {
       killBird();
     }
   }
-  
-  var ev_keydown = function(ev) {
-    alert("key");
-  }
-  
+   
   var collision = function(mouseevent, obj) {
     var px = mouseevent.pageX;
     var py = mouseevent.pageY;
@@ -171,7 +169,7 @@ EPC.DT = (function () {
       audio.play();
     }, 100);
 
-    setTimeout(changeBird, Math.random() * 3000);
+    _changeInt = setTimeout(changeBird, Math.random() * 3000);
     setTimeout(endBird, 10000);
   }
   
@@ -210,7 +208,7 @@ EPC.DT = (function () {
       _height = jQuery("#musiccanvas").height();
       jQuery("#musiccanvas").bind('mousemove', ev_mousemove);
       jQuery("#musiccanvas").bind('click', ev_click);
-      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
+//      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
       
       var sources = {
         bird: "images/canvas/duck.png"
@@ -224,8 +222,12 @@ EPC.DT = (function () {
       return setInterval(draw, 40);
     },
     
-    mousemouse : function(ev) {
-      ev_mousemove(ev);
+    destroyCanvas : function() {
+      _score = 0;
+      clearTimeout(_birdInt);
+      clearTimeout(_changeInt);
+      clearInterval(_flapInt);
+      clearInterval(_quackInt);
     }
   }
 })();

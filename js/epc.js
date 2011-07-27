@@ -1,11 +1,8 @@
 var EPC = (function () {
   var windowWidth = jQuery(window).width();
-  var windowHeight = jQuery(window).height();
   var z0_speed = 350000;
-  var z1_speed = 450000;
   var z2_speed = 800000;
   var bgPosOffset = 0;
-  var runner = null;
   var homerunner = null
   var workrunner = null
   var musicrunner = null
@@ -153,22 +150,31 @@ var EPC = (function () {
     initHome : function() {
       setTimeout(function() {
         jQuery("#homecanvas, .homesprite").show();
-        jQuery("#musiccanvas, #workcanvas, .musicsprite, .worksprite").hide();
+        jQuery("#workcanvas,.worksprite").hide();
         workrunner.pause();
-        musicrunner.pause();
         homerunner.draw();
         homerunner.resume();                
       }, 3000);
       
       if(EPC.isFooterOn()) {
+        setTimeout(function() {
+          EPC.setFooterOff();
+          musicrunner.pause();
+          jQuery("#musiccanvas, .musicsprite").hide();
+          EPC.DT.destroyCanvas();
+        },100);
+        
         jQuery("#footer").animate({
           top: "+=641"
         }, {
           duration: 1000,
           easing: "easeInOutExpo",
+          step : function(a, b) {
+            var off = b.start-b.now;
+            console.log("step: " + off);
+            EPC.setFooterOffset(off);
+          },
           complete: function() {
-            jQuery(this).hide();
-            EPC.setFooterOff();
           }
         });
       }

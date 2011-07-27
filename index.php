@@ -39,7 +39,7 @@
         <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
         <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
         <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>        
-        <img id="jacksnaps" class="homesprite sprite" src="images/canvas/jacksnaps.png"></img>
+        <img id="jacksnaps" class="homesprite sprite" src="images/canvas/jacksnaps.png"></img>        
         <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
         <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
         <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
@@ -48,7 +48,13 @@
         <img id="sonic-sign" class="worksprite sprite floaty-sign" src="images/canvas/sonic-sign.png"></img>
         <img id="dentsu-sign" class="worksprite sprite floaty-sign" src="images/canvas/dentsu-sign.png"></img>
         <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
-        <img id="youtube" class="musicsprite sprite" src="images/canvas/youtube.png"></img>
+<!--        <img id="youtube" class="musicsprite sprite" src="images/canvas/youtube.png"></img>-->
+<!--        <img id="sheet-op32no8" class="musicsprite sprite" src="images/canvas/sheet-op32no8.png"></img>
+        <img id="sheet-hexentanz" class="musicsprite sprite" src="images/canvas/sheet-hexentanz.png"></img>-->
+        <img id="music-note1" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
+        <img id="music-note2" class="musicsprite sprite" src="images/canvas/music_note2.png"></img>
+        <img id="music-note3" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
+        <img id="music-note4" class="musicsprite sprite" src="images/canvas/music_note2.png"></img>
         <div id="flash"></div>
       </div>
       <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>

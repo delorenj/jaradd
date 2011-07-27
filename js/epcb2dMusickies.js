@@ -114,6 +114,25 @@ Musickies.prototype.createBall = function(world, x, y, radius, fric, rest, dens)
     return body;
 }
 
+Musickies.prototype.createMusicNote = function(world, x, y) {
+    radius = 2;
+    fric = 0.4;
+    rest = 0.6;
+    dens = 1.0;
+    
+    var fixtureDef = new b2FixtureDef();
+    fixtureDef.shape = new b2CircleShape(radius);
+    fixtureDef.friction = fric;
+    fixtureDef.restitution = rest;
+    fixtureDef.density = dens;
+    var ballBd = new b2BodyDef();
+    ballBd.type = b2Body.b2_dynamicBody;
+    ballBd.position.Set(x,y);
+    var body = world.CreateBody(ballBd);
+    body.CreateFixture(fixtureDef);
+    return body;  
+}
+
 Musickies.prototype.step = function(delta) {
     if(!this._world)
         return;       
@@ -167,7 +186,7 @@ Musickies.prototype._updateMouseInteraction = function() {
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
-          case "youtube":
+          case "music-note1":
             EPC.initHome();
             break;
             
@@ -273,15 +292,21 @@ b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, b
     .css("-moz-transform", rotationStyle)
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 12  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-929) + "px");
+    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 20  + "px")
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-935) + "px");
 
-      
-  if(jQuery(sprite).css("top") > jQuery(window).height()) {
+
+  if(!EPC.isFooterOn()) {
     jQuery(sprite).hide();
   } else {
     jQuery(sprite).show();
-  }  
+  }
+  
+//  if(jQuery(sprite).css("top") > jQuery(window).height()) {
+//    jQuery(sprite).hide();
+//  } else {
+//    jQuery(sprite).show();
+//  }  
   
 }
 
