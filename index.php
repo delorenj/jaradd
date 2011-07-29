@@ -74,25 +74,22 @@
       <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="images/dentsu02.png"></a>
       <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="images/dentsu03.png"></a>
       <a class="sb dentsu-sign" title="Dentsu Network Internal CMS" href="images/dentsu04.png"></a>
+      <a class="sb music-note1 video" href="http://www.youtube.com/v/MDK8Lulw7k4?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
     </div>
     <div id="footer">
       <canvas id="musiccanvas2d" width="1024" height="641"></canvas>
     </div>
     <audio id="blast">
-      <source src="js/blast.ogg" type="audio/ogg"></source>
-      <source src="js/blast.mp3" type="audio/mpeg"></source>
+      <source src="audio/blast.ogg" type="audio/ogg"></source>
+      <source src="audio/blast.mp3" type="audio/mpeg"></source>
     </audio>    
-    <audio id="quack">
-      <source src="js/quack.ogg" type="audio/ogg"></source>
-      <source src="js/quack.mp3" type="audio/mpeg"></source>
+    <audio id="quack" loop="true" preload="true">
+      <source src="audio/bird.ogg" type="audio/ogg"></source>
+      <source src="audio/bird.mp3" type="audio/mpeg"></source>
     </audio>        
     <audio id="end-round">
-      <source src="js/end_round.ogg" type="audio/ogg"></source>
-      <source src="js/end_round.mp3" type="audio/mpeg"></source>
+      <source src="audio/end_round.ogg" type="audio/ogg"></source>
+      <source src="audio/end_round.mp3" type="audio/mpeg"></source>
     </audio>        
-    <audio id="wings">
-      <source src="js/wings.ogg" type="audio/ogg"></source>
-      <source src="js/wings.wav" type="audio/wav"></source>
-    </audio>            
   </body>
 </html>

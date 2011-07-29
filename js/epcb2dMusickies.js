@@ -114,25 +114,6 @@ Musickies.prototype.createBall = function(world, x, y, radius, fric, rest, dens)
     return body;
 }
 
-Musickies.prototype.createMusicNote = function(world, x, y) {
-    radius = 2;
-    fric = 0.4;
-    rest = 0.6;
-    dens = 1.0;
-    
-    var fixtureDef = new b2FixtureDef();
-    fixtureDef.shape = new b2CircleShape(radius);
-    fixtureDef.friction = fric;
-    fixtureDef.restitution = rest;
-    fixtureDef.density = dens;
-    var ballBd = new b2BodyDef();
-    ballBd.type = b2Body.b2_dynamicBody;
-    ballBd.position.Set(x,y);
-    var body = world.CreateBody(ballBd);
-    body.CreateFixture(fixtureDef);
-    return body;  
-}
-
 Musickies.prototype.step = function(delta) {
     if(!this._world)
         return;       
@@ -186,10 +167,18 @@ Musickies.prototype._updateMouseInteraction = function() {
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
-          case "music-note1":
-            EPC.initHome();
-            break;
-            
+//          case "music-note1":
+//            EPC.initHome();
+//            break;
+//          case "music-note2":
+//            EPC.initHome();
+//            break;
+//          case "music-note3":
+//            EPC.initHome();
+//            break;
+//          case "music-note4":
+//            EPC.initHome();
+//            break;            
           default:
             jQuery("." + body.m_userData).click();
         }

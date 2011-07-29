@@ -9,6 +9,7 @@ var EPC = (function () {
   var footerShowing = false;
   var footerOffset = 0;
   var bgTriggerOffset = -7000;
+  var _duckTuntThread = null;
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
@@ -69,7 +70,7 @@ var EPC = (function () {
         easing: "easeInOutExpo",
         complete: function() {
           homerunner.pause();
-          EPC.DT.initCanvas();
+          EPC.initDuckTunt();
         }
       });
       
@@ -147,6 +148,15 @@ var EPC = (function () {
       });      
     },
 
+    initDuckTunt : function () {
+      _duckTuntThread = EPC.DT.initCanvas();      
+    },
+    
+    destroyDuckTunt : function() {
+      EPC.DT.destroyCanvas();
+      clearInterval(_duckTuntThread);      
+    },
+    
     initHome : function() {
       setTimeout(function() {
         jQuery("#homecanvas, .homesprite").show();
@@ -161,7 +171,7 @@ var EPC = (function () {
           EPC.setFooterOff();
           musicrunner.pause();
           jQuery("#musiccanvas, .musicsprite").hide();
-          EPC.DT.destroyCanvas();
+          EPC.destroyDuckTunt();
         },100);
         
         jQuery("#footer").animate({
@@ -204,8 +214,25 @@ jQuery(document).ready(function() {
   
   EPC.startHomeCanvas();
   EPC.initBgClouds();
-  Shadowbox.init({
-    skipSetup: true
+//  Shadowbox.init({
+//    skipSetup: true
+//  });
+
+  Shadowbox.init({ 
+    language: 'en', 
+    players: ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv'],
+    autoplayMovies: true,
+    onOpen : function(e) {
+      if(EPC.isFooterOn()) {
+        EPC.destroyDuckTunt();
+      }
+    },
+    
+    onClose : function() {
+      if(EPC.isFooterOn()) {
+        EPC.initDuckTunt();
+      }
+    }
   });
   
   Shadowbox.setup("a.sobe-sign", {
@@ -231,5 +258,7 @@ jQuery(document).ready(function() {
   Shadowbox.setup("a.dentsu-sign", {
     gallery: "Dentsu Network Public Site & CMS"
   });
+
+  Shadowbox.setup("a.video");
 
 });

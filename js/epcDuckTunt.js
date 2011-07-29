@@ -7,9 +7,9 @@ EPC.DT = (function () {
   var _mouseY = 0;
   var _images = {};
   var _quackInt;
-  var _flapInt;
   var _birdInt;
   var _changeInt;
+  var _quack = null;
   var _bird = {
     active: false,
     ending: false,
@@ -71,8 +71,7 @@ EPC.DT = (function () {
 
     if(_bird.ending && ((_bird.x > _width)) || (_bird.x < 0) || (_bird.y > _height) || (_bird.y < 0)) {
       _bird.active = false;
-      clearInterval(_quackInt);
-      clearInterval(_flapInt);
+      _quack.stop();
       jQuery("#end-round")[0].play();
       _birdInt = setTimeout(initBird, Math.random() * 30000 + 30000);
     }
@@ -159,16 +158,7 @@ EPC.DT = (function () {
     _bird.active = true;
     _bird.ending = false;
     _bird.alive = true;
-//    _quackInt = setInterval(function() {
-//      audio = document.getElementById("quack");
-//      audio.play();
-//    }, 2000);
-//
-//    _flapInt = setInterval(function() {
-//      audio = document.getElementById("wings");
-//      audio.play();
-//    }, 1000);
-
+    _quack.play();
     _changeInt = setTimeout(changeBird, Math.random() * 3000 + 1000);
     setTimeout(endBird, 10000);
   }
@@ -194,8 +184,7 @@ EPC.DT = (function () {
     _bird.alive = false;
     _bird.frame = 0;
     _score++;
-    clearInterval(_quackInt);
-    clearInterval(_flapInt);
+    _quack.stop();
     setTimeout(function() {
       _bird.active = true
     }, 1500);
@@ -209,7 +198,7 @@ EPC.DT = (function () {
       jQuery("#musiccanvas").bind('mousemove', ev_mousemove);
       jQuery("#musiccanvas").bind('click', ev_click);
 //      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
-      
+      _quack = document.getElementById("quack");
       var sources = {
         bird: "images/canvas/duck.png"
       }
@@ -223,11 +212,9 @@ EPC.DT = (function () {
     },
     
     destroyCanvas : function() {
-      _score = 0;
       clearTimeout(_birdInt);
       clearTimeout(_changeInt);
-      clearInterval(_flapInt);
-      clearInterval(_quackInt);
+      _quack.stop();
     }
   }
 })();
