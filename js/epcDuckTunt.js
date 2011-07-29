@@ -71,7 +71,7 @@ EPC.DT = (function () {
 
     if(_bird.ending && ((_bird.x > _width)) || (_bird.x < 0) || (_bird.y > _height) || (_bird.y < 0)) {
       _bird.active = false;
-      _quack.stop();
+      _quack.pause();
       jQuery("#end-round")[0].play();
       _birdInt = setTimeout(initBird, Math.random() * 30000 + 30000);
     }
@@ -184,7 +184,7 @@ EPC.DT = (function () {
     _bird.alive = false;
     _bird.frame = 0;
     _score++;
-    _quack.stop();
+    _quack.pause();
     setTimeout(function() {
       _bird.active = true
     }, 1500);
@@ -214,7 +214,7 @@ EPC.DT = (function () {
     destroyCanvas : function() {
       clearTimeout(_birdInt);
       clearTimeout(_changeInt);
-      _quack.stop();
+      _quack.pause();
     }
   }
 })();
