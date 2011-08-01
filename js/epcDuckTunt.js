@@ -10,6 +10,7 @@ EPC.DT = (function () {
   var _birdInt;
   var _changeInt;
   var _quack = null;
+  var _flash_scheduled = false;
   var _bird = {
     active: false,
     ending: false,
@@ -27,9 +28,16 @@ EPC.DT = (function () {
   };
   
   var draw = function() {
-    clear();
+    clear();    
     updateBird();
-    
+
+    if(_flash_scheduled) {
+      _ctx.fillStyle="#fff";
+      _ctx.fillRect(0,0,_width, _height);
+      _flash_scheduled = false;
+      return;
+    }
+
     drawScore();    
     drawBird();
   }
@@ -123,10 +131,7 @@ EPC.DT = (function () {
   }
   
   var ev_click = function(ev) {
-    _ctx.save();
-    _ctx.fillStyle="#fff";
-    _ctx.fillRect(0,0,_width, _height);
-    _ctx.restore();
+    _flash_scheduled = true;
     audio = document.getElementById("blast");
     if(audio.currentTime == 0) {
       audio.play();    
@@ -135,7 +140,7 @@ EPC.DT = (function () {
     }
     
     //check for collision
-    if(collision(ev, _bird)) {
+    if((collision(ev, _bird)) && (_bird.alive)) {
       killBird();
     }
   }
@@ -196,7 +201,7 @@ EPC.DT = (function () {
       _width = jQuery("#musiccanvas").width();
       _height = jQuery("#musiccanvas").height();
       jQuery("#musiccanvas").bind('mousemove', ev_mousemove);
-      jQuery("#musiccanvas").bind('click', ev_click);
+      jQuery("#musiccanvas").bind('click', ev_click, false);
 //      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
       _quack = document.getElementById("quack");
       var sources = {
