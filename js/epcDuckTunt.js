@@ -218,7 +218,7 @@ EPC.DT = (function () {
     
     destroyCanvas : function() {
       clearTimeout(_birdInt);
-      clearTimeout(_changeInt);
+      clearTimeout(_changeInt);      
       _quack.pause();
     }
   }

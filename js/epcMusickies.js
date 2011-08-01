@@ -13,6 +13,7 @@ Musickies.prototype.createWorld = function() {
     function spawn(x, y, w, h, a) {
         w = w || 1.7;
         h = h || 1.7;
+        a = a || ((Math.random() * 10) - 20);
         var bodyDef = new b2BodyDef();
         bodyDef.type = b2Body.b2_dynamicBody;
         bodyDef.position.Set(x, y);
@@ -112,7 +113,7 @@ Musickies.prototype.createWorld = function() {
     }
 
 
-    function createMusicNote(x, y, w, h, numJoints, delta, div) {
+    function createMusicNote(x, y, w, h, div) {
       w = w || 1.7;
       h = h || 1.7;
       var anchor = createAnchor(x,y);
@@ -131,28 +132,29 @@ Musickies.prototype.createWorld = function() {
       jointDef.bodyA = anchor;
       jointDef.bodyB = spawn(x, y,w, h, 0);
       jointDef.bodyB.m_userData = div;
+      jointDef.bodyB.ApplyForce(new b2Vec2(10,10), new b2Vec2(10,10));
       world.CreateJoint(jointDef);
     }
     
-    createMusicNote(10,22,
-                    57/32,86/32,
-                    6,0.1,"music-note2");
+    createMusicNote(10,23,
+                    57/32,66/32,
+                    "music-note2");
 
-    createMusicNote(20,30,
-                    57/32,86/32,
-                    6,0.1,"music-note1");
+    createMusicNote(20,31,
+                    57/32,66/32,
+                    "music-note1");
 
 //    createRope(26,23,
 //               1.7,1.7,
 //               4,0.1,"youtube");
 
-    createMusicNote(11,33,
-                    57/32,86/32,
-                    6,0.1,"music-note3");
+    createMusicNote(11,34,
+                    57/32,66/32,
+                    "music-note3");
 
-    createMusicNote(24,22,
-                    57/32,86/32,
-                    6,0.1,"music-note4");
+    createMusicNote(24,23,
+                    57/32,66/32,
+                    "music-note4");
 
 //    createRope(18,24,
 //               85/32,114/32,

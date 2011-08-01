@@ -282,7 +282,7 @@ b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, b
     .css("-webkit-transform", rotationStyle)
     .css("transform", rotationStyle)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 20  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-935) + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-910) + "px");
 
 
   if(!EPC.isFooterOn()) {
