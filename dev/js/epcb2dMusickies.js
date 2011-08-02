@@ -89,7 +89,7 @@ Musickies.prototype.createWorld = function(){
     m_world.SetWarmStarting(true);
     
     this._tree = new Image();
-    this._tree.src = "images/canvas/tree.png";
+    this._tree.src = "images/tree.png";
     return m_world;
     
     

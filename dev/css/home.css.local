@@ -1,12 +1,11 @@
 body {
   text-align: center;
-  background-color: #B5BEFF;
-/*  background-color: #9fa0a3;  */
-  background-image: url("../../images/bg-margin.png");
-  background-position: 0 -7255px;
-  background-repeat: repeat-x;
-  width: 100%;
-  height:100%;
+  background-color: #9fa0a3;  
+background-image: url("../images/bg-margin.png");
+background-position: 0 -7255px;
+background-repeat: repeat-x;
+width: 100%;
+height:100%;
 }
 
 #wrapper {
@@ -30,22 +29,8 @@ body {
   z-index: 100;
 }
 
-#musiccanvas {
-  position: relative;
-  top: 0;
-  left: 0;
-  margin: 0 auto;
-  z-index: 100;
-}
-
-#musiccanvas2d {
-  position: relative;
-  display: none;
-  z-index: 200;
-}
-
 #content {
-  background-image: url("../../images/bg.jpg");
+  background-image: url("../images/bg.jpg");
   background-position: 0 -7255px;
   background-repeat: no-repeat;
   width: 1024px;
@@ -84,14 +69,29 @@ body {
   width:1024px;
 }
 
+#footer {
+  background: transparent url("../images/is-grass.png") 0 0 repeat-x;  
+  width: 100%;
+  height: 380px;
+  margin:0;
+}
+
+#bird {
+  position: absolute;
+  background: transparent url("../images/bird_90x90.png") 0 0 no-repeat;  
+  height: 62px;
+  width: 90px;
+  z-index: 1000;
+}
+
 .sprite {
   position: relative;  
   z-index: 1;
 }
 
 .homesprite {
-  margin-top: -354px;  
   margin-left: -10px;
+  margin-top: -354px;
   display: block;
 }
 
@@ -99,11 +99,6 @@ body {
   margin-top: -360px;
   margin-left: -90px;
   display: none;
-}
-
-.musicsprite {
-  display: none;
-  margin-top: 0px;
 }
 
 .floaty-sign {
@@ -164,15 +159,7 @@ body {
   top: -650px;
 }
 
-#footer {
-  background: transparent url("../../images/grass.png") 0 0 repeat-x;  
-  position: absolute;
-  height: 641px;
-  width: 100%;
-  clear: both;
-  display: none;
-}
+/* captions */
+.orbit-caption {
 
-#footer img {
-  margin-left: -400px;
 }

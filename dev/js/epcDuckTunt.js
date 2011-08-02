@@ -205,7 +205,7 @@ EPC.DT = (function () {
 //      jQuery("#musiccanvas")[0].addEventListener("keydown", ev_keydown, true);
       _quack = document.getElementById("quack");
       var sources = {
-        bird: "images/canvas/duck.png"
+        bird: "images/duck.png"
       }
       
       loadImages(sources, function() {

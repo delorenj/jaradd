@@ -6,11 +6,6 @@
     <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="css/shadowbox.css" />        
     <link type="text/css" rel="stylesheet" href="css/home.css" />
-    <script type="text/javascript">
-      if(window.navigator.userAgent.indexOf("MSIE") > 0){
-        location.href="http://localhost/jaradd/ie";
-      };
-    </script>
     <script type="text/javascript" src="js/modernizr.js"></script>
     <script type="text/javascript" src="js/box2dDangly.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -40,27 +35,27 @@
       <div id="content"></div>
       <div id="container"></div>
       <div class="wrapper">
-        <img id="work-stuff" class="homesprite sprite" src="images/canvas/work-stuff.png"></img>
-        <img id="music-stuff" class="homesprite sprite" src="images/canvas/music-stuff.png"></img>
-        <img id="facebook" class="homesprite sprite" src="images/canvas/facebook.png"></img>
-        <img id="linkedin" class="homesprite sprite" src="images/canvas/linkedin.png"></img>
-        <img id="gplus" class="homesprite sprite" src="images/canvas/gplus.png"></img>        
-        <img id="jacksnaps" class="homesprite sprite" src="images/canvas/jacksnaps.png"></img>        
-        <img id="satAnchor" class="worksprite sprite" src="images/canvas/down.png"></img>
-        <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/canvas/sobe-sign.png"></img>
-        <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/canvas/orbit-sign.png"></img>
-        <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/canvas/eclipse-sign.png"></img>
-        <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/canvas/5gum-sign.png"></img>
-        <img id="sonic-sign" class="worksprite sprite floaty-sign" src="images/canvas/sonic-sign.png"></img>
-        <img id="dentsu-sign" class="worksprite sprite floaty-sign" src="images/canvas/dentsu-sign.png"></img>
-        <img id="sat" class="worksprite sprite" src="images/canvas/SatelliteOnly.png"></img>
-<!--        <img id="youtube" class="musicsprite sprite" src="images/canvas/youtube.png"></img>-->
-<!--        <img id="sheet-op32no8" class="musicsprite sprite" src="images/canvas/sheet-op32no8.png"></img>
-        <img id="sheet-hexentanz" class="musicsprite sprite" src="images/canvas/sheet-hexentanz.png"></img>-->
-        <img id="music-note1" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
-        <img id="music-note2" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
-        <img id="music-note3" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
-        <img id="music-note4" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
+        <img id="work-stuff" class="homesprite sprite" src="images/work-stuff.png"></img>
+        <img id="music-stuff" class="homesprite sprite" src="images/music-stuff.png"></img>
+        <img id="facebook" class="homesprite sprite" src="images/facebook.png"></img>
+        <img id="linkedin" class="homesprite sprite" src="images/linkedin.png"></img>
+        <img id="gplus" class="homesprite sprite" src="images/gplus.png"></img>        
+        <img id="jacksnaps" class="homesprite sprite" src="images/jacksnaps.png"></img>        
+        <img id="satAnchor" class="worksprite sprite" src="images/down.png"></img>
+        <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/sobe-sign.png"></img>
+        <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/orbit-sign.png"></img>
+        <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="images/eclipse-sign.png"></img>
+        <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="images/5gum-sign.png"></img>
+        <img id="sonic-sign" class="worksprite sprite floaty-sign" src="images/sonic-sign.png"></img>
+        <img id="dentsu-sign" class="worksprite sprite floaty-sign" src="images/dentsu-sign.png"></img>
+        <img id="sat" class="worksprite sprite" src="images/SatelliteOnly.png"></img>
+<!--        <img id="youtube" class="musicsprite sprite" src="images/youtube.png"></img>-->
+<!--        <img id="sheet-op32no8" class="musicsprite sprite" src="images/sheet-op32no8.png"></img>
+        <img id="sheet-hexentanz" class="musicsprite sprite" src="images/sheet-hexentanz.png"></img>-->
+        <img id="music-note1" class="musicsprite sprite" src="images/music_note1.png"></img>
+        <img id="music-note2" class="musicsprite sprite" src="images/music_note1.png"></img>
+        <img id="music-note3" class="musicsprite sprite" src="images/music_note1.png"></img>
+        <img id="music-note4" class="musicsprite sprite" src="images/music_note1.png"></img>
         <div id="flash"></div>
       </div>
       <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
