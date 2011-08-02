@@ -13,7 +13,7 @@ Musickies.prototype.createWorld = function() {
     function spawn(x, y, w, h, a) {
         w = w || 1.7;
         h = h || 1.7;
-        a = a || ((Math.random() * 10) - 20);
+        a = a || ((Math.random() * 2) - 1);
         var bodyDef = new b2BodyDef();
         bodyDef.type = b2Body.b2_dynamicBody;
         bodyDef.position.Set(x, y);
@@ -136,34 +136,21 @@ Musickies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);
     }
     
-    createMusicNote(10,23,
+    createMusicNote(10,24,
                     57/32,66/32,
                     "music-note2");
 
-    createMusicNote(20,31,
+    createMusicNote(22,32,
                     57/32,66/32,
                     "music-note1");
 
-//    createRope(26,23,
-//               1.7,1.7,
-//               4,0.1,"youtube");
-
-    createMusicNote(11,34,
+    createMusicNote(11,35,
                     57/32,66/32,
                     "music-note3");
 
-    createMusicNote(24,23,
+    createMusicNote(27,24,
                     57/32,66/32,
                     "music-note4");
-
-//    createRope(18,24,
-//               85/32,114/32,
-//               6,0.1,"sheet-bill");
-
-//    createDoubleRope(14.5,18.0,
-//                     26.0,18.0,
-//                     11.1,6,
-//                     6,1.1, "sobe-sign");
 
     return world;
 };

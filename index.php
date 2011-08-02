@@ -5,7 +5,13 @@
     <link type="text/css" rel="stylesheet" href="css/reset.css" />
     <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="css/shadowbox.css" />        
-    <link type="text/css" rel="stylesheet" href="css/home.css" />    
+    <link type="text/css" rel="stylesheet" href="css/home.css" />
+    <script type="text/javascript">
+      if(window.navigator.userAgent.indexOf("MSIE") > 0){
+        location.href="http://localhost/jaradd/ie";
+      };
+    </script>
+    <script type="text/javascript" src="js/modernizr.js"></script>
     <script type="text/javascript" src="js/box2dDangly.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
@@ -52,9 +58,9 @@
 <!--        <img id="sheet-op32no8" class="musicsprite sprite" src="images/canvas/sheet-op32no8.png"></img>
         <img id="sheet-hexentanz" class="musicsprite sprite" src="images/canvas/sheet-hexentanz.png"></img>-->
         <img id="music-note1" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
-        <img id="music-note2" class="musicsprite sprite" src="images/canvas/music_note2.png"></img>
+        <img id="music-note2" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
         <img id="music-note3" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
-        <img id="music-note4" class="musicsprite sprite" src="images/canvas/music_note2.png"></img>
+        <img id="music-note4" class="musicsprite sprite" src="images/canvas/music_note1.png"></img>
         <div id="flash"></div>
       </div>
       <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="images/sobe_tryeverything.jpg"></a>
