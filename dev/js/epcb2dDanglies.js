@@ -290,8 +290,12 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
   jQuery(sprite)
     .css("position", "absolute")
     .css("-moz-transform", rotationStyle)
-    .css("-webkit-transform", rotationStyle)
+    .css("-webkit-transform", rotationStyle)    
+    .css("-o-transform", rotationStyle)
     .css("transform", rotationStyle)
+    .css("-ms-transform", rotationStyle)
+    .css("filter", EPC.ieRotate(-body.m_xf.GetAngle() * 57.2957795))
+    .css("zoom", 1)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
     .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + "px");
     

@@ -205,6 +205,13 @@ var EPC = (function () {
         duration: 6000,
         easing: "easeInOutExpo"
       });            
+    },
+    
+    ieRotate : function(angle) {
+      var rad = angle * Math.PI * 2 / 360,
+      cos = Math.cos(rad),
+      sin = Math.sin(rad);
+      return ("progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11 = " + cos + ", M12 = " + (-sin) + ", M21 = " + sin + ", M22 = " + cos);
     }
     
   };
