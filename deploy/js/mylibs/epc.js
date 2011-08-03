@@ -29,9 +29,9 @@ var EPC = (function () {
   
   return  {    
     initBgClouds : function() {
-      jQuery("#wrapper").append("<img id='cloud1' src='images/cloud_370x147.png' alt='' />");
-      jQuery("#wrapper").append("<img id='cloud2' src='images/cloud_500x200.png' alt='' />");      
-      jQuery("#wrapper").append("<img id='cloud3' src='images/cloud_410x272.png' alt='' />");      
+      jQuery("#wrapper").append("<img id='cloud1' src='img/cloud_370x147.png' alt='' />");
+      jQuery("#wrapper").append("<img id='cloud2' src='img/cloud_500x200.png' alt='' />");      
+      jQuery("#wrapper").append("<img id='cloud3' src='img/cloud_410x272.png' alt='' />");      
       jQuery("img[id*='cloud']").each(function() {
         jQuery(this).css({
         left: Math.random() * jQuery(window).width(),

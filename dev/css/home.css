@@ -89,6 +89,8 @@ body {
   z-index: 1;
 }
 
+.hidden { visibility: hidden; }
+
 .homesprite {
   margin-top: -354px;  
   margin-left: -10px;

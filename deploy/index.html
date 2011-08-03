@@ -1,0 +1,148 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Jarad DeLorenzo</title>
+  <meta name="description" content="">
+  <meta name="author" content="Jarad DeLorenzo">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>  
+  <link rel="stylesheet" href="css/style.css?v=3">
+
+  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
+  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
+  <script src="js/libs/modernizr.js"></script>
+</head>
+
+<body>
+  <div id="container" class="mainwrap">
+    <header>
+
+    </header>
+    <div id="main" role="main">
+      <div id="wrapper">
+        <canvas id="homecanvas" width="1024" height="600"></canvas>
+        <canvas id="workcanvas" width="1200" height="600"></canvas>
+        <canvas id="musiccanvas"></canvas>    
+      </div>
+      <div id="content"></div>
+      <div id="my-container"></div>
+      <div class="wrapper">
+        <img id="work-stuff" class="homesprite sprite hidden" src="img/work-stuff.png"></img>
+        <img id="music-stuff" class="homesprite sprite hidden" src="img/music-stuff.png"></img>
+        <img id="facebook" class="homesprite sprite hidden" src="img/facebook.png"></img>
+        <img id="linkedin" class="homesprite sprite hidden" src="img/linkedin.png"></img>
+        <img id="gplus" class="homesprite sprite hidden" src="img/gplus.png"></img>        
+        <img id="jacksnaps" class="homesprite sprite hidden" src="img/jacksnaps.png"></img>        
+        <img id="satAnchor" class="worksprite sprite" src="img/down.png"></img>
+        <img id="sobe-sign" class="worksprite sprite floaty-sign" src="img/sobe-sign.png"></img>
+        <img id="orbit-sign" class="worksprite sprite floaty-sign" src="img/orbit-sign.png"></img>
+        <img id="eclipse-sign" class="worksprite sprite floaty-sign" src="img/eclipse-sign.png"></img>
+        <img id="fivegum-sign" class="worksprite sprite floaty-sign" src="img/5gum-sign.png"></img>
+        <img id="sonic-sign" class="worksprite sprite floaty-sign" src="img/sonic-sign.png"></img>
+        <img id="dentsu-sign" class="worksprite sprite floaty-sign" src="img/dentsu-sign.png"></img>
+        <img id="sat" class="worksprite sprite" src="img/SatelliteOnly.png"></img>
+        <img id="music-note1" class="musicsprite sprite" src="img/music_note1.png"></img>
+        <img id="music-note2" class="musicsprite sprite" src="img/music_note1.png"></img>
+        <img id="music-note3" class="musicsprite sprite" src="img/music_note1.png"></img>
+        <img id="music-note4" class="musicsprite sprite" src="img/music_note1.png"></img>
+        <div id="flash"></div>
+      </div>
+      <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="img/sobe_tryeverything.jpg"></a>
+      <a class="sb sobe-sign" title="SoBe's Facebook Profile" href="img/sobe_skinsuit_facebook.jpg"></a>
+      <a class="sb sobe-sign" title="SoBe Mobile Website" href="img/sobe_girl_01.png"></a>
+      <a class="sb sobe-sign" title="SoBe Mobile Website" href="img/sobe_girl_02.jpg"></a>    
+      <a class="sb orbit-sign" title="Orbit Gum" href="img/orbitgum.jpg"></a>
+      <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="img/Twilight_Eclipse_01.jpg"></a>
+      <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="img/Twilight_Eclipse_02.jpg"></a>
+      <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="img/coachella_5gum_02.jpg"></a>
+      <a class="sb fivegum-sign" title="Coachella 5gum Promo Site" href="img/coachella_5gum_01.jpg"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="img/sonic01.png"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="img/sonic02.png"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="img/sonic03.png"></a>
+      <a class="sb sonic-sign" title="Sonic Burgers Contest Site" href="img/sonic04.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="img/dentsu01.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="img/dentsu02.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="img/dentsu03.png"></a>
+      <a class="sb dentsu-sign" title="Dentsu Network Internal CMS" href="img/dentsu04.png"></a>
+      <a class="sb music-note1 video" href="http://www.youtube.com/v/MDK8Lulw7k4?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
+    </div>
+    <footer id="footer">
+      <canvas id="musiccanvas2d" width="1024" height="641"></canvas>
+    </footer>
+    <audio id="blast">
+      <source src="audio/blast.ogg" type="audio/ogg"></source>
+      <source src="audio/blast.mp3" type="audio/mpeg"></source>
+    </audio>    
+    <audio id="quack" loop="true" preload="true">
+      <source src="audio/bird.ogg" type="audio/ogg"></source>
+      <source src="audio/bird.mp3" type="audio/mpeg"></source>
+    </audio>        
+    <audio id="end-round">
+      <source src="audio/end_round.ogg" type="audio/ogg"></source>
+      <source src="audio/end_round.mp3" type="audio/mpeg"></source>
+    </audio>            
+  </div>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+  <script>window.jQuery || document.write("<script src='js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>-->
+
+
+<!-- scripts concatenated and minified via ant build script-->
+<!--  <script src="js/plugins.js"></script>
+<script src="js/script.js"></script>-->
+<!-- end scripts-->
+
+
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+  <![endif]-->
+
+
+  <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
+  <script>
+    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+  
+      Modernizr.load([
+        {
+          test: Modernizr.canvas,
+          yep: [
+            "js/libs/box2dDangly.min.js",
+            "js/libs/jquery.min.js",
+            "js/libs/jquery-ui.min.js",
+            "js/plugins.js",
+            "js/script.js",
+            "js/libs/shadowbox.js",
+            "js/mylibs/epcb2dDanglies.js",
+            "js/mylibs/epcDanglies.js",
+            "js/mylibs/epcb2dSpacies.js",
+            "js/mylibs/epcSpacies.js",
+            "js/mylibs/epcb2dMusickies.js",
+            "js/mylibs/epcMusickies.js",
+            "js/mylibs/epc.js",
+            "js/mylibs/epcDuckTunt.js"
+          ],
+          complete: function() {
+            $j = jQuery.noConflict();
+            jQuery(".sprite").removeClass("hidden");
+          }
+        }
+      ]);  
+  </script>
+
+</body>
+</html>

@@ -6,8 +6,42 @@
     <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>
     <link type="text/css" rel="stylesheet" href="css/shadowbox.css" />        
     <link type="text/css" rel="stylesheet" href="css/home.css" />
+    <script type="text/javascript">
+      if (typeof console == "undefined") {
+          window.console = {
+              log: function () {}
+          };
+      }      
+    </script>
     <script type="text/javascript" src="js/modernizr.js"></script>
-    <script type="text/javascript" src="js/box2dDangly.min.js"></script>
+    <script type="text/javascript">
+      Modernizr.load([
+        {
+          test: Modernizr.canvas,
+          yep: [
+            "js/box2dDangly.min.js",
+            "js/jquery.min.js",
+            "js/jquery-ui.min.js",
+            "js/jquery.easing.1.3.js",
+            "js/jquery.backgroundPosition.js",
+            "js/shadowbox.js",
+            "js/epcb2dDanglies.js",
+            "js/epcDanglies.js",
+            "js/epcb2dSpacies.js",
+            "js/epcSpacies.js",
+            "js/epcb2dMusickies.js",
+            "js/epcMusickies.js",
+            "js/epc.js",
+            "js/epcDuckTunt.js"
+          ],
+          complete: function() {
+            $j = jQuery.noConflict();            
+            jQuery(".sprite").removeClass("hidden");
+          }
+        }
+      ]);
+    </script>
+<!--    <script type="text/javascript" src="js/box2dDangly.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
@@ -23,7 +57,7 @@
     <script type="text/javascript" src="js/epcb2dMusickies.js"></script>
     <script type="text/javascript" src="js/epcMusickies.js"></script>    
     <script type="text/javascript" src="js/epc.js"></script>
-    <script type="text/javascript" src="js/epcDuckTunt.js"></script>    
+    <script type="text/javascript" src="js/epcDuckTunt.js"></script>    -->
   </head>
   <body>
     <div class="mainwrap">
@@ -35,12 +69,12 @@
       <div id="content"></div>
       <div id="container"></div>
       <div class="wrapper">
-        <img id="work-stuff" class="homesprite sprite" src="images/work-stuff.png"></img>
-        <img id="music-stuff" class="homesprite sprite" src="images/music-stuff.png"></img>
-        <img id="facebook" class="homesprite sprite" src="images/facebook.png"></img>
-        <img id="linkedin" class="homesprite sprite" src="images/linkedin.png"></img>
-        <img id="gplus" class="homesprite sprite" src="images/gplus.png"></img>        
-        <img id="jacksnaps" class="homesprite sprite" src="images/jacksnaps.png"></img>        
+        <img id="work-stuff" class="homesprite sprite hidden" src="images/work-stuff.png"></img>
+        <img id="music-stuff" class="homesprite sprite hidden" src="images/music-stuff.png"></img>
+        <img id="facebook" class="homesprite sprite hidden" src="images/facebook.png"></img>
+        <img id="linkedin" class="homesprite sprite hidden" src="images/linkedin.png"></img>
+        <img id="gplus" class="homesprite sprite hidden" src="images/gplus.png"></img>        
+        <img id="jacksnaps" class="homesprite sprite hidden" src="images/jacksnaps.png"></img>        
         <img id="satAnchor" class="worksprite sprite" src="images/down.png"></img>
         <img id="sobe-sign" class="worksprite sprite floaty-sign" src="images/sobe-sign.png"></img>
         <img id="orbit-sign" class="worksprite sprite floaty-sign" src="images/orbit-sign.png"></img>
