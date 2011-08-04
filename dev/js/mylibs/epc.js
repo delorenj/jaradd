@@ -107,11 +107,21 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
-      jQuery("#workcanvas").hide();
-      jQuery("#musiccanvas").attr("width", jQuery(document).width())
+      jQuery("#homecanvas")
+        .attr("height", jQuery(window).height());
+        
+      jQuery("#workcanvas")
+        .attr("height", jQuery(window).height())
+        .attr("width", jQuery(window).width())
+        .hide();
+        
+      jQuery("#musiccanvas")
+        .attr("width", jQuery(document).width())
         .attr("height", jQuery(document).height())
         .hide();        
+        
       jQuery("#footer").css("top", (jQuery(window).height()));
+      
       homerunner = new danglies(jQuery("#homecanvas")[0]);            
       workrunner = new spacies(jQuery("#workcanvas")[0]);
       musicrunner = new musickies(jQuery("#musiccanvas2d")[0]);
@@ -219,7 +229,7 @@ var EPC = (function () {
 jQuery(document).ready(function() {
   
   EPC.startHomeCanvas();
-  EPC.initBgClouds();
+//  EPC.initBgClouds();
 //  Shadowbox.init({
 //    skipSetup: true
 //  });

@@ -269,7 +269,6 @@ Danglies.prototype.isPaused = function() {
 }
 
 b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  console.log("Drawing");
 //  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
 //  this.m_sprite.lineWidth=this.m_lineThickness;
 //  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);

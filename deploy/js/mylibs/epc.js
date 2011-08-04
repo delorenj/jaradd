@@ -219,7 +219,7 @@ var EPC = (function () {
 jQuery(document).ready(function() {
   
   EPC.startHomeCanvas();
-  EPC.initBgClouds();
+//  EPC.initBgClouds();
 //  Shadowbox.init({
 //    skipSetup: true
 //  });

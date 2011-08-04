@@ -102,29 +102,29 @@ Danglies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);      
     }    
 
-    createRope(28,24,
+    createRope(28,24 - (600 - jQuery(window).height())*2/32,
                1.7,1.7,
                25,0.1,"linkedin");
                
-    createRope(32,24,
+    createRope(32,24 - (600 - jQuery(window).height())*2/32,
                1.7,1.7,
                20,0.1, "facebook");
 
-    createRope(45.5,26,
+    createRope(45.5,26 - (600 - jQuery(window).height())*2/32,
                1.7,1.7,
                25,0.1, "gplus");
 
-    createRope(14.5,26,
+    createRope(14.5,26 - (600 - jQuery(window).height())*2/32,
                1.7,1.7,
                30,0.1, "jacksnaps");
 
-    createDoubleRope(38.5,24.0,
-                     43.0,24.7,
+    createDoubleRope(38.5,24.0 - (600 - jQuery(window).height())*2/32,
+                     43.0,24.7 - (600 - jQuery(window).height())*2/32,
                      4.35,1.95,
                      12,0.1, "work-stuff");
 
-    createDoubleRope(18.5,24.0,
-                     23.0,24.7,
+    createDoubleRope(18.5,24.0 - (600 - jQuery(window).height())*2/32,
+                     23.0,24.7 - (600 - jQuery(window).height())*2/32,
                      4.35,1.95,
                      12,0.1, "music-stuff");
 
