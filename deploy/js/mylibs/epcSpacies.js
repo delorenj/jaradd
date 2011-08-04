@@ -114,7 +114,7 @@ Spacies.prototype.createWorld = function() {
       return sign;
     }
     
-    createRope(28,29,
+    createRope(28,29 - (600 - jQuery(window).height())*2/32,
                1.7,1.7,
                10,0.1,"satAnchor");
 

@@ -112,7 +112,7 @@ var EPC = (function () {
         
       jQuery("#workcanvas")
         .attr("height", jQuery(window).height())
-        .attr("width", jQuery(window).width())
+//        .attr("width", jQuery(window).width())
         .hide();
         
       jQuery("#musiccanvas")

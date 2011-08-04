@@ -300,19 +300,19 @@ Spacies.prototype.isPaused = function() {
 }
 
 b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-//  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-//  this.m_sprite.beginPath();
-//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//
-//  for(var i=1;i<numVertices;i++) 
-//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-//
-//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//  this.m_sprite.fill();
-//  this.m_sprite.stroke();
-//  this.m_sprite.closePath();
+  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+  this.m_sprite.lineWidth=this.m_lineThickness;
+  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+  this.m_sprite.beginPath();
+  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+
+  for(var i=1;i<numVertices;i++) 
+    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+
+  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+  this.m_sprite.fill();
+  this.m_sprite.stroke();
+  this.m_sprite.closePath();
 
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   var sprite = jQuery("#" + body.m_userData);
