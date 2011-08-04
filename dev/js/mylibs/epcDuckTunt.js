@@ -216,7 +216,7 @@ EPC.DT = (function () {
         this.currentTime = 0;
       }, false);      
       
-      setTimeout(initBird, Math.random() * 10000);
+      _birdInt = setTimeout(initBird, Math.random() * 10000);
       return setInterval(draw, 40);
     },
     
