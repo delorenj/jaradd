@@ -474,3 +474,9 @@ footer {
 footer img {
   margin-left: -400px;
 }
+
+
+html.no-canvas img.sprite {
+  position: relative;
+  left: -9000px;
+}

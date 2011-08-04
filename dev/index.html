@@ -6,28 +6,19 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-
   <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
   <title>Jarad DeLorenzo</title>
   <meta name="description" content="">
   <meta name="author" content="Jarad DeLorenzo">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css'>  
   <link rel="stylesheet" href="css/style.css?v=3">
-
-  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
   <script src="js/libs/modernizr.js"></script>
 </head>
-
 <body>
   <div id="container" class="mainwrap">
-    <header>
-
-    </header>
     <div id="main" role="main">
       <div id="wrapper">
         <canvas id="homecanvas" width="1024" height="600"></canvas>
@@ -75,8 +66,11 @@
       <a class="sb dentsu-sign" title="Dentsu Network Public Site" href="img/dentsu03.png"></a>
       <a class="sb dentsu-sign" title="Dentsu Network Internal CMS" href="img/dentsu04.png"></a>
       <a class="sb music-note1 video" href="http://www.youtube.com/v/MDK8Lulw7k4?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
+      <a class="sb music-note2 video" href="http://www.youtube.com/v/0FylDSzy5Ds?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
+      <a class="sb music-note3 video" href="http://www.youtube.com/v/jfAoUN5rBOU?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
+      <a class="sb music-note4 video" href="http://www.youtube.com/v/Ymow-ZlRxig?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
     </div>
-    <footer id="footer">
+    <footer id="footer" class="png_bg">
       <canvas id="musiccanvas2d" width="1024" height="641"></canvas>
     </footer>
     <audio id="blast">
@@ -93,23 +87,6 @@
     </audio>            
   </div>
 
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-<!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-  <script>window.jQuery || document.write("<script src='js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>-->
-
-
-<!-- scripts concatenated and minified via ant build script-->
-<!--  <script src="js/plugins.js"></script>
-<script src="js/script.js"></script>-->
-<!-- end scripts-->
-
-
-  <!--[if lt IE 7 ]>
-    <script src="js/libs/dd_belatedpng.js"></script>
-    <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
-  <![endif]-->
-
-
   <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
   <script>
     var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
@@ -118,7 +95,24 @@
     s.parentNode.insertBefore(g,s)}(document,"script"));
   
       Modernizr.load([
-        {
+//        {
+//          load: ['//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js',
+//                 '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'],
+//          complete: function () {
+//            if ( !window.jQuery ) {
+//                  Modernizr.load('js/libs/jquery.min.js')([
+//                    {
+//                      complete: function() {
+//                        $j = jQuery.noConflict();
+//                      }
+//                    }
+//                  ])
+//            } else {
+//                $j = jQuery.noConflict();
+//            }
+//          }
+//        },
+        {         
           test: Modernizr.canvas,
           yep: [
             "js/libs/box2dDangly.min.js",
@@ -136,6 +130,14 @@
             "js/mylibs/epc.js",
             "js/mylibs/epcDuckTunt.js"
           ],
+          nope: [
+            "js/libs/jquery.min.js",
+            "js/libs/jquery-ui.min.js",
+            "js/plugins.js",
+            "js/libs/shadowbox.js",            
+            "js/mylibs/epc.nc.js"
+          ],
+          
           complete: function() {
             $j = jQuery.noConflict();
             jQuery(".sprite").removeClass("hidden");
@@ -143,6 +145,5 @@
         }
       ]);  
   </script>
-
 </body>
 </html>
