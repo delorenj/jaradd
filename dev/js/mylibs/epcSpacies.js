@@ -64,48 +64,6 @@ Spacies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);
     }
     
-    function createDoubleRope(x1, y1, x2, y2, w, h, numJoints, delta, div) {
-      var anchor1 = createAnchor(x1,y1);
-      var anchor2 = createAnchor(x2,y2);
-      var xOffset = 0
-      console.log("createDoubleRope: " + x1 + ", " + y1 + " ---> " + x2 + ", " + y2);
-      for(var i=0; i<numJoints; i++) {
-        jointDef = new b2RevoluteJointDef();
-        jointDef.localAnchorA.Set(0, 0);
-        jointDef.localAnchorB.Set(0, 1);
-        jointDef.bodyA = anchor1;          
-        jointDef.bodyB = that.createBall(world, x1, y1-delta*i, 0.5, 1, 1, 70);  //x,y,radius,fric,rest,density
-        world.CreateJoint(jointDef);
-        anchor1 = jointDef.bodyB;
-      }
-      jointDef = new b2RevoluteJointDef();        
-      jointDef.localAnchorA.Set(0, 0);
-      jointDef.localAnchorB.Set(-w/2,4.2);
-      jointDef.bodyA = anchor1;
-      jointDef.bodyB = spawn(x1+xOffset, y1-(numJoints*delta),w, h, Math.random()/2);
-      jointDef.bodyB.m_userData = div;
-      world.CreateJoint(jointDef);
-      
-      var sign = jointDef.bodyB;
-      
-      for(i=0; i<numJoints; i++) {
-        jointDef = new b2RevoluteJointDef();
-        jointDef.localAnchorA.Set(0, 0);
-        jointDef.localAnchorB.Set(0, 1);
-        jointDef.bodyA = anchor2;          
-        jointDef.bodyB = that.createBall(world, x2, y2-delta*i, 0.5, 1, 1, 70);  //x,y,radius,fric,rest,density
-        world.CreateJoint(jointDef);
-        anchor2 = jointDef.bodyB;
-      }
-      jointDef = new b2RevoluteJointDef();        
-      jointDef.localAnchorA.Set(0, 0);
-      jointDef.localAnchorB.Set(w/2,4.2);
-      jointDef.bodyA = anchor2;
-      jointDef.bodyB = sign;
-      jointDef.bodyB.m_userData = div;
-      world.CreateJoint(jointDef);      
-    }    
-
     function spawnFloatySign(x, y, sign_id) {
       var dbgWidth = jQuery("#"+sign_id).width()/that._dbgDraw.m_drawScale/2;
       var dbgHeight = jQuery("#"+sign_id).height()/that._dbgDraw.m_drawScale/2;
@@ -117,11 +75,6 @@ Spacies.prototype.createWorld = function() {
     createRope(28,29,
                1.7,1.7,
                10,0.1,"satAnchor");
-
-//    createDoubleRope(14.5,18.0,
-//                     26.0,18.0,
-//                     11.1,6,
-//                     6,1.1, "sobe-sign");
 
     spawnFloatySign(17, 12, "sobe-sign");
     spawnFloatySign(40, 18, "orbit-sign");

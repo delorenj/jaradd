@@ -164,7 +164,7 @@ Spacies.prototype.step = function(delta) {
     jQuery("#sat")
       .css("position", "absolute")
       .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-72  + "px")
-      .css("top",  pos.y*this._dbgDraw.m_drawScale-7370 + EPC.getBgOffset() - EPC.getWindowHeight() + "px");
+      .css("top",  pos.y*this._dbgDraw.m_drawScale-8040 + ((675-EPC.getWindowHeight())*1.6) + EPC.getBgOffset() + "px");
     
     var delta = (typeof delta == "undefined") ? 1/this._fps : delta;
     
