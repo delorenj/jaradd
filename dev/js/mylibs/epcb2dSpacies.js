@@ -164,7 +164,7 @@ Spacies.prototype.step = function(delta) {
     jQuery("#sat")
       .css("position", "absolute")
       .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-72  + "px")
-      .css("top",  pos.y*this._dbgDraw.m_drawScale-575 + EPC.getBgOffset() - 7619 + "px");
+      .css("top",  pos.y*this._dbgDraw.m_drawScale-7370 + EPC.getBgOffset() - EPC.getWindowHeight() + "px");
     
     var delta = (typeof delta == "undefined") ? 1/this._fps : delta;
     
@@ -300,19 +300,19 @@ Spacies.prototype.isPaused = function() {
 }
 
 b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-  this.m_sprite.lineWidth=this.m_lineThickness;
-  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-  this.m_sprite.beginPath();
-  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-
-  for(var i=1;i<numVertices;i++) 
-    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-
-  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-  this.m_sprite.fill();
-  this.m_sprite.stroke();
-  this.m_sprite.closePath();
+//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
+//  this.m_sprite.lineWidth=this.m_lineThickness;
+//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+//  this.m_sprite.beginPath();
+//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//
+//  for(var i=1;i<numVertices;i++) 
+//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
+//
+//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
+//  this.m_sprite.fill();
+//  this.m_sprite.stroke();
+//  this.m_sprite.closePath();
 
   var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
   var sprite = jQuery("#" + body.m_userData);
@@ -326,42 +326,14 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
     .css("zoom", 1)    
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-10  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + ((900 - EPC.getWindowHeight())) + "px");
 
       
-  if(jQuery(sprite).css("top") > jQuery(window).height()) {
+  if(jQuery(sprite).css("top") > EPC.getWindowHeight()) {
     jQuery(sprite).hide();
   } else {
     jQuery(sprite).show();
   }  
-  
-  if(EPC.getBgOffset() > 0) {
-    jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
-//      if(jQuery(this).css("top") > jQuery(window).height()) {
-        jQuery(this).hide();
-      } else {
-        jQuery(this).show()
-         .stop()
-         .css("position","absolute")
-         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
-      }
-    });
-  }
-
-  if(EPC.getBgOffset() < 0) {    
-    jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") < 0) {
-        jQuery(this).hide();
-      } else {
-        jQuery(this)
-         .stop()
-         .css("position","absolute")
-         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
-      }
-    });        
-  }
-   
 }
 
 b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){

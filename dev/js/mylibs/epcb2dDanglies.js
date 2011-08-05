@@ -295,9 +295,9 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
     .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
     .css("zoom", 1)
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + ((900 - EPC.getWindowHeight())) + "px");
     
-  if(jQuery(sprite).css("top") > jQuery("canvas").css("height")) {
+  if(jQuery(sprite).css("top") > EPC.getWindowHeight()) {
     jQuery(sprite).hide();
   } else {
     jQuery(sprite).show();
@@ -305,8 +305,7 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
   
   if(EPC.getBgOffset() > 0) {
     jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") > jQuery("canvas").css("height")) {
-//      if(jQuery(this).css("top") > jQuery(window).height()) {
+      if(jQuery(this).css("top") > EPC.getWindowHeight()) {
         jQuery(this).hide();
       } else {
         jQuery(this).show()

@@ -286,7 +286,7 @@ b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, b
     .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
     .css("zoom", 1)    
     .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 20  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (jQuery(window).height()-910) + "px");
+    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (EPC.getWindowHeight()-910) + "px");
 
 
   if(!EPC.isFooterOn()) {

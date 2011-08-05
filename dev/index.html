@@ -21,7 +21,7 @@
   <div id="container" class="mainwrap">
     <div id="main" role="main">
       <div id="wrapper">
-        <canvas id="homecanvas" width="1024"></canvas>
+        <canvas id="homecanvas" width="1024" height="600"></canvas>
         <canvas id="workcanvas" width="1200"></canvas>
         <canvas id="musiccanvas"></canvas>    
       </div>
@@ -95,23 +95,6 @@
     s.parentNode.insertBefore(g,s)}(document,"script"));
   
       Modernizr.load([
-//        {
-//          load: ['//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js',
-//                 '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js'],
-//          complete: function () {
-//            if ( !window.jQuery ) {
-//                  Modernizr.load('js/libs/jquery.min.js')([
-//                    {
-//                      complete: function() {
-//                        $j = jQuery.noConflict();
-//                      }
-//                    }
-//                  ])
-//            } else {
-//                $j = jQuery.noConflict();
-//            }
-//          }
-//        },
         {         
           test: Modernizr.canvas,
           yep: [

@@ -10,7 +10,7 @@ var EPC = (function () {
   var footerOffset = 0;
   var bgTriggerOffset = -7000;
   var _duckTuntThread = null;
-  
+  var _windowHeight = null;
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
       left: "+=" + windowWidth
@@ -28,6 +28,14 @@ var EPC = (function () {
   }
   
   return  {    
+    getWindowHeight : function() {
+      return _windowHeight;
+    },
+    
+    setWindowHeight : function(h) {
+      _windowHeight = h;
+    },
+    
     initBgClouds : function() {
       jQuery("#wrapper").append("<img id='cloud1' src='img/cloud_370x147.png' alt='' />");
       jQuery("#wrapper").append("<img id='cloud2' src='img/cloud_500x200.png' alt='' />");      
@@ -108,7 +116,7 @@ var EPC = (function () {
     
     startHomeCanvas : function() {
       jQuery("#homecanvas")
-        .attr("height", jQuery(window).height());
+//        .attr("height", jQuery(window).height());
         
       jQuery("#workcanvas")
         .attr("height", jQuery(window).height())
@@ -227,6 +235,9 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
+  
+  jQuery("#content").height(jQuery(window).height());
+  EPC.setWindowHeight(jQuery(window).height());
   
   EPC.startHomeCanvas();
 //  EPC.initBgClouds();
