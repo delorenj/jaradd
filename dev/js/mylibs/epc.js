@@ -19,14 +19,6 @@ var EPC = (function () {
     });    
   }
   
-  var oscilate = function(x, vel) {
-    jQuery(x).animate({      
-      top: "-=" + vel + "px"
-    }, 1000, 'linear', function() {
-      oscilate(x, -vel);
-    })
-  }
-  
   return  {    
     getWindowHeight : function() {
       return _windowHeight;
@@ -249,6 +241,7 @@ jQuery(document).ready(function() {
     language: 'en', 
     players: ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv'],
     autoplayMovies: true,
+    modal: true,
     onOpen : function(e) {
       if(EPC.isFooterOn()) {
         EPC.destroyDuckTunt();

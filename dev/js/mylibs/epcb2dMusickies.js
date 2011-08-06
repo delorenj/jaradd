@@ -168,7 +168,9 @@ Musickies.prototype._updateMouseInteraction = function() {
       if(body) {
         switch(body.m_userData) {
           default:
-            jQuery("." + body.m_userData).click();
+            setTimeout(function() {
+              jQuery("." + body.m_userData).click();
+            }, 1500);
             body.SetAngularVelocity(20);
         }
       }
