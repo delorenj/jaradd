@@ -472,7 +472,8 @@ footer {
 }
 
 footer img {
-  margin-left: -400px;
+  position: absolute;
+  margin-left: -1100px;
 }
 
 

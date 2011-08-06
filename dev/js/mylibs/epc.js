@@ -232,10 +232,10 @@ jQuery(document).ready(function() {
   EPC.setWindowHeight(jQuery(window).height());
   
   EPC.startHomeCanvas();
-//  EPC.initBgClouds();
-//  Shadowbox.init({
-//    skipSetup: true
-//  });
+  EPC.initBgClouds();
+  Shadowbox.init({
+    skipSetup: true
+  });
 
   Shadowbox.init({ 
     language: 'en', 
