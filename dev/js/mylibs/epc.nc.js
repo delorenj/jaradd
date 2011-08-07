@@ -17,12 +17,68 @@ var EPC = (function () {
         jQuery(this).fadeOut("slow", function() {
           jQuery(this)
             .css("left", "0")
+            .css("top", Math.random() * jQuery(window).height() - jQuery(this).height())
             .fadeIn("slow", function() {
               animateCloud(this, (Math.random() * (z2_speed-z0_speed) + z0_speed)/10)
             });
         });
       }
+    })
+  }
+    
+  var animateCloudGroup = function(img, layer) {
+    var rel = jQuery("img[rel='" + jQuery(img).attr("id") + "']");    
+    jQuery(rel).animate({
+      left: jQuery(window).width() - jQuery(rel).width()*2
+    },
+    {
+      duration: layer,
+      easing: "linear",
+      step: function(a, b) {
+        jQuery("#" + jQuery(this).attr("rel")).css("left", a)
+      },
+      complete: function() {
+        jQuery(img).fadeOut("slow", function() {
+          jQuery(img).css("left", "0").fadeIn("slow");
+        });
+        
+        jQuery(rel).fadeOut("slow", function() {
+          jQuery(rel).css("left", "0").fadeIn("slow");
+          animateCloudGroup(img, (Math.random() * (z2_speed-z0_speed) + z0_speed)/10);
+        });                
+      }
     });
+  }
+  
+  var initCloudLink = function(obj, x, y, scale) {
+    jQuery(obj)
+      .css("position", "absolute")
+      .css("top", y)
+      .css("margin-left", "50px")
+      .fadeIn("slow")      
+      .parent()
+        .append($("<img></img>")
+          .attr({
+            src: "img/cloudlink.png",
+            rel: jQuery(obj).attr("id")
+          })
+          .hover(function() {
+            jQuery(this).pause();
+            jQuery("#" + jQuery(this).attr("rel")).animate({
+              top: "-=30px"
+            })
+          }, function() {
+            jQuery(this).resume();
+            jQuery("#" + jQuery(this).attr("rel")).animate({
+              top: "+=30px"
+            })            
+          })
+          .css("position", "absolute")
+          .css("top", y - jQuery(window).height()/2+10)
+          .css("left", x)
+          .css("z-index", "2000")
+        );
+    animateCloudGroup(obj, (Math.random() * (z2_speed-z0_speed) + z0_speed)/10);
   }
   
   return  {    
@@ -30,12 +86,23 @@ var EPC = (function () {
       jQuery("img[id*='cloud']").each(function() {
         jQuery(this).css({
         left: Math.random() * jQuery(window).width()/2,
-        top: Math.random() * jQuery(window).height()/2
+        top: Math.random() * jQuery(window).height() - jQuery(this).height()
         });
         animateCloud(this, (Math.random() * (z2_speed-z0_speed) + z0_speed)/10);
       });
     },
-        
+    
+    initCloudLinks : function() {
+      var index = 2;
+      var count = jQuery(".homesprite.cloudlink").length + 2;
+      jQuery(".homesprite.cloudlink").each(function() {
+        initCloudLink(this,
+                      Math.random() * jQuery(window).width() * 0.75, 
+                      (jQuery(window).height()/count * index++) - (jQuery(window).height()/2), 
+                      1);
+      });
+    },
+    
     isFooterOn : function() {
       return footerShowing;
     },
@@ -72,6 +139,7 @@ var EPC = (function () {
         });
         jQuery("#musiccanvas2d").show();
       }, 5000);
+      
 
       jQuery("#content").animate({
         backgroundPosition: "(0 -15255)"
@@ -192,8 +260,10 @@ var EPC = (function () {
 
 jQuery(document).ready(function() {
   jQuery("#content").height(jQuery(window).height());  
+  jQuery(".homesprite.planelink").hide();
   EPC.startHomeCanvas();
   EPC.initBgClouds();
+  EPC.initCloudLinks();
   Shadowbox.init({ 
     language: 'en', 
     players: ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv'],
