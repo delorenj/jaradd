@@ -31,6 +31,24 @@ Musickies.prototype.createWorld = function() {
         return body;
     }
 
+    function spawnstatic(x, y, w, h) {
+        var bodyDef = new b2BodyDef();
+        bodyDef.type = b2Body.b2_staticBody;
+        bodyDef.position.Set(x, y);
+        bodyDef.angle = 0;
+        var body = world.CreateBody(bodyDef);
+        body.w = w;
+        body.h = h;
+        var shape = new b2PolygonShape.AsBox(body.w, body.h);
+        var fixtureDef = new b2FixtureDef();
+        fixtureDef.restitution = 1;
+        fixtureDef.density = 0;
+        fixtureDef.friction = 0;
+        fixtureDef.shape = shape;
+        body.CreateFixture(fixtureDef);
+        return body;
+    }
+
     function createAnchor(x, y) {
       var anchorBd = new b2BodyDef();
       anchorBd.position.Set(x,y);
@@ -135,7 +153,28 @@ Musickies.prototype.createWorld = function() {
       jointDef.bodyB.ApplyForce(new b2Vec2(10,10), new b2Vec2(10,10));
       world.CreateJoint(jointDef);
     }
-    
+
+    function createSign(x, y, w, h, div) {
+      w = w || 1.7;
+      h = h || 1.7;
+      var anchor = createAnchor(x,y);
+      //create wall to set swinging contraints
+      var wall = new b2PolygonShape();
+      var wallBd = new b2BodyDef();
+      wallBd.position.Set(x, y-2);
+      wall.SetAsBox(2, 0.1);
+      var signtop = world.CreateBody(wallBd);
+      signtop.CreateFixture2(wall);
+      jointDef = new b2RevoluteJointDef();        
+      jointDef.localAnchorA.Set(0, 0);
+      jointDef.localAnchorB.Set(0,2);
+      jointDef.bodyA = anchor;
+      jointDef.bodyB = spawn(x, y, w, h, 0);
+      jointDef.bodyB.m_userData = div;
+      jointDef.bodyB.ApplyForce(new b2Vec2(10,10), new b2Vec2(10,10));
+      world.CreateJoint(jointDef);
+    }
+
     createMusicNote(10,24,
                     57/32,66/32,
                     "music-note2");
@@ -152,6 +191,14 @@ Musickies.prototype.createWorld = function() {
                     57/32,66/32,
                     "music-note4");
 
+    createSign(26,19,
+                    92/32,35/32,
+                    "work");
+
+    createSign(26,15.5,
+                    92/32,35/32,
+                    "home");
+
     return world;
 };
 
@@ -165,6 +212,7 @@ Musickies.prototype.draw = function() {
       this._world.SetDebugDraw(this._dbgDraw);      
       this._world.DrawDebugData();
       c.drawImage(this._tree, 100, 0);
+      c.drawImage(this._sign, -50, 0);
   }          
 }
 

@@ -15,6 +15,7 @@ Musickies.__constructor = function(canvas) {
     this._mouseY = null;
     this._dbgDraw = new b2MusickyDebugDraw();
     this._tree = null;
+    this._sign = null;
     this.m_lineThickness = 1;
     
     this._handleMouseMove = function(e){
@@ -90,6 +91,8 @@ Musickies.prototype.createWorld = function(){
     
     this._tree = new Image();
     this._tree.src = "img/tree.png";
+    this._sign = new Image();
+    this._sign.src = "img/grass_sign_small_cutout.png";    
     return m_world;
     
     
@@ -167,6 +170,12 @@ Musickies.prototype._updateMouseInteraction = function() {
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
         switch(body.m_userData) {
+          case "home":
+            EPC.initHome();
+            break;
+          case "work":
+            EPC.initWorkStuff();
+            break;          
           default:
             setTimeout(function() {
               jQuery("." + body.m_userData).click();

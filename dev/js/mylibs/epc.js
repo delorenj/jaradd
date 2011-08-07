@@ -131,31 +131,90 @@ var EPC = (function () {
     },
     
     initWorkStuff : function() {
-      setTimeout(function() {
-        jQuery("#workcanvas").show();
-        jQuery("#homecanvas").hide();
-        jQuery(".worksprite").show();
-        jQuery(".homesprite").hide();
-        homerunner.pause();
-        workrunner.draw();
-        workrunner.resume();        
-      }, 3000);
-      
-      jQuery("#content").animate({
-        backgroundPosition: "(0 0)"
-      }, {
-        duration: 6000,
-        easing: "easeInOutExpo",
-        complete: function() {
-        }
-      });
-      
-      jQuery("body").animate({
-        backgroundPosition: "(0 0)"
-      }, {
-        duration: 6000,
-        easing: "easeInOutExpo"
-      });      
+      if(!EPC.isFooterOn()) {
+        setTimeout(function() {
+          jQuery("#workcanvas").show();
+          jQuery("#homecanvas").hide();
+          jQuery(".worksprite").show();
+          jQuery(".homesprite").hide();
+          homerunner.pause();
+          workrunner.draw();
+          workrunner.resume();        
+        }, 3000);
+
+        jQuery("#content").animate({
+          backgroundPosition: "(0 0)"
+        }, {
+          duration: 6000,
+          easing: "easeInOutExpo",
+          complete: function() {
+          }
+        });
+
+        jQuery("body").animate({
+          backgroundPosition: "(0 0)"
+        }, {
+          duration: 6000,
+          easing: "easeInOutExpo"
+        });              
+      } else {
+        setTimeout(function() {
+          EPC.setFooterOff();
+          musicrunner.pause();
+          jQuery("#musiccanvas, .musicsprite").hide();
+          EPC.destroyDuckTunt();
+        },100);
+        
+        jQuery("#footer").animate({
+          top: "+=641"
+        }, {
+          duration: 1000,
+          easing: "easeInOutExpo",
+          step : function(a, b) {
+            var off = b.start-b.now;
+            console.log("step: " + off);
+            EPC.setFooterOffset(off);
+          },
+          complete: function() {
+          }
+        });
+        
+        setTimeout(function() {
+          jQuery("#workcanvas").show();
+          jQuery("#homecanvas").hide();
+          jQuery(".worksprite").show();
+          jQuery(".homesprite").hide();
+          homerunner.pause();
+          workrunner.draw();
+          workrunner.resume();        
+        }, 5000);
+
+        setTimeout(function() {
+          jQuery("#homecanvas").show();
+          jQuery("#musiccanvas").hide();
+          jQuery(".homesprite").show();
+          jQuery(".musicsprite").hide();
+          musicrunner.pause();
+          homerunner.draw();
+          homerunner.resume();        
+        }, 3000);
+
+        jQuery("#content").animate({
+          backgroundPosition: "(0 0)"
+        }, {
+          duration: 8000,
+          easing: "easeInOutExpo",
+          complete: function() {
+          }
+        });
+
+        jQuery("body").animate({
+          backgroundPosition: "(0 0)"
+        }, {
+          duration: 8000,
+          easing: "easeInOutExpo"
+        });                      
+      }
     },
 
     initDuckTunt : function () {
