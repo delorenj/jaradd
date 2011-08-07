@@ -340,7 +340,6 @@ b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
       easing: "easeInOutExpo",
       step : function(a, b) {
         var off = b.now-b.start;
-        console.log("step: " + off);
         EPC.setFooterOffset(off);
       }
     });

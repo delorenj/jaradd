@@ -308,6 +308,7 @@ body {
 #wrapper {
   position: absolute;
   width: 100%;
+  overflow: hidden;
 }
 
 #homecanvas {
@@ -446,17 +447,6 @@ body {
   font-family: "Trebuchet";
 }
 
-.orbit-bullets li.has-thumb {
-    width: 100px !important;
-    height: 61px !important; 
-}
-
-.orbit-bullets {
-    width: 430px;
-    position: static;
-    margin: 15px auto;
-}
-
 #my-container {
   position: relative;
   top: -650px;
@@ -477,7 +467,23 @@ footer img {
 }
 
 
-html.no-canvas img.sprite {
-  position: relative;
+
+#cloud1, #cloud2, #cloud3, html.no-canvas img.sprite {
+  position: absolute;
   left: -9000px;
 }
+
+html.no-canvas #wrapper {
+  overflow: visible;
+}
+
+html.no-canvas .homesprite {
+  position: absolute;
+  top: 0px;
+}
+html.no-canvas #music-stuff {left: 50px;}
+html.no-canvas #jacksnaps {left: 200px;}
+html.no-canvas #facebook {left: 350px;}
+html.no-canvas #linkedin {left: 500px;}
+html.no-canvas #gplus {left: 650px;}
+html.no-canvas #work-stuff {left: 800px;}

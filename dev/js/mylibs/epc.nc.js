@@ -10,26 +10,30 @@ var EPC = (function () {
   
   var animateCloud = function(img, layer) {
     jQuery(img).animate({
-      left: "+=" + windowWidth
+      left: windowWidth - jQuery(img).width()
     },{
-      duration: layer
-    });    
+      duration: layer,
+      complete: function() {
+        jQuery(this).fadeOut("slow", function() {
+          jQuery(this)
+            .css("left", "0")
+            .fadeIn("slow", function() {
+              animateCloud(this, (Math.random() * (z2_speed-z0_speed) + z0_speed)/10)
+            });
+        });
+      }
+    });
   }
   
   return  {    
     initBgClouds : function() {
-      jQuery("#wrapper").append("<img id='cloud1' src='img/cloud_370x147.png' alt='' />");
-      jQuery("#wrapper").append("<img id='cloud2' src='img/cloud_500x200.png' alt='' />");      
-      jQuery("#wrapper").append("<img id='cloud3' src='img/cloud_410x272.png' alt='' />");      
       jQuery("img[id*='cloud']").each(function() {
         jQuery(this).css({
-        left: Math.random() * jQuery(window).width(),
-        top: Math.random() * jQuery(window).height()
-        });        
+        left: Math.random() * jQuery(window).width()/2,
+        top: Math.random() * jQuery(window).height()/2
+        });
+        animateCloud(this, (Math.random() * (z2_speed-z0_speed) + z0_speed)/10);
       });
-      animateCloud("#cloud1", Math.random() * (z2_speed-z0_speed) + z0_speed);
-      animateCloud("#cloud2", Math.random() * (z2_speed-z0_speed) + z0_speed);
-      animateCloud("#cloud3", Math.random() * (z2_speed-z0_speed) + z0_speed);
     },
         
     isFooterOn : function() {
@@ -49,7 +53,26 @@ var EPC = (function () {
         jQuery("#homecanvas").hide();
         jQuery("#musiccanvas, .musicsprite").show();
       }, 3000);
+
+      EPC.setFooterOn();
       
+      setTimeout(function() {
+        jQuery("#footer")
+          .show()
+          .animate({
+            top: "-=641px"
+          }, 
+          {
+            duration: 1000,
+            easing: "easeInOutExpo",
+            step : function(a, b) {
+              var off = b.now-b.start;
+              EPC.setFooterOffset(off);
+          }
+        });
+        jQuery("#musiccanvas2d").show();
+      }, 5000);
+
       jQuery("#content").animate({
         backgroundPosition: "(0 -15255)"
       }, {
@@ -89,8 +112,8 @@ var EPC = (function () {
     
     startHomeCanvas : function() {
       jQuery("#workcanvas").hide();
-      jQuery("#musiccanvas").attr("width", jQuery(document).width())
-        .attr("height", jQuery(document).height())
+      jQuery("#musiccanvas").attr("width", jQuery(window).width())
+        .attr("height", jQuery(window).height())
         .hide();        
       jQuery("#footer").css("top", (jQuery(window).height()));
     },
@@ -168,10 +191,9 @@ var EPC = (function () {
 })();
 
 jQuery(document).ready(function() {
-  
+  jQuery("#content").height(jQuery(window).height());  
   EPC.startHomeCanvas();
   EPC.initBgClouds();
-
   Shadowbox.init({ 
     language: 'en', 
     players: ['img', 'html', 'iframe', 'qt', 'wmp', 'swf', 'flv'],
@@ -180,10 +202,17 @@ jQuery(document).ready(function() {
       if(EPC.isFooterOn()) {
         EPC.destroyDuckTunt();
       }
-    },
-    
+    }
   });
-  
+
+  jQuery("#work-stuff").click(function() {
+    EPC.initWorkStuff();
+  });
+
+  jQuery("#music-stuff").click(function() {
+    EPC.initMusicStuff();
+  });
+
   Shadowbox.setup("a.sobe-sign", {
     gallery: "SoBe: Try Everything Campaign"
   });

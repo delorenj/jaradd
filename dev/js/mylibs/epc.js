@@ -29,14 +29,11 @@ var EPC = (function () {
     },
     
     initBgClouds : function() {
-      jQuery("#wrapper").append("<img id='cloud1' src='img/cloud_370x147.png' alt='' />");
-      jQuery("#wrapper").append("<img id='cloud2' src='img/cloud_500x200.png' alt='' />");      
-      jQuery("#wrapper").append("<img id='cloud3' src='img/cloud_410x272.png' alt='' />");      
       jQuery("img[id*='cloud']").each(function() {
         jQuery(this).css({
-        left: Math.random() * jQuery(window).width(),
-        top: Math.random() * jQuery(window).height()
-        });        
+        left: Math.random() * jQuery(window).width()/2 - $(this).width(),
+        top: Math.random() * jQuery(window).height() - $(this).height()
+        });                
       });
       animateCloud("#cloud1", Math.random() * (z2_speed-z0_speed) + z0_speed);
       animateCloud("#cloud2", Math.random() * (z2_speed-z0_speed) + z0_speed);
