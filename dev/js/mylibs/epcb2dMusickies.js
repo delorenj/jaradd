@@ -15,6 +15,7 @@ Musickies.__constructor = function(canvas) {
     this._mouseY = null;
     this._dbgDraw = new b2MusickyDebugDraw();
     this._tree = null;
+    this._note = null;
     this._sign = null;
     this.m_lineThickness = 1;
     
@@ -92,7 +93,9 @@ Musickies.prototype.createWorld = function(){
     this._tree = new Image();
     this._tree.src = "img/tree.png";
     this._sign = new Image();
-    this._sign.src = "img/grass_sign_small_cutout.png";    
+    this._sign.src = "img/grass_sign_small_cutout.png";
+    this._note = new Image();
+    this._note.src = "img/music_note1.png";
     return m_world;
     
     
@@ -169,7 +172,7 @@ Musickies.prototype._updateMouseInteraction = function() {
       jQuery("#musiccanvas").trigger(nev);
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
-        switch(body.m_userData) {
+        switch(body.m_userData[0]) {
           case "home":
             EPC.initHome();
             break;
@@ -178,7 +181,7 @@ Musickies.prototype._updateMouseInteraction = function() {
             break;          
           default:
             setTimeout(function() {
-              jQuery("." + body.m_userData).click();
+              jQuery("." + body.m_userData[0]).click();
             }, 1500);
             body.SetAngularVelocity(20);
         }
@@ -260,47 +263,17 @@ Musickies.prototype.isPaused = function() {
 }
 
 b2MusickyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-//  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-//  this.m_sprite.beginPath();
-//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//
-//  for(var i=1;i<numVertices;i++) 
-//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-//
-//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//  this.m_sprite.fill();
-//  this.m_sprite.stroke();
-//  this.m_sprite.closePath();
-
-  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
-  var sprite = jQuery("#" + body.m_userData);
-  jQuery(sprite)
-    .css("position", "absolute")
-    .css("-moz-transform", rotationStyle)
-    .css("-webkit-transform", rotationStyle)
-    .css("transform", rotationStyle)
-    .css("-o-transform", rotationStyle)    
-    .css("-ms-transform", rotationStyle)
-    .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
-    .css("zoom", 1)    
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale) - 20  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale) + EPC.getFooterOffset() + (EPC.getWindowHeight()-700) + "px");
-
-
-  if(!EPC.isFooterOn()) {
-    jQuery(sprite).hide();
-  } else {
-    jQuery(sprite).show();
-  }
-  
-//  if(jQuery(sprite).css("top") > jQuery(window).height()) {
-//    jQuery(sprite).hide();
-//  } else {
-//    jQuery(sprite).show();
-//  }  
-  
+    if(body.m_userData == undefined) return;
+    if(body.m_userData[1] == null) return;
+    var w = body.m_userData[1].width;
+    var h = body.m_userData[1].height;
+    var x = body.m_xf.position.x*this.m_drawScale;
+    var y = this.Y(body.m_xf.position.y*this.m_drawScale);
+    this.m_sprite.translate(x, y);
+    this.m_sprite.rotate(-body.m_xf.GetAngle());
+    this.m_sprite.drawImage(body.m_userData[1],-w/2, -h/2, w, h);
+    this.m_sprite.rotate(body.m_xf.GetAngle());
+    this.m_sprite.translate(-x, -y);
 }
 
 b2MusickyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){

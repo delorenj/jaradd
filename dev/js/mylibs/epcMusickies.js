@@ -177,27 +177,27 @@ Musickies.prototype.createWorld = function() {
 
     createMusicNote(10,24,
                     57/32,66/32,
-                    "music-note2");
+                    ["music-note2", this._note]);
 
     createMusicNote(22,32,
                     57/32,66/32,
-                    "music-note1");
+                    ["music-note1", this._note]);
 
     createMusicNote(11,35,
                     57/32,66/32,
-                    "music-note3");
+                    ["music-note3", this._note]);
 
     createMusicNote(27,24,
                     57/32,66/32,
-                    "music-note4");
+                    ["music-note4", this._note]);
 
     createSign(26,19,
                     92/32,35/32,
-                    "work");
+                    ["work", null]);
 
     createSign(26,15.5,
                     92/32,35/32,
-                    "home");
+                    ["home", null]);
 
     return world;
 };
