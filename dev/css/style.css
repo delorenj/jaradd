@@ -389,9 +389,7 @@ body {
 }
 
 .homesprite {
-  margin-top: -354px;  
-  margin-left: -10px;
-  display: block;
+  display: none;
 }
 
 .worksprite {

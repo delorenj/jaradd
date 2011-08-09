@@ -55,10 +55,18 @@ var EPC = (function () {
     initMusicStuff : function() {
       setTimeout(function() {
         jQuery("#homecanvas").hide();
-        jQuery("#musiccanvas, .musicsprite").show();
+        jQuery("#musiccanvas").show();
         musicrunner.draw();
         musicrunner.resume();
       }, 3000);
+ 
+      jQuery("#homecanvas").animate({
+        marginTop: "-=8000px"
+      },
+      {
+        duration: 6000,
+        easing: "easeInOutExpo"
+      })
       
       jQuery("#content").animate({
         backgroundPosition: "(0 -15255)"
@@ -104,8 +112,8 @@ var EPC = (function () {
     },
     
     startHomeCanvas : function() {
-      jQuery("#homecanvas")
-//        .attr("height", jQuery(window).height());
+      jQuery("#homecanvas");
+//        .attr("height", jQuery(window).height())
         
       jQuery("#workcanvas")
         .attr("height", jQuery(window).height())
@@ -133,11 +141,18 @@ var EPC = (function () {
           jQuery("#workcanvas").show();
           jQuery("#homecanvas").hide();
           jQuery(".worksprite").show();
-          jQuery(".homesprite").hide();
           homerunner.pause();
           workrunner.draw();
           workrunner.resume();        
         }, 3000);
+
+        jQuery("#homecanvas").animate({
+          marginTop: "+=8000px"
+        },
+        {
+          duration: 6000,
+          easing: "easeInOutExpo"
+        })
 
         jQuery("#content").animate({
           backgroundPosition: "(0 0)"
@@ -156,9 +171,8 @@ var EPC = (function () {
         });              
       } else {
         setTimeout(function() {
-          EPC.setFooterOff();
           musicrunner.pause();
-          jQuery("#musiccanvas, .musicsprite").hide();
+          jQuery("#musiccanvas").hide();
           EPC.destroyDuckTunt();
         },100);
         
@@ -173,6 +187,8 @@ var EPC = (function () {
             EPC.setFooterOffset(off);
           },
           complete: function() {
+            footerShowing=false
+            jQuery("#footer").hide();            
           }
         });
         
@@ -180,7 +196,6 @@ var EPC = (function () {
           jQuery("#workcanvas").show();
           jQuery("#homecanvas").hide();
           jQuery(".worksprite").show();
-          jQuery(".homesprite").hide();
           homerunner.pause();
           workrunner.draw();
           workrunner.resume();        
@@ -189,12 +204,18 @@ var EPC = (function () {
         setTimeout(function() {
           jQuery("#homecanvas").show();
           jQuery("#musiccanvas").hide();
-          jQuery(".homesprite").show();
-          jQuery(".musicsprite").hide();
           musicrunner.pause();
           homerunner.draw();
           homerunner.resume();        
         }, 3000);
+
+        jQuery("#homecanvas").animate({
+          marginTop: "+=16000px"
+        },
+        {
+          duration: 8000,
+          easing: "easeInOutExpo"
+        })
 
         jQuery("#content").animate({
           backgroundPosition: "(0 0)"
@@ -225,7 +246,7 @@ var EPC = (function () {
     
     initHome : function() {
       setTimeout(function() {
-        jQuery("#homecanvas, .homesprite").show();
+        jQuery("#homecanvas").show();
         jQuery("#workcanvas,.worksprite").hide();
         workrunner.pause();
         homerunner.draw();
@@ -236,10 +257,18 @@ var EPC = (function () {
         setTimeout(function() {
           EPC.setFooterOff();
           musicrunner.pause();
-          jQuery("#musiccanvas, .musicsprite").hide();
+          jQuery("#musiccanvas").hide();
           EPC.destroyDuckTunt();
         },100);
-        
+
+        jQuery("#homecanvas").animate({
+          marginTop: "+=8000px"
+        },
+        {
+          duration: 6000,
+          easing: "easeInOutExpo"
+        })
+
         jQuery("#footer").animate({
           top: "+=641"
         }, {
@@ -247,14 +276,24 @@ var EPC = (function () {
           easing: "easeInOutExpo",
           step : function(a, b) {
             var off = b.start-b.now;
-            console.log("step: " + off);
             EPC.setFooterOffset(off);
           },
           complete: function() {
+            footerShowing = false;
+            jQuery("#footer").hide()
+
           }
         });
+      } else {
+      jQuery("#homecanvas").animate({
+        marginTop: "-=8000px"
+      },
+      {
+        duration: 6000,
+        easing: "easeInOutExpo"
+      })        
       }
-      
+
       jQuery("#content").animate({
         backgroundPosition: "(0 -7255)"
       }, {

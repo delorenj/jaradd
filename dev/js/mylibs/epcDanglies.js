@@ -38,6 +38,7 @@ Danglies.prototype.createWorld = function() {
     function createRope(x, y, w, h, numJoints, delta, div) {
       w = w || 1.7;
       h = h || 1.7;
+//      y = y - (600 - jQuery(window).height())/16
       var anchor = createAnchor(x,y);
       //var xOffset = (Math.random() - 0.5) * 100
       var xOffset = 0
@@ -61,9 +62,11 @@ Danglies.prototype.createWorld = function() {
     }
     
     function createDoubleRope(x1, y1, x2, y2, w, h, numJoints, delta, div) {
+//      y1 = y1 - (600 - jQuery(window).height())/16;
+//      y2 = y2 - (600 - jQuery(window).height())/16;      
       var anchor1 = createAnchor(x1,y1);
       var anchor2 = createAnchor(x2,y2);
-      var xOffset = 0
+      var xOffset = 0;
       console.log("createDoubleRope: " + x1 + ", " + y1 + " ---> " + x2 + ", " + y2);
       for(var i=0; i<numJoints; i++) {
         jointDef = new b2RevoluteJointDef();
@@ -102,31 +105,37 @@ Danglies.prototype.createWorld = function() {
       world.CreateJoint(jointDef);      
     }    
 
-    createRope(28,24, // - (600 - jQuery(window).height())*2/32,
+    createRope(28,24,
                1.7,1.7,
-               25,0.1,"linkedin");
+               25,0.1,
+               ["linkedin", this._linkedin]);
                
-    createRope(32,24, // - (600 - jQuery(window).height())*2/32,
+    createRope(32,24,
                1.7,1.7,
-               20,0.1, "facebook");
+               20,0.1, 
+               ["facebook", this._facebook]);
 
-    createRope(45.5,26, // - (600 - jQuery(window).height())*2/32,
+    createRope(47.5,25,
                1.7,1.7,
-               25,0.1, "gplus");
+               10,0.1, 
+               ["gplus", this._gplus]);
 
-    createRope(14.5,26, // - (600 - jQuery(window).height())*2/32,
+    createRope(14.5,22.8,
                1.7,1.7,
-               30,0.1, "jacksnaps");
+               13,0.1, 
+               ["jacksnaps",this._jacksnaps]);
 
-    createDoubleRope(38.5,24.0, // - (600 - jQuery(window).height())*2/32,
-                     43.0,24.7, // - (600 - jQuery(window).height())*2/32,
+    createDoubleRope(38.5,24.0,
+                     43.0,24.7,
                      4.35,1.95,
-                     12,0.1, "work-stuff");
+                     12,0.1, 
+                     ["work-stuff", this._workstuff]);
 
-    createDoubleRope(18.5,24.0, // - (600 - jQuery(window).height())*2/32,
-                     23.0,24.7, // - (600 - jQuery(window).height())*2/32,
+    createDoubleRope(18.5,24.0,
+                     23.0,24.7,
                      4.35,1.95,
-                     12,0.1, "music-stuff");
+                     12,0.1, 
+                     ["music-stuff", this._musicstuff]);
 
     return world;
 };
@@ -142,6 +151,48 @@ Danglies.prototype.draw = function() {
       this._world.SetDebugDraw(this._dbgDraw);
       this._world.DrawDebugData();
   }          
+  if(EPC.getBgOffset() > 0) {
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") > EPC.getWindowHeight()) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this).show()
+         .stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });
+  }
+
+  if(EPC.getBgOffset() < 0) {    
+    jQuery("img[id*='cloud']").each(function() {
+      if(jQuery(this).css("top") < 0) {
+        jQuery(this).hide();
+      } else {
+        jQuery(this)
+         .stop()
+         .css("position","absolute")
+         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
+      }
+    });        
+  }
+  
+  if((EPC.getBgOffset() < EPC.getBgTriggerOffset()) && !EPC.isFooterOn()) {
+    EPC.setFooterOn();
+    jQuery("#footer")
+    .show()
+    .animate({
+      top: "-=641px"
+    }, {
+      duration: 1000,
+      easing: "easeInOutExpo",
+      step : function(a, b) {
+        var off = b.now-b.start;
+        EPC.setFooterOffset(off);
+      }
+    });
+    jQuery("#musiccanvas2d").show();    
+  }  
 //    c.fillStyle = "black";
 //    if(this._paused) {
 //        c.fillText("paused", 5, 15);

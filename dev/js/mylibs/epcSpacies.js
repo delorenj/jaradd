@@ -39,6 +39,7 @@ Spacies.prototype.createWorld = function() {
     function createRope(x, y, w, h, numJoints, delta, div) {
       w = w || 1.7;
       h = h || 1.7;
+//      y = y - (675 - jQuery(window).height())/16
       var anchor = createAnchor(x,y);
       if(div == "satAnchor") {
         that.satAnchor = anchor;

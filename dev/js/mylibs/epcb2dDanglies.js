@@ -11,6 +11,7 @@ Danglies.__constructor = function(canvas) {
     this._fps = 200;
     this._lastClick = 0;
     this._mouseClicked = false;
+    this._icons;
     this._dbgDraw = new b2DanglyDebugDraw();    
     this._handleMouseMove = function(e){
         // adapted from cocos2d-js/Director.js
@@ -78,6 +79,18 @@ Danglies.prototype.createWorld = function(){
     var m_world = new b2World(new b2Vec2(0.0, -9.81), true);
     var m_physScale = 1;
     m_world.SetWarmStarting(true);
+    this._facebook = new Image();
+    this._facebook.src = "img/facebook.png";
+    this._linkedin = new Image();
+    this._linkedin.src = "img/linkedin.png";
+    this._jacksnaps = new Image();
+    this._jacksnaps.src = "img/jacksnaps.png";
+    this._musicstuff = new Image();
+    this._musicstuff.src = "img/music-stuff.png";
+    this._workstuff = new Image();
+    this._workstuff.src = "img/work-stuff.png";
+    this._gplus = new Image();
+    this._gplus.src = "img/gplus.png";    
     return m_world;
 };
 
@@ -170,7 +183,7 @@ Danglies.prototype._updateMouseInteraction = function() {
       this._mouseClicked = false;
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
-        switch(body.m_userData) {
+        switch(body.m_userData[0]) {
           case "facebook":
             location.href = "http://www.facebook.com/jaradd";
             break;
@@ -269,92 +282,26 @@ Danglies.prototype.isPaused = function() {
 }
 
 b2DanglyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
-//  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
-//  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
-//  this.m_sprite.beginPath();
-//  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//
-//  for(var i=1;i<numVertices;i++) 
-//    this.m_sprite.lineTo(vertices[i].x*this.m_drawScale,this.Y(vertices[i].y*this.m_drawScale));
-//
-//  this.m_sprite.lineTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
-//  this.m_sprite.fill();
-//  this.m_sprite.stroke();
-//  this.m_sprite.closePath()
-
-  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
-  var sprite = jQuery("#" + body.m_userData);
-  jQuery(sprite)
-    .css("position", "absolute")
-    .css("-moz-transform", rotationStyle)
-    .css("-webkit-transform", rotationStyle)    
-    .css("transform", rotationStyle)
-    .css("-o-transform", rotationStyle)    
-    .css("-ms-transform", rotationStyle)
-    .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
-    .css("zoom", 1)
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-575 + EPC.getBgOffset() + ((900 - EPC.getWindowHeight())) + "px");
-    
-  if(jQuery(sprite).css("top") > EPC.getWindowHeight()) {
-    jQuery(sprite).hide();
-  } else {
-    jQuery(sprite).show();
-  }
-  
-  if(EPC.getBgOffset() > 0) {
-    jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") > EPC.getWindowHeight()) {
-        jQuery(this).hide();
-      } else {
-        jQuery(this).show()
-         .stop()
-         .css("position","absolute")
-         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
-      }
-    });
-  }
-
-  if(EPC.getBgOffset() < 0) {    
-    jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") < 0) {
-        jQuery(this).hide();
-      } else {
-        jQuery(this)
-         .stop()
-         .css("position","absolute")
-         .css("top", EPC.getBgOffset()/10 + parseInt(jQuery(this).css("top")) + "px");
-      }
-    });        
-  }
-  
-  if((EPC.getBgOffset() < EPC.getBgTriggerOffset()) && !EPC.isFooterOn()) {
-    EPC.setFooterOn();
-    jQuery("#footer")
-    .show()
-    .animate({
-      top: "-=641px"
-    }, {
-      duration: 1000,
-      easing: "easeInOutExpo",
-      step : function(a, b) {
-        var off = b.now-b.start;
-        EPC.setFooterOffset(off);
-      }
-    });
-    jQuery("#musiccanvas2d").show();    
-  }
+  if(body.m_userData == undefined) return;
+  if(body.m_userData[1] == null) return;
+  var w = body.m_userData[1].width;
+  var h = body.m_userData[1].height;
+  var x = body.m_xf.position.x*this.m_drawScale;
+  var y = this.Y(body.m_xf.position.y*this.m_drawScale);
+  this.m_sprite.translate(x, y);
+  this.m_sprite.rotate(-body.m_xf.GetAngle());
+  this.m_sprite.drawImage(body.m_userData[1],-w/2, -h/2, w, h);
+  this.m_sprite.rotate(body.m_xf.GetAngle());
+  this.m_sprite.translate(-x, -y);
 }
 
 b2DanglyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){
   mouseDown = mouseDown || false;
-  if(mouseDown) console.log("Segment Y: " + this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
   this.m_sprite.lineWidth=this.m_lineThickness;
   this.m_sprite.strokeStyle=this.ColorStyle(new b2Color(0,0,0),this.m_alpha);  
   this.m_sprite.beginPath();
-  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale) + EPC.getBgOffset());
-  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale) + EPC.getBgOffset());
+  this.m_sprite.moveTo(a.x*this.m_drawScale,this.Y(a.y*this.m_drawScale));
+  this.m_sprite.lineTo(b.x*this.m_drawScale,this.Y(b.y*this.m_drawScale));
   this.m_sprite.stroke();
   this.m_sprite.closePath()
 };
