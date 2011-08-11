@@ -61,7 +61,7 @@ var EPC = (function () {
       }, 3000);
  
       jQuery("#homecanvas").animate({
-        marginTop: "-=8000px"
+        top: "-=8000px"
       },
       {
         duration: 6000,
@@ -117,7 +117,7 @@ var EPC = (function () {
         
       jQuery("#workcanvas")
         .attr("height", jQuery(window).height())
-//        .attr("width", jQuery(window).width())
+        .attr("width", jQuery(window).width())
         .hide();
         
       jQuery("#musiccanvas")
@@ -136,39 +136,32 @@ var EPC = (function () {
     },
     
     initWorkStuff : function() {
+      jQuery("#wrapper").css("overflow", "visible");
+      
       if(!EPC.isFooterOn()) {
         setTimeout(function() {
           jQuery("#workcanvas").show();
           jQuery("#homecanvas").hide();
-          jQuery(".worksprite").show();
           homerunner.pause();
           workrunner.draw();
           workrunner.resume();        
         }, 3000);
 
-        jQuery("#homecanvas").animate({
-          marginTop: "+=8000px"
-        },
+        jQuery("#homecanvas, #workcanvas").animate({
+          top: "+=8000px"
+        }, 
         {
           duration: 6000,
           easing: "easeInOutExpo"
         })
 
-        jQuery("#content").animate({
-          backgroundPosition: "(0 0)"
-        }, {
-          duration: 6000,
-          easing: "easeInOutExpo",
-          complete: function() {
-          }
-        });
-
-        jQuery("body").animate({
+        jQuery("#content, body").animate({
           backgroundPosition: "(0 0)"
         }, {
           duration: 6000,
           easing: "easeInOutExpo"
-        });              
+        });
+
       } else {
         setTimeout(function() {
           musicrunner.pause();
@@ -183,7 +176,6 @@ var EPC = (function () {
           easing: "easeInOutExpo",
           step : function(a, b) {
             var off = b.start-b.now;
-            console.log("step: " + off);
             EPC.setFooterOffset(off);
           },
           complete: function() {
@@ -195,7 +187,6 @@ var EPC = (function () {
         setTimeout(function() {
           jQuery("#workcanvas").show();
           jQuery("#homecanvas").hide();
-          jQuery(".worksprite").show();
           homerunner.pause();
           workrunner.draw();
           workrunner.resume();        
@@ -210,14 +201,22 @@ var EPC = (function () {
         }, 3000);
 
         jQuery("#homecanvas").animate({
-          marginTop: "+=16000px"
+          top: "+=16000px"
         },
         {
           duration: 8000,
           easing: "easeInOutExpo"
         })
 
-        jQuery("#content").animate({
+        jQuery("#workcanvas").animate({
+          top: "+=8000px"
+        },
+        {
+          duration: 8000,
+          easing: "easeInOutExpo"
+        })
+
+        jQuery("#content,body").animate({
           backgroundPosition: "(0 0)"
         }, {
           duration: 8000,
@@ -225,13 +224,6 @@ var EPC = (function () {
           complete: function() {
           }
         });
-
-        jQuery("body").animate({
-          backgroundPosition: "(0 0)"
-        }, {
-          duration: 8000,
-          easing: "easeInOutExpo"
-        });                      
       }
     },
 
@@ -262,7 +254,7 @@ var EPC = (function () {
         },100);
 
         jQuery("#homecanvas").animate({
-          marginTop: "+=8000px"
+          top: "+=8000px"
         },
         {
           duration: 6000,
@@ -285,8 +277,8 @@ var EPC = (function () {
           }
         });
       } else {
-      jQuery("#homecanvas").animate({
-        marginTop: "-=8000px"
+      jQuery("#homecanvas,#workcanvas").animate({
+        top: "-=8000px"
       },
       {
         duration: 6000,

@@ -12,6 +12,14 @@ Spacies.__constructor = function(canvas) {
     this._lastClick = 0;
     this._mouseClicked = false;
     this._dbgDraw = new b2SpaceyDebugDraw();
+    this._sat = null;
+    this._home = null;
+    this._sobesign = null;
+    this._orbitsign = null;
+    this._eclipsesign = null;
+    this._fivegumsign = null;
+    this._sonicsign = null;
+    this._dentsusign = null;
     this.satbounds = 60;
     this.satdir = 1;
     
@@ -102,6 +110,31 @@ Spacies.prototype.createWorld = function(){
     wallBd.position.Set(32, -18.0);
     this._wallBottom = m_world.CreateBody(wallBd);
     this._wallBottom.CreateFixture2(wall); 
+    
+    this._sat = new Image();
+    this._sat.src = "img/SatelliteOnly.png";
+    
+    this._home = new Image();
+    this._home.src = "img/down.png";
+    
+    this._sobesign = new Image();
+    this._sobesign.src = "img/sobe-sign.png?v2";
+    
+    this._orbitsign = new Image();
+    this._orbitsign.src = "img/orbit-sign.png?v2";
+    
+    this._eclipsesign = new Image();
+    this._eclipsesign.src = "img/eclipse-sign.png?v2";
+    
+    this._fivegumsign = new Image();
+    this._fivegumsign.src = "img/5gum-sign.png?v2";
+    
+    this._sonicsign = new Image();
+    this._sonicsign.src = "img/sonic-sign.png?v2";
+    
+    this._dentsusign = new Image();
+    this._dentsusign.src = "img/dentsu-sign.png?v2";
+    
     return m_world;
 };
 
@@ -146,7 +179,6 @@ Spacies.prototype.step = function(delta) {
         return;
         
     this._world.ClearForces();
-//    this.twitterAnchor.ApplyForce(new b2Vec2(1000,0), this.twitterAnchor.GetPosition());
     var pos = this.satAnchor.GetPosition();
     if(this.satdir > 0) {
       if(pos.x > this.satbounds) {
@@ -161,10 +193,10 @@ Spacies.prototype.step = function(delta) {
     }
     this.satAnchor.SetPosition(new b2Vec2(pos.x+0.01 * this.satdir, pos.y));
     
-    jQuery("#sat")
-      .css("position", "absolute")
-      .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-72  + "px")
-      .css("top",  pos.y*this._dbgDraw.m_drawScale-8040 + ((675-EPC.getWindowHeight())*1.6) + EPC.getBgOffset() + "px");
+//    jQuery("#sat")
+//      .css("position", "absolute")
+//      .css("left", (pos.x*this._dbgDraw.m_drawScale)- (this._dbgDraw.m_drawScale)-72  + "px")
+//      .css("top",  pos.y*this._dbgDraw.m_drawScale-8040 + ((675-EPC.getWindowHeight())*1.6) + EPC.getBgOffset() + "px");
     
     var delta = (typeof delta == "undefined") ? 1/this._fps : delta;
     
@@ -213,13 +245,13 @@ Spacies.prototype._updateMouseInteraction = function() {
       this._mouseClicked = false;
       body = getBodyAtPoint(this._world, this._mousePoint);
       if(body) {
-        switch(body.m_userData) {
+        switch(body.m_userData[0]) {
           case "satAnchor":
             EPC.initHome();
             break;
             
           default:
-            jQuery("." + body.m_userData).click();
+            jQuery("." + body.m_userData[0]).click();
         }
       }
     }
@@ -314,26 +346,38 @@ b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, bo
 //  this.m_sprite.stroke();
 //  this.m_sprite.closePath();
 
-  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
-  var sprite = jQuery("#" + body.m_userData);
-  jQuery(sprite)
-    .css("position", "absolute")
-    .css("-moz-transform", rotationStyle)
-    .css("-webkit-transform", rotationStyle)
-    .css("transform", rotationStyle)
-    .css("-o-transform", rotationStyle)    
-    .css("-ms-transform", rotationStyle)
-    .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
-    .css("zoom", 1)    
-    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-10  + "px")
-    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + ((900 - EPC.getWindowHeight())) + "px");
+  if(body.m_userData == undefined) return;
+  if(body.m_userData[1] == null) return;
+  var w = body.m_userData[1].width;
+  var h = body.m_userData[1].height;
+  var x = body.m_xf.position.x*this.m_drawScale;
+  var y = this.Y(body.m_xf.position.y*this.m_drawScale);
+  this.m_sprite.translate(x, y);
+  this.m_sprite.rotate(-body.m_xf.GetAngle());
+  this.m_sprite.drawImage(body.m_userData[1],-w/2, -h/2, w, h);
+  this.m_sprite.rotate(body.m_xf.GetAngle());
+  this.m_sprite.translate(-x, -y);
+  
+//  var rotationStyle = 'rotate(' + (-body.m_xf.GetAngle() * 57.2957795) + 'deg)';
+//  var sprite = jQuery("#" + body.m_userData);
+//  jQuery(sprite)
+//    .css("position", "absolute")
+//    .css("-moz-transform", rotationStyle)
+//    .css("-webkit-transform", rotationStyle)
+//    .css("transform", rotationStyle)
+//    .css("-o-transform", rotationStyle)    
+//    .css("-ms-transform", rotationStyle)
+//    .css("filter", EPC.ieRotate(-body.m_xf.GetAngle()))
+//    .css("zoom", 1)    
+//    .css("left", (body.m_xf.position.x*this.m_drawScale)- (this.m_drawScale)-10  + "px")
+//    .css("top",  this.Y(body.m_xf.position.y*this.m_drawScale)-570 + EPC.getBgOffset() - 7250 + ((900 - EPC.getWindowHeight())) + "px");
 
       
-  if(jQuery(sprite).css("top") > EPC.getWindowHeight()) {
-    jQuery(sprite).hide();
-  } else {
-    jQuery(sprite).show();
-  }  
+//  if(jQuery(sprite).css("top") > EPC.getWindowHeight()) {
+//    jQuery(sprite).hide();
+//  } else {
+//    jQuery(sprite).show();
+//  }  
 }
 
 b2SpaceyDebugDraw.prototype.DrawSegment=function(a,b,c, mouseDown){

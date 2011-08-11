@@ -39,9 +39,8 @@ Spacies.prototype.createWorld = function() {
     function createRope(x, y, w, h, numJoints, delta, div) {
       w = w || 1.7;
       h = h || 1.7;
-//      y = y - (675 - jQuery(window).height())/16
       var anchor = createAnchor(x,y);
-      if(div == "satAnchor") {
+      if(div[0] == "satAnchor") {
         that.satAnchor = anchor;
       }
       //var xOffset = (Math.random() - 0.5) * 100
@@ -66,8 +65,8 @@ Spacies.prototype.createWorld = function() {
     }
     
     function spawnFloatySign(x, y, sign_id) {
-      var dbgWidth = jQuery("#"+sign_id).width()/that._dbgDraw.m_drawScale/2;
-      var dbgHeight = jQuery("#"+sign_id).height()/that._dbgDraw.m_drawScale/2;
+      var dbgWidth = 330/that._dbgDraw.m_drawScale/2;
+      var dbgHeight = 191/that._dbgDraw.m_drawScale/2;
       var sign = spawn(x, y, dbgWidth, dbgHeight, Math.random()/2);
       sign.m_userData = sign_id;
       return sign;
@@ -75,14 +74,14 @@ Spacies.prototype.createWorld = function() {
     
     createRope(28,29,
                1.7,1.7,
-               10,0.1,"satAnchor");
+               10,0.1,["satAnchor", this._home]);
 
-    spawnFloatySign(17, 12, "sobe-sign");
-    spawnFloatySign(40, 18, "orbit-sign");
-    spawnFloatySign(48, 25,"eclipse-sign");
-    spawnFloatySign(50, 30, "fivegum-sign");
-    spawnFloatySign(25, 35, "sonic-sign");
-    spawnFloatySign(35, 13, "dentsu-sign");
+    spawnFloatySign(17, 12, ["sobe-sign", this._sobesign]);
+    spawnFloatySign(40, 18, ["orbit-sign", this._orbitsign]);
+    spawnFloatySign(48, 25, ["eclipse-sign", this._eclipsesign]);
+    spawnFloatySign(50, 30, ["fivegum-sign", this._fivegumsign]);
+    spawnFloatySign(25, 35, ["sonic-sign", this._sonicsign]);
+    spawnFloatySign(35, 13, ["dentsu-sign", this._dentsusign]);
     
     return world;
 };
@@ -97,7 +96,8 @@ Spacies.prototype.draw = function() {
   if(this._world) {
       this._world.SetDebugDraw(this._dbgDraw);
       this._world.DrawDebugData();
-  }          
+  }
+  
 //    c.fillStyle = "black";
 //    if(this._paused) {
 //        c.fillText("paused", 5, 15);

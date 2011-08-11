@@ -153,7 +153,7 @@ Danglies.prototype.draw = function() {
   }          
   if(EPC.getBgOffset() > 0) {
     jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") > EPC.getWindowHeight()) {
+      if(parseInt(jQuery(this).css("top").split("px")[0]) > EPC.getWindowHeight()) {        
         jQuery(this).hide();
       } else {
         jQuery(this).show()
@@ -166,7 +166,7 @@ Danglies.prototype.draw = function() {
 
   if(EPC.getBgOffset() < 0) {    
     jQuery("img[id*='cloud']").each(function() {
-      if(jQuery(this).css("top") < 0) {
+      if(parseInt(jQuery(this).css("top").split("px")[0]) < 0) {
         jQuery(this).hide();
       } else {
         jQuery(this)
