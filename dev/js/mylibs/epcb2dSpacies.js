@@ -91,23 +91,25 @@ Spacies.prototype.createWorld = function(){
     // Create border of boxes
     var wall = new b2PolygonShape();
     var wallBd = new b2BodyDef();
-    
+    var width = 1200;    
+    var height = 675;
+    var wall_thickness = 0.5;
     // Left
-    wallBd.position.Set( -27.0, 18);
-    wall.SetAsBox(10, 40);
+    wallBd.position.Set(0,0);
+    wall.SetAsBox(wall_thickness, height/16 - wall_thickness*2);
     this._wallLeft = m_world.CreateBody(wallBd);
     this._wallLeft.CreateFixture2(wall);
     // Right
-    wallBd.position.Set(99.0, 18);
+    wallBd.position.Set(width/18.8, 0);
     this._wallRight = m_world.CreateBody(wallBd);
     this._wallRight.CreateFixture2(wall);
     // Top
-    wallBd.position.Set(70, 48.5);
-    wall.SetAsBox(64, 10);
+    wallBd.position.Set(0 + wall_thickness*2, height/16);
+    wall.SetAsBox(width, wall_thickness);
     this._wallTop = m_world.CreateBody(wallBd);
     this._wallTop.CreateFixture2(wall); 
     // Bottom
-    wallBd.position.Set(32, -18.0);
+    wallBd.position.Set(0 + wall_thickness*2, 0);
     this._wallBottom = m_world.CreateBody(wallBd);
     this._wallBottom.CreateFixture2(wall); 
     
@@ -334,7 +336,7 @@ Spacies.prototype.isPaused = function() {
 b2SpaceyDebugDraw.prototype.DrawSolidPolygon=function(vertices,numVertices,c, body) {
 //  this.m_sprite.strokeSyle=this.ColorStyle(c,this.m_alpha);
 //  this.m_sprite.lineWidth=this.m_lineThickness;
-//  this.m_sprite.fillStyle=this.ColorStyle(c,this.m_fillAlpha);
+//  this.m_sprite.fillStyle="white";
 //  this.m_sprite.beginPath();
 //  this.m_sprite.moveTo(vertices[0].x*this.m_drawScale,this.Y(vertices[0].y*this.m_drawScale));
 //

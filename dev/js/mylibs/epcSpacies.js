@@ -98,6 +98,9 @@ Spacies.prototype.draw = function() {
       this._world.DrawDebugData();
   }
   
+  var pos = this.satAnchor.GetPosition();
+  
+  c.drawImage(this._sat,pos.x*16, 80);
 //    c.fillStyle = "black";
 //    if(this._paused) {
 //        c.fillText("paused", 5, 15);
