@@ -142,8 +142,8 @@ AddType application/octet-stream       safariextz
 # html, txt, css, js, json, xml, htc:
 <IfModule filter_module>
   FilterDeclare   COMPRESS
-  FilterProvider  COMPRESS  DEFLATE resp=Content-Type /text/(html|css|javascript|plain|x(ml|-component))/
-  FilterProvider  COMPRESS  DEFLATE resp=Content-Type /application/(javascript|json|xml|x-javascript)/
+  FilterProvider  COMPRESS DEFLATE "%{CONTENT_TYPE} = '/text/(html|css|javascript|plain|x(ml|-component))/'"
+  FilterProvider  COMPRESS DEFLATE "%{CONTENT_TYPE} = '/application/(javascript|json|xml|x-javascript)/'"
   FilterChain     COMPRESS
   FilterProtocol  COMPRESS  change=yes;byteranges=no
 </IfModule>
