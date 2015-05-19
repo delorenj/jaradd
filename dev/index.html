@@ -10,7 +10,12 @@
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Jarad DeLorenzo</title>
-  <meta name="description" content="" />
+  <meta name="description" content="I'm a Software Architect with expertise in Agile Software and Web Development. I'm currently employed at Splash, NY as a Senior Web Developer." />
+  <meta property="og:image" content="http://www.jaradd.com/img/dinosaur.png"/>
+  <meta property="og:title" content="Jarad DeLorenzo: Web Developer, Musician, Space Enthusiast"/>
+  <meta property="og:url" content="http://jaradd.com/index.html"/>
+  <meta property="og:site_name" content="Jarad DeLorenzo"/>
+  <meta property="og:type" content="website"/>
   <meta name="author" content="Jarad DeLorenzo" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href='http://fonts.googleapis.com/css?family=Amaranth&v1' rel='stylesheet' type='text/css' />
@@ -28,7 +33,7 @@
       <div id="content">
         <img id='cloud1' src='img/cloud_370x147.png' alt='' />
         <img id='cloud2' src='img/cloud_500x200.png' alt='' />
-        <img id='cloud3' src='img/cloud_410x272.png' alt='' />        
+        <img id='cloud3' src='img/cloud_410x272.png' alt='' />
       </div>
       <div id="my-container"></div>
       <div class="wrapper">
@@ -51,7 +56,7 @@
       <a class="sb sobe-sign" title="SoBe's Try A New Look Kiosk and iPhone App" href="img/sobe_tryeverything.jpg"></a>
       <a class="sb sobe-sign" title="SoBe's Facebook Profile" href="img/sobe_skinsuit_facebook.jpg"></a>
       <a class="sb sobe-sign" title="SoBe Mobile Website" href="img/sobe_girl_01.png"></a>
-      <a class="sb sobe-sign" title="SoBe Mobile Website" href="img/sobe_girl_02.jpg"></a>    
+      <a class="sb sobe-sign" title="SoBe Mobile Website" href="img/sobe_girl_02.jpg"></a>
       <a class="sb orbit-sign" title="Orbit Gum" href="img/orbitgum.jpg"></a>
       <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="img/Twilight_Eclipse_01.jpg"></a>
       <a class="sb eclipse-sign" title="Eclipse Gum / Twilight Eclipse Promo Site" href="img/Twilight_Eclipse_02.jpg"></a>
@@ -70,21 +75,21 @@
       <a class="sb music-note3 video" href="http://www.youtube.com/v/jfAoUN5rBOU?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
       <a class="sb music-note4 video" href="http://www.youtube.com/v/Ymow-ZlRxig?autoplay=1" rel="shadowbox;width=640;height=480;player=swf"></a>
     </div>
-    <footer id="footer" class="png_bg">      
+    <footer id="footer" class="png_bg">
       <canvas id="musiccanvas2d" width="1024" height="641"></canvas>
     </footer>
     <audio id="blast">
       <source src="audio/blast.ogg" type="audio/ogg"></source>
       <source src="audio/blast.mp3" type="audio/mpeg"></source>
-    </audio>    
+    </audio>
     <audio id="quack" loop="true" preload="true">
       <source src="audio/bird.ogg" type="audio/ogg"></source>
       <source src="audio/bird.mp3" type="audio/mpeg"></source>
-    </audio>        
+    </audio>
     <audio id="end-round">
       <source src="audio/end_round.ogg" type="audio/ogg"></source>
       <source src="audio/end_round.mp3" type="audio/mpeg"></source>
-    </audio>            
+    </audio>
   </div>
 
   <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
@@ -93,9 +98,9 @@
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
-  
+
       Modernizr.load([
-        {         
+        {
           test: Modernizr.canvas,
           yep: [
             "js/libs/box2dDangly.min.js",
@@ -117,16 +122,16 @@
             "js/libs/jquery.min.js",
             "js/libs/jquery-ui.min.js",
             "js/plugins.js",
-            "js/libs/shadowbox.js",            
+            "js/libs/shadowbox.js",
             "js/mylibs/epc.nc.js"
           ],
-          
+
           complete: function() {
             $j = jQuery.noConflict();
             jQuery(".sprite").removeClass("hidden");
           }
         }
-      ]);  
+      ]);
   </script>
 </body>
 </html>
