@@ -1,0 +1,20 @@
+
+> modern@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use, using available port 3002 instead.
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3002
+   - Network:      http://192.168.1.12:3002
+
+ ✓ Starting...
+ ✓ Ready in 533ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1352ms
+ GET / 200 in 1544ms
+ GET / 200 in 38ms
+ ⚠ Cross origin request detected from big-chungus to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ✓ Compiled /favicon.ico in 212ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 390ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 387ms

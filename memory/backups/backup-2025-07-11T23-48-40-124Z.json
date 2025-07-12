@@ -1,0 +1,114 @@
+{
+  "timestamp": "2025-07-11T23:48:40.124Z",
+  "version": "1.0",
+  "entries": [
+    {
+      "id": "entry_mczgwnxy_tqcn3dvjz",
+      "key": "website_analysis",
+      "value": "Legacy HTML5/Canvas personal portfolio site for Jarad DeLorenzo. Features: Interactive canvas animations, Box2D physics, jQuery/Modernizr, social media integration, work portfolio showcase, music section with YouTube videos. Needs: Modern framework migration, responsive design, performance optimization, content updates, security improvements.",
+      "type": "string",
+      "namespace": "default",
+      "tags": [],
+      "metadata": {},
+      "owner": "system",
+      "accessLevel": "shared",
+      "createdAt": "2025-07-11T23:48:32.182Z",
+      "updatedAt": "2025-07-11T23:48:32.182Z",
+      "lastAccessedAt": "2025-07-11T23:48:32.182Z",
+      "version": 1,
+      "size": 375,
+      "compressed": false,
+      "checksum": "62fc631ae5b13d24c816bcb174af8e6628aa86c1a362de7b36f657ab3d0b6485",
+      "references": [],
+      "dependencies": []
+    },
+    {
+      "id": "entry_mczgwu2j_m4484o2gu",
+      "key": "revival_strategy",
+      "value": "Multi-phase website revival: Phase 1 - Analysis & Architecture (Research Agent + Site Architect), Phase 2 - Modern Framework Migration (Frontend Swarm), Phase 3 - Content & Design Refresh (Content + Design Agents), Phase 4 - Performance & Security (Optimization Swarm), Phase 5 - Deployment & Monitoring (DevOps Agent). Target: Modern React/Next.js with preserved interactive elements.",
+      "type": "string",
+      "namespace": "default",
+      "tags": [],
+      "metadata": {},
+      "owner": "system",
+      "accessLevel": "shared",
+      "createdAt": "2025-07-11T23:48:40.123Z",
+      "updatedAt": "2025-07-11T23:48:40.123Z",
+      "lastAccessedAt": "2025-07-11T23:48:40.123Z",
+      "version": 1,
+      "size": 416,
+      "compressed": false,
+      "checksum": "fafd1a3880d56b82d6ed033395c484787b14a7e870d5eb625016a8e31f936d24",
+      "references": [],
+      "dependencies": []
+    }
+  ],
+  "statistics": {
+    "overview": {
+      "totalEntries": 2,
+      "totalSize": 791,
+      "compressedEntries": 0,
+      "compressionRatio": 1,
+      "indexSize": 100,
+      "memoryUsage": 9576960,
+      "diskUsage": 0
+    },
+    "distribution": {
+      "byNamespace": {
+        "default": {
+          "count": 2,
+          "size": 791
+        }
+      },
+      "byType": {
+        "string": {
+          "count": 2,
+          "size": 791
+        }
+      },
+      "byOwner": {
+        "system": {
+          "count": 2,
+          "size": 791
+        }
+      },
+      "byAccessLevel": {
+        "shared": {
+          "count": 2,
+          "size": 791
+        }
+      }
+    },
+    "temporal": {
+      "entriesCreatedLast24h": 2,
+      "entriesUpdatedLast24h": 2,
+      "entriesAccessedLast24h": 2,
+      "oldestEntry": "2025-07-11T23:48:32.182Z",
+      "newestEntry": "2025-07-11T23:48:40.123Z"
+    },
+    "performance": {
+      "averageQueryTime": 0,
+      "averageWriteTime": 0,
+      "cacheHitRatio": 0,
+      "indexEfficiency": 0.95
+    },
+    "health": {
+      "expiredEntries": 0,
+      "orphanedReferences": 0,
+      "duplicateKeys": 0,
+      "corruptedEntries": 0,
+      "recommendedCleanup": false
+    },
+    "optimization": {
+      "suggestions": [],
+      "potentialSavings": {
+        "compression": 0,
+        "cleanup": 0,
+        "deduplication": 0
+      },
+      "indexOptimization": [
+        "Consider periodic index rebuilding for optimal performance"
+      ]
+    }
+  }
+}

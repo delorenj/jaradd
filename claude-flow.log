@@ -1,0 +1,32 @@
+✅ Starting Claude-Flow orchestration system...
+
+🚀 Starting orchestration components...
+
+⚡ Starting Event Bus...
+✅ Event Bus started
+🧠 Starting Orchestrator Engine...
+✅ Orchestrator Engine started
+💾 Starting Memory Manager...
+✅ Memory Manager started
+🖥️  Starting Terminal Pool...
+✅ Terminal Pool started
+🌐 Starting MCP server on port 3001...
+✅ MCP Server started
+🔄 Starting Coordination Manager...
+✅ Coordination Manager started
+
+✅ All components started successfully!
+
+📊 System Status:
+   • Event Bus: Active
+   • Orchestrator: Active
+   • Memory Manager: Active
+   • Terminal Pool: Active
+   • MCP Server: Active
+   • Coordination Manager: Active
+
+💡 Use "claude-flow status" to check system status
+💡 Use "claude-flow stop" to stop the orchestrator
+
+📌 Press Ctrl+C to stop the orchestrator...
+

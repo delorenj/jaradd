@@ -302,9 +302,9 @@
                      -js.delete,
                      -css,
                      -html,
-                     -htmlclean,
-                     -imagespng,
-                     -imagesjpg"/>
+                      -htmlclean"/>
+                      <!-- -imagespng, -->
+                      <!-- -imagesjpg"/> -->
 
     <target name="-build.production"
             depends="-rev,
@@ -812,5 +812,4 @@
         </copy> 
     </target>
 
-    
 </project>
